@@ -3,14 +3,19 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const cors = require("cors");
-
 require("dotenv").config();
 const app = express();
 app.use(cors({}));
 app.use(bodyParser.json());
 
+//Routers  
+const userRouter = require('./Routers/User/Register');
+const employeeRouter = require('./Routers/Employee/EmployeeRouter');
+const AdminRouter = require('./Routers/Admin/AdminRouter');
+
 const port = process.env.PORT;
 const URL = process.env.DB_URL;
+
 const start = async () => {
   await app.listen(port, () => console.log(`connected to the port ${port}`));
   await mongoose
@@ -22,6 +27,10 @@ const start = async () => {
 };
 start();
 
+
+app.use("/user",userRouter); // Login Router
+app.use("/employee",employeeRouter); // Employee Router
+app.use("/admin",AdminRouter); // Admin Router
 module.exports = start;
 // To start the server
-// use => npm run serve
+// use => nodemon start

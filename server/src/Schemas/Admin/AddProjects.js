@@ -1,0 +1,14 @@
+const mongoose = require("mongoose");
+
+const AddProjects =new mongoose.Schema({
+    projectName: { type: String, required: true },
+    websiteAddress: { type: String, required: true },
+    clientName: { type: String, required: true },
+    startDate: { type: String, required: true },
+    monthlyPrice: { type: String, required: true },
+    employeeAlloted: { type: String, required: true },
+})
+
+const Admin_Add_ProjectssModel = mongoose.model("AddProjects", AddProjects);
+
+module.exports = Admin_Add_ProjectssModel;
