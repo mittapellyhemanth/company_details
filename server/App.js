@@ -25,8 +25,9 @@ const start = async () => {
     })
     .then((res) => console.log("connected to db"));
 };
-start();
 
+start();
+// console.log(new Date().getFullYear());
 
 app.use("/user",userRouter); // Login Router
 app.use("/employee",employeeRouter); // Employee Router

@@ -1,15 +1,23 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './components/Login_SignUp/Login';
-import Navbar from './components/Navbar/NavbarScroll';
-
+import { BrowserRouter } from 'react-router-dom';
+import Router from './Routers/Routers';
+import ContextAPI from './Context/ContextAPI';
+import './App.css'
 function App() {
 
   
   return (
     <>
-    <Navbar/>
-    <Login/>
+    <div className='App'>
+    <BrowserRouter>
+    <ContextAPI>
+
+    <Router/>
+    </ContextAPI>
+    </BrowserRouter>
+
+    </div>
     </>
   );
 }

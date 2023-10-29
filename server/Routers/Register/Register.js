@@ -56,7 +56,8 @@ userRouter.post("/register", async (req, res) => {
 
 
 userRouter.post("/login", async (req, res) => {
-    const loginCred = req.body;
+    const loginCred =req.body.data;
+    console.log(loginCred.email);
     User.findOne({ email: loginCred.email }).then(user => {
         if (user) {  // will give response from DB
 
@@ -85,7 +86,7 @@ userRouter.post("/login", async (req, res) => {
                 }
             })
         } else {
-            res.status(400).json({
+            res.status(401).json({
                 message: "Email is not registered with us.."
             })
         }

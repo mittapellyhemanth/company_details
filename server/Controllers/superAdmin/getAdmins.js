@@ -5,7 +5,7 @@ const getAdmins = {};
 getAdmins.get=  async (req, res) => {
     
     try {
-        // console.log('Getting the properties')
+        console.log('Getting the properties')
     
         const page = await parseInt(req.query.page) || 1;
         const limit = 10;

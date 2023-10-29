@@ -6,6 +6,7 @@ const AddAdmin =new mongoose.Schema({
     PhoneNumber: { type: Number, required: true },
     Email: { type: String, required: true },
     Password: { type: String, required: true },
+    unique_id:{ type: String}
     })
 
 const AddAdminModel = mongoose.model("AddAdmin", AddAdmin);

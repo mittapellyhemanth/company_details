@@ -1,11 +1,46 @@
-.Login{
-    max-width:500px;
-    height: auto;
-    border: 1px solid red;
+.Login-container{
+    max-width:400px;
+    height: 100%;
+    border: 1px solid blueviolet;
     margin: auto;
+    text-align: center;
+    background-color: rgb(243, 215, 173);
+    padding: 50px;
+    margin-top: 50px;
+    border-radius: 5px;
+}
+.Login{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     align-items: center;
     justify-content: center;
-    
+    text-align: center;
+}
+.login-text{
+    font-weight: 400;
+    font-size: 0.9rem;
+    color:rgb(85, 76, 76);
+}
+.title{
+    color: blueviolet;
+    padding-top: 15px;
+    font-weight: 800;
+    font-style: oblique;
+}
+.placeholder-text{
+    text-align: center !important;
+}
+.button{
+    text-align: center ;
+    background-color: rgb(205, 218, 185);
+    padding:1px 10px;
+    border-radius: 20px !important;
+    margin-top: 10px;
+
+}
+
+.error{
+    color: red;
+    font-size: 1rem;
+    padding: 15px;
 }
