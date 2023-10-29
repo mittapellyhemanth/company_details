@@ -1,7 +1,9 @@
 const express = require("express");
 const User = require("../../Schemas/User/Register");  //schema
+const AddAdminModel = require('../../Schemas/SuperAdmin/AddAdmin');
 const userRouter = express.Router();
-const jwt = require("jsonwebtoken");
+const LoginDetails = require('../../Routers/Login/Login')
+
 const bcrypt = require("bcrypt")
 require('dotenv').config();
 
@@ -55,47 +57,5 @@ userRouter.post("/register", async (req, res) => {
 })
 
 
-userRouter.post("/login", async (req, res) => {
-    const loginCred =req.body.data;
-    console.log(loginCred.email);
-    User.findOne({ email: loginCred.email }).then(user => {
-        if (user) {  // will give response from DB
-
-            // if user found then it will encrypt password and compare with DB password 
-            bcrypt.compare(loginCred.password, user.password).then(response => {
-                if (response) {  // password is correct then create web token
-                    const jwtToken = jwt.sign({
-                        email: user.email,
-                        id: user._id,
-
-                    },
-                        process.env.SECRET_KEY, {
-                        expiresIn: "24h"
-                    })
-                    res.status(200).json({
-                        message: "Login credential matched!!",
-                        Token: jwtToken,
-                        name: user.email.split("@")[0],
-                        email: user.email,
-
-                    })
-                } else {
-                    res.status(400).json({
-                        message: "Email or password does not match!!"
-                    })
-                }
-            })
-        } else {
-            res.status(401).json({
-                message: "Email is not registered with us.."
-            })
-        }
-    }).catch(err => {
-        // console.log(err);
-        res.status(500).json({
-            message: "Internal server Error!!"
-        })
-    })
-})
 
 module.exports = userRouter;

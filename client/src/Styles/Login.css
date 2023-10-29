@@ -8,8 +8,15 @@
     padding: 50px;
     margin-top: 50px;
     border-radius: 5px;
+    box-shadow: 10px 10px 25px 0px #07070721;
+  
+}
+.Login-container:hover{
+    max-width:410px;
+    box-shadow: 10px 10px 25px 10px #00000021;
 }
 .Login{
+    
     display: flex;
     flex-wrap:wrap;
     align-items: center;
@@ -44,3 +51,8 @@
     font-size: 1rem;
     padding: 15px;
 }
+@media only screen and (max-width: 410px) {
+    .Login-container{
+        margin: 10px;
+    }
+  }

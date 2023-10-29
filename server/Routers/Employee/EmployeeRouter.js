@@ -7,6 +7,19 @@ require('dotenv').config();
 
 
 
+EmployeeRouter.post("/login", async (req, res) => {
+    const loginCred =req.body.data;
+    // console.log(loginCred.email);
+    User.findOne({ email: loginCred.email }).then(user => {
+       return LoginDetails( req,res,user);
+    }).catch(err => {
+        // console.log(err);
+        res.status(500).json({
+            message: "Internal server Error!!"
+        })
+    })
+})
+
 EmployeeRouter.post("/project", async (req, res) => {
     
     try{

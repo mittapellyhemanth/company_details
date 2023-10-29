@@ -1,29 +1,29 @@
 const express = require("express");
-const addAdmin = require("../../Schemas/SuperAdmin/AddAdmin");  //schema
+const addEmployee = require("../../Schemas/Admin/AddEmployee");  //schema
 const bcrypt = require('bcrypt')
-const postAdmin = {};
+const postEmployee = {};
 
 
-postAdmin.post = async (req, res) => {
-    let newAdminID ; 
-    let previousAdminID =0; 
+postEmployee.post = async (req, res) => {
+    let newEmployeeID ; 
+    let previousEmployeeID =0; 
 
     // would give last registred user
-    const lastAdminID = await addAdmin.findOne({}, {}, { sort: { _id: -1 } }, function (err, AdminID) {
-        return AdminID;
+    const lastEmployeeID = await addEmployee.findOne({}, {}, { sort: { _id: -1 } }, function (err, employeeID) {
+        return employeeID;
     });
     
-    if(lastAdminID != null){
-          for(let i=5 ;i<lastAdminID.unique_id.length ;i++){
-            previousAdminID+=lastAdminID.unique_id[i]
+    if(lastEmployeeID != null){
+          for(let i=5 ;i<lastEmployeeID.unique_id.length ;i++){
+            previousEmployeeID+=lastEmployeeID.unique_id[i]
           }
-          newAdminID = new Date().getFullYear()+"100" +(parseInt(previousAdminID) +1)
+          newEmployeeID = new Date().getFullYear()+"001" +(parseInt(previousEmployeeID) +1)
           
     }else{
-        newAdminID =new Date().getFullYear()+"100";
+        newEmployeeID =new Date().getFullYear()+"001";
     }
-    const { adminName, address,phoneNumber,email,password} = req.body;
-    const ExsistingUser = await addAdmin.findOne({ email: email });  // check user exsists or not
+    const { employeeName, address, phoneNumber,email,password,aadhaar } = req.body;
+    const ExsistingUser = await addEmployee.findOne({ email: email });  // check user exsists or not
     if (ExsistingUser) {
         return res.json({ error: 'User Exsists' });
     }
@@ -37,19 +37,23 @@ postAdmin.post = async (req, res) => {
     if (!specialCharacters.test(password)) {
         return res.json({ error: 'Password must contain at least one special character' });
     }
+
 if(phoneNumber.toString().length<10 || phoneNumber.toString().length>10){  // check phoneNumber
-    return res.json({ error: 'please enter exact number' });
+    return res.json({ error: 'check phone number' });
+}
+if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phoneNumber
+    return res.json({ error: 'check aadhaar number' });
 }
     bcrypt.hash(password, 10).then(hashPass => { // encrypting password  times with bcrypt
 
-        const AdminData = new addAdmin({
-            adminName, address,phoneNumber,email,
+        const employeeData = new addEmployee({
+            employeeName, address, phoneNumber,email,aadhaar,
             password: hashPass,
-            unique_id:newAdminID
+            unique_id:newEmployeeID
         })
 
         // saving email and encrypted password to DB
-        AdminData.save().then(result => {
+        employeeData.save().then(result => {
             res.status(200).json({
                 message: "User Created successfully!!",
                 data: result,
@@ -72,8 +76,4 @@ if(phoneNumber.toString().length<10 || phoneNumber.toString().length>10){  // ch
 
 }
 
-
-
-
-
-module.exports = postAdmin;
+module.exports = postEmployee;

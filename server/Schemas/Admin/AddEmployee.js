@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 
 const AddEmployee =new mongoose.Schema({
-    AdminName: { type: String, required: true},
-    Address: { type: String, required: true },
-    PhoneNumber: { type: Number, required: true },
-    Email: { type: String, required: true },
-    Password: { type: String, required: true },
-    Aadhaar: { type: Number, required: true },
+    employeeName: { type: String, required: true},
+    address: { type: String, required: true },
+    phoneNumber: { type: Number, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    aadhaar: { type: Number, required: true },
+    unique_id:{ type: String}
 })
 
 const Admin_Add_EmployeesModel = mongoose.model("AddEmployee", AddEmployee);
