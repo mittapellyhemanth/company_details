@@ -1,6 +1,6 @@
 const express = require("express");
-const AddEmployee = require("../../src/Schemas/Admin/AddEmployee");  //schema
-const AddProject = require('../../src/Schemas/Admin/AddProjects');
+const AddEmployee = require("../../Schemas/Admin/AddEmployee");  //schema
+const AddProject = require('../../Schemas/Admin/AddProjects');
 const AdminRouter = express.Router();
 
 require('dotenv').config();

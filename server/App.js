@@ -9,10 +9,10 @@ app.use(cors({}));
 app.use(bodyParser.json());
 
 //Routers  
-const userRouter = require('./Routers/User/Register');
+const userRouter = require('./Routers/Register/Register');
 const employeeRouter = require('./Routers/Employee/EmployeeRouter');
 const AdminRouter = require('./Routers/Admin/AdminRouter');
-
+const SuperAdmin = require('./Routers/SuperAdmin/SuperAdmin')
 const port = process.env.PORT;
 const URL = process.env.DB_URL;
 
@@ -31,6 +31,7 @@ start();
 app.use("/user",userRouter); // Login Router
 app.use("/employee",employeeRouter); // Employee Router
 app.use("/admin",AdminRouter); // Admin Router
+app.use("/superAdmin",SuperAdmin)
 module.exports = start;
 // To start the server
 // use => nodemon start

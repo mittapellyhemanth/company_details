@@ -1,0 +1,21 @@
+.navbar{
+    background-color: skyblue !important;
+}
+.nav-title{
+    color: blue;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+}
+.link{
+    color:black;
+}
+.link:hover{
+    width:100px;
+    height: auto;
+    border: 1px solid green;
+    border-radius: 20px;
+    text-align: center;
+    background-color: lightgreen;
+    color:rgb(4, 66, 4);
+}

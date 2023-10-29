@@ -1,6 +1,6 @@
 const express = require("express");
-const projectSchema = require("../../src/Schemas/Employee/Projects");  //schema
-const LeaveSchema = require('../../src/Schemas/Employee/Leave')
+const projectSchema = require("../../Schemas/Employee/Projects");  //schema
+const LeaveSchema = require('../../Schemas/Employee/Leave')
 const EmployeeRouter = express.Router();
 
 require('dotenv').config();
