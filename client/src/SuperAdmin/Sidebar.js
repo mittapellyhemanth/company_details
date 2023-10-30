@@ -3,35 +3,20 @@ import { MdAdminPanelSettings } from "react-icons/md";
 
 import { BsPersonFillAdd } from "react-icons/bs";
 
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import '../Styles/Sidebar.css'
 
 export default function Sidebar(){
    
-   return (
-
-    <div
-        className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 "
-        style={{
-            justifyContent: "center",
-            backgroundColor: "#e1f9f4",
-            width:"18%"
-        }}
+   return <>
+   
+<div className="side-container">
+<div
+        className="col-auto col-md-3 col-xl-2 px-sm-2 px-0  sider"
+       
     >
-        <div
-            className="d-flex flex-column align-items-center min-vh-100"
-            style={{
-                color: "#AAAAAA",
-                paddingTop: "25px",
-            }}
-        >
-            <div
-                style={{
-                    height: "100vh",
-                    // width:"600px",
-                       backgroundColor: "#e1f9f4",
-                    padding: "0 10px",
-                }}
-            >
+        <div className="d-flex flex-column align-items-center min-vh-100">
+            <div >
                
                 <div>
                     <ul
@@ -39,8 +24,8 @@ export default function Sidebar(){
                         id="menu"
                     >
                         <li className="nav-item">
-                            <a
-                                href="admins"
+                            <Link
+                                to="admins"
                                 style={{ color: "#2289FF" }}
                                 className="nav-link align-middle px-0"
                             >
@@ -49,7 +34,7 @@ export default function Sidebar(){
                                     <MdAdminPanelSettings />
                                 </i>
                                 <span className="ms-1 d-none d-sm-inline mx-2" >Admins</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <Link to='addAdmin' style={{color:"#AAAAAA"}} className="nav-link align-middle px-0">
@@ -67,6 +52,17 @@ export default function Sidebar(){
             </div>
         </div>
     </div>
-   
-)
+    
+    <div className="side-content">
+        
+
+    <Outlet/>
+       
+   </div>
+
+    
+</div>
+    
+  
+    </>
 }

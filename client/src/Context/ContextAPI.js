@@ -7,15 +7,15 @@ export default function ContextAPI({ children }) {
 
   const [personLogin, setPersonLogin] = useState("");
 
-
-
+const [personName,setPersonName] = useState("")
+// const [input,setInput] = useState('')
   
 
   const contextValue = {
     personLogin,
     setPersonLogin,
-    
-  
+    personName,
+    setPersonName
     
   };
 

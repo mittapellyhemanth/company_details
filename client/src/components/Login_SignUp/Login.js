@@ -5,15 +5,15 @@ import NavbarScroll from "../Navbar/NavbarScroll";
 import DetailsContext from "../../Context/CreateContext";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
-
+import OnChange from '../../Functions/OnChange'
 export default function Login() {
   const navigate = useNavigate();
+  const {personLogin,setPersonName} = useContext(DetailsContext);
 
   const [data, setData] = useState({
     email: "",
     password: ""
   });
-  const personLogin = useContext(DetailsContext);
   const [err, SetErr] = useState('')
   const { email, password } = data;
   const onchange = (e) => {
@@ -28,7 +28,7 @@ export default function Login() {
     if (email === "" || password === "") {
       return SetErr("Email or paasword should not be empty")
     }
-    if (personLogin.personLogin === 'Employee') {
+    if (personLogin === 'Employee') {
       
         await axios.post('http://localhost:8080/admin/addEmployee',{data})
         .then((res) => {
@@ -39,7 +39,8 @@ export default function Login() {
           //  console.log(res);
           if (res.status === 200) {
             // console.log(res);
-
+            let Name = res.data.email.split('@')[0]
+            setPersonName(Name);
             return navigate('/dashboard')
           }
 
@@ -53,7 +54,7 @@ export default function Login() {
 
       
     }
-    if (personLogin.personLogin === 'Admin') {
+    if (personLogin === 'Admin') {
 
       
         await axios.post('http://localhost:8080/admin/login', { data })
@@ -65,7 +66,8 @@ export default function Login() {
           //  console.log(res);
           if (res.status === 200) {
             // console.log(res);
-
+            let Name = res.data.email.split('@')[0]
+            setPersonName(Name);
             return navigate('/dashboard')
           }
 
@@ -80,7 +82,7 @@ export default function Login() {
 
 
 }
-if (personLogin.personLogin === 'SuperAdmin') {
+if (personLogin === 'SuperAdmin') {
 
   // console.log(data);
   await axios.post('http://localhost:8080/superAdmin/login', { data })
@@ -92,7 +94,10 @@ if (personLogin.personLogin === 'SuperAdmin') {
       //  console.log(res);
       if (res.status === 200) {
         // console.log(res);
-
+        
+        let Name = res.data.email.split('@')[0]
+        console.log(Name);
+        setPersonName(Name);
         return navigate('/dashboard')
       }
 
@@ -112,7 +117,7 @@ return <>
     <NavbarScroll />
   </div>
   <div className="title">
-    <h1>{personLogin.personLogin}</h1>
+    <h1>{personLogin}</h1>
   </div>
   <div className="Login-container">
     <div className="login-text">

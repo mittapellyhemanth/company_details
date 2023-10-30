@@ -11,7 +11,7 @@ export default function Layout(){
             }
             // eslint-disable-next-line
           }, [personLogin]);
-          console.log(personLogin);
+         
           
     return<>
     
