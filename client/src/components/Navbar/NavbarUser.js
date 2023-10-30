@@ -9,8 +9,13 @@ import { BsPersonCircle } from "react-icons/bs";
 
 export default function NavbarUser(){
   
-  const {personName,personLogin} = useContext(DetailsContext);
-// console.log(personName);
+  const {personName,personLogin,setPersonLogin,setPersonName} = useContext(DetailsContext);
+let name = localStorage.getItem('userName')
+name = name.split('@')[0]
+setPersonName(name);
+let personType = localStorage.getItem('personLogin');
+setPersonLogin(personType);
+
   return (
     <>
       {[ 'sm'].map((expand) => (

@@ -1,153 +1,137 @@
 import React, { useContext, useState } from "react";
-import Form from 'react-bootstrap/Form';
-import '../../Styles/Login.css'
+import Form from "react-bootstrap/Form";
+import "../../Styles/Login.css";
 import NavbarScroll from "../Navbar/NavbarScroll";
 import DetailsContext from "../../Context/CreateContext";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom'
-import OnChange from '../../Functions/OnChange'
+import { useNavigate } from "react-router-dom";
+
 export default function Login() {
   const navigate = useNavigate();
-  const {personLogin,setPersonName} = useContext(DetailsContext);
+  const { personLogin } = useContext(DetailsContext);
 
   const [data, setData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
-  const [err, SetErr] = useState('')
+  const [err, SetErr] = useState("");
   const { email, password } = data;
   const onchange = (e) => {
     e.preventDefault();
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setData({ ...data, [name]: value });
-
-  }
+  };
   const submitLogin = async (e) => {
     e.preventDefault();
     // console.log("data",personLogin.personLogin);
     if (email === "" || password === "") {
-      return SetErr("Email or paasword should not be empty")
+      return SetErr("Email or paasword should not be empty");
     }
-    if (personLogin === 'Employee') {
-      
-        await axios.post('http://localhost:8080/admin/addEmployee',{data})
+    if (personLogin === "Employee") {
+      await axios
+        .post("http://localhost:8080/admin/addEmployee", { data })
         .then((res) => {
-
-          localStorage.setItem("email", res.data.email);
+          localStorage.setItem("userName", res.data.email);
           localStorage.setItem("token", res.data.Token); // Modified to get token
-
+          localStorage.setItem("personLogin", "Employee");
           //  console.log(res);
           if (res.status === 200) {
             // console.log(res);
-            let Name = res.data.email.split('@')[0]
-            setPersonName(Name);
-            return navigate('/dashboard')
-          }
 
+            return navigate("/dashboard");
+          }
         })
 
-    .catch((err) => {
-      // console.log(err);
-      SetErr("Please enter correct Email or password")
-
-    });
-
-      
+        .catch((err) => {
+          // console.log(err);
+          SetErr("Please enter correct Email or password");
+        });
     }
-    if (personLogin === 'Admin') {
-
-      
-        await axios.post('http://localhost:8080/admin/login', { data })
-     .then((res) => {
-
-          localStorage.setItem("email", res.data.email);
+    if (personLogin === "Admin") {
+      await axios
+        .post("http://localhost:8080/admin/login", { data })
+        .then((res) => {
+          localStorage.setItem("userName", res.data.email);
           localStorage.setItem("token", res.data.Token); // Modified to get token
+          localStorage.setItem("personLogin", "Admin");
 
           //  console.log(res);
           if (res.status === 200) {
-            // console.log(res);
-            let Name = res.data.email.split('@')[0]
-            setPersonName(Name);
-            return navigate('/dashboard')
+            return navigate("/dashboard");
           }
-
         })
 
-    .catch((err) => {
-      // console.log(err);
-      SetErr("Please enter correct Email or password")
+        .catch((err) => {
+          // console.log(err);
+          SetErr("Please enter correct Email or password");
+        });
+    }
+    if (personLogin === "SuperAdmin") {
+      // console.log(data);
+      await axios
+        .post("http://localhost:8080/superAdmin/login", { data })
+        .then((res) => {
+          localStorage.setItem("userName", res.data.email);
+          localStorage.setItem("token", res.data.Token); // Modified to get token
+          localStorage.setItem("personLogin", "SuperAdmin");
+          //  console.log(res);
+          if (res.status === 200) {
+            return navigate("/dashboard");
+          }
+        })
 
-    });
+        .catch((err) => {
+          // console.log(err);
+          SetErr("Please enter correct Email or password");
+        });
+    }
+  };
+  return (
+    <>
+      <div>
+        <NavbarScroll />
+      </div>
+      <div className="title">
+        <h1>{personLogin}</h1>
+      </div>
+      <div className="Login-container">
+        <div className="login-text">
+          <p>Enter your credentials to access your account</p>
+        </div>
+        <div className="error">{err}</div>
+        <div className="Login">
+          <Form
+            method="POST"
+            encType="multipart/form-data"
+            onSubmit={submitLogin}
+          >
+            <Form.Group className="mb-3" controlId="formGroupEmail">
+              <Form.Control
+                className="placeholder-text"
+                type="email"
+                placeholder="USERNAME"
+                name="email"
+                value={email}
+                onChange={onchange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupPassword">
+              <Form.Control
+                className="placeholder-text"
+                type="password"
+                placeholder="PASSWORD"
+                name="password"
+                value={password}
+                onChange={onchange}
+              />
+            </Form.Group>
 
-
-
+            <button className="button" type="submit">
+              SIGN IN
+            </button>
+          </Form>
+        </div>
+      </div>
+    </>
+  );
 }
-if (personLogin === 'SuperAdmin') {
-
-  // console.log(data);
-  await axios.post('http://localhost:8080/superAdmin/login', { data })
-    .then((res) => {
-
-      localStorage.setItem("email", res.data.email);
-      localStorage.setItem("token", res.data.Token); // Modified to get token
-
-      //  console.log(res);
-      if (res.status === 200) {
-        // console.log(res);
-        
-        let Name = res.data.email.split('@')[0]
-        console.log(Name);
-        setPersonName(Name);
-        return navigate('/dashboard')
-      }
-
-    })
-
-    .catch((err) => {
-      // console.log(err);
-      SetErr("Please enter correct Email or password")
-
-    });
-
-
-}
- }
-return <>
-  <div>
-    <NavbarScroll />
-  </div>
-  <div className="title">
-    <h1>{personLogin}</h1>
-  </div>
-  <div className="Login-container">
-    <div className="login-text">
-      <p>Enter your credentials to access your account</p>
-
-    </div>
-    <div className="error">
-      {err}
-    </div>
-    <div className="Login">
-      <Form method="POST" encType="multipart/form-data" onSubmit={submitLogin}>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-
-          <Form.Control className="placeholder-text" type="email" placeholder="USERNAME" name="email" value={email} onChange={onchange} />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formGroupPassword">
-
-          <Form.Control className="placeholder-text" type="password" placeholder="PASSWORD" name="password" value={password} onChange={onchange} />
-        </Form.Group>
-
-
-        <button className="button" type="submit">SIGN IN</button>
-
-
-      </Form>
-    </div>
-
-  </div>
-
-</>
-
-}
-
