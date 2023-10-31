@@ -6,8 +6,8 @@ require('dotenv').config();
 const LoginDetails = require('../Login/Login');
 
 SuperAdminRouter.post("/login", async (req, res) => {
-    const loginCred =req.body.data;
-    // console.log(req);
+    const loginCred =req.body;
+    console.log(req.body);
     User.findOne({ email: loginCred.email }).then(user => {
         LoginDetails( req,res,user);
     }).catch(err => {

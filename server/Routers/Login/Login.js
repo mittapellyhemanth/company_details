@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt")
 require('dotenv').config();
 
 const LoginDetails = async function(req,res,user){
-    const loginCred =req.body.data;
+    const loginCred =req.body;
     // console.log(loginCred);
     if (user) {  // will give response from DB
 
