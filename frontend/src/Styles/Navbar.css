@@ -1,0 +1,47 @@
+.navbar{
+    background-color: skyblue !important;
+}
+.nav-title{
+    color: blue;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+}
+.link{
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid green;
+    margin: 10px;
+    color:black;
+}
+.link:hover{
+    width:100px;
+    height: auto;
+    border: 1px solid green;
+    border-radius: 20px;
+    text-align: center;
+    background-color: lightgreen;
+    color:rgb(4, 66, 4);
+}
+.logo{
+    
+    margin: 5px;
+}
+@media only screen and (max-width:572px) {
+    .link{
+        width:100px;
+        height: auto;
+        border: 1px solid black;
+         text-align: center;
+        background-color: black;
+        color:white;
+        margin: 10px;
+    }
+    .link:focus{
+        border: 1px solid green;
+        border-radius: 20px;
+        text-align: center;
+        background-color: lightgreen;
+        color:rgb(4, 66, 4);
+    }
+}

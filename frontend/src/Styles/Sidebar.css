@@ -1,0 +1,29 @@
+.side-container{
+    width: 100vw;
+    height: 100vh;
+  
+    display: grid;
+ 
+    grid-template-areas: 'sider  side-content side-content side-content'
+    'sider  side-content side-content side-content'
+    'sider  side-content side-content side-content';
+}
+.sider{
+    width:20vw;
+    height: auto;
+    grid-area: sider;
+   background-color: rgb(221, 215, 112);
+}
+.side-content{
+    grid-area: side-content;
+    width: 80vw;
+    height: auto;
+    background-color:aliceblue ;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+padding: 15px; 
+column-gap: 15px;
+
+}
