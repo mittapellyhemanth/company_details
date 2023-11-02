@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import "../Styles/Sidebar.css";
+import "../../Styles/Sidebar.css";
 // {label:'Add Admin', to:'/addAdmin',icon: <BsPersonFillAdd />}
 export default function Sidebar({ children }) {
   // console.log(children);

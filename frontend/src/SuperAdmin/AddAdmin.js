@@ -1,93 +1,66 @@
-import React from "react";
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-
+import React, { useContext } from "react";
+import ReUseForm from "../Forms/ReUseForm";
+import axios from "axios";
+import DetailsContext from "../Context/CreateContext";
+import "../Styles/SuperHome.css";
 
 export default function AddAdmin() {
- 
-  const [data, setData] = useState({
-    adminName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-  });
-  const { adminName, address, phoneNumber, email, password } = data;
+  const { err, setError } = useContext(DetailsContext);
+  const input = [
+    {
+      type: "text",
+      placeholder: "ADMIN NAME",
+      name: "adminName",
+      required: true,
+    },
+    { type: "text", placeholder: "ADDRESS", name: "address", required: true },
+    {
+      type: "text",
+      placeholder: "PHONE NUMBER ",
+      name: "phoneNumber",
+      required: true,
+    },
+    {
+      type: "email",
+      placeholder: "EMAIL ADDRESS",
+      name: "email",
+      required: true,
+    },
+    {
+      type: "password",
+      placeholder: "PASSWORD",
+      name: "password",
+      required: true,
+    },
+  ];
 
-  const onchange = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+  const onSubmit = async ({ ...formData }) => {
+    try {
+      await axios
+        .post("http://localhost:8080/superAdmin/addAdmin", { ...formData })
+        .then((res) => {
+          if (res.data.error) {
+            setError(res.data.error);
+          }
+          // console.log(res);
+        });
+    } catch (error) {
+      // console.log(error,'error');
+    }
   };
 
-  const handleSubmit = (event) => {
-   
-  };
   return (
     <>
- <Form method="POST" action='#' encType="multipart/form-data" onSubmit={handleSubmit}>
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Control
-          required
-            type="text"
-            placeholder="ADMIN NAME"
-            name="adminName"
-            value={adminName}
-            onChange={onchange}
-          />
-        </Form.Group>
+      {err && <h6 className="error">{err}</h6>}
 
-        <Form.Group className="mb-3" controlId="formGridAddress1">
-          <Form.Control
-          required
-            type="text"
-            placeholder="ADDRESS"
-            name="address"
-            value={address}
-            onChange={onchange}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formGridAddress2">
-          <Form.Control
-          required
-            type="text"
-            placeholder="PHONE NUMBER "
-            name="phoneNumber"
-            value={phoneNumber}
-            onChange={onchange}
-          />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridCity">
-          <Form.Control
-          required
-            type="email"
-            placeholder="EMAIL ADDRESS "
-            name="email"
-            value={email}
-            onChange={onchange}
-          />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridCity">
-          <Form.Control
-          required
-              type="password"
-              placeholder="PASSWORD"
-              name="password"
-              value={password}
-              onChange={onchange}
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-
+      <div className="Login">
+        <ReUseForm
+          Method="POST"
+          inputs={input}
+          onSubmit={onSubmit}
+          btnText="Submit"
+        />
+      </div>
     </>
   );
 }

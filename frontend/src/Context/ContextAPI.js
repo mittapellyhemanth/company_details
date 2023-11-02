@@ -5,6 +5,7 @@ import DetailsContext from "./CreateContext";
 export default function ContextAPI({ children }) {
   const [flag,setFlag] = useState(false)
   const [result, setResult] = useState({})
+  const [err,setError] = useState('')
   let [personLogin, setPersonLogin] = useState("");
 
 let [personName,setPersonName] = useState("")
@@ -12,7 +13,7 @@ let [personName,setPersonName] = useState("")
   
 
   const contextValue = {
-    flag,setFlag,
+    flag,setFlag,err,setError,
     result,
     setResult,
     personLogin,

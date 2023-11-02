@@ -1,10 +1,14 @@
 import React, { useContext, useEffect } from "react";
-import Sidebar from "./Sidebar";
+
 import { BsPersonFillAdd } from "react-icons/bs";
 import { MdAdminPanelSettings } from "react-icons/md";
 import "../Styles/SuperHome.css";
 import DetailsContext from "../Context/CreateContext";
 import NavbarScroll from "../components/Navbar/NavbarScroll";
+import Sidebar from "../components/Sidebar/Sidebar";
+
+
+
 export default function SuperAdminHome() {
   const { setFlag, setPersonName } = useContext(DetailsContext);
   const name = localStorage.getItem("userName");
@@ -14,9 +18,9 @@ export default function SuperAdminHome() {
   }, [setFlag, setPersonName,name]);
 
 const sidebarData = [
-  {label:'Add Admin', to:'/addAdmin',icon:<BsPersonFillAdd/>},
-  {label:'Admins', to:'/admins',icon:<MdAdminPanelSettings/>}
-]
+  {label:'Admins', to:'admins',icon:<MdAdminPanelSettings/>},
+  {label:'Add Admin', to:'addAdmin',icon:<BsPersonFillAdd/>}
+];
 
   return (
     <>
@@ -28,6 +32,7 @@ const sidebarData = [
           <div className="sidebar">
             <Sidebar children={sidebarData} />
           </div>
+          
         </div>
       </div>
     </>
