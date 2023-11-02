@@ -1,12 +1,12 @@
 const express = require("express");
-const adminDetails = require("../../Schemas/SuperAdmin/AddAdmin"); //schema
-const getAdmins = {};
+const ProjectsDetails = require("../../Schemas/Admin/AddProjects"); //schema
+const getProjects = {};
 
-getAdmins.get = async (req, res) => {
+getProjects.get = async (req, res) => {
   try {
     console.log("Getting the properties");
 
-    await adminDetails.find().then((result) => {
+    await ProjectsDetails.find().then((result) => {
         res.status(200).json({
           message: "Property details fetched successfully",
           data: result,
@@ -20,4 +20,4 @@ getAdmins.get = async (req, res) => {
   }
 };
 
-module.exports = getAdmins;
+module.exports = getProjects;

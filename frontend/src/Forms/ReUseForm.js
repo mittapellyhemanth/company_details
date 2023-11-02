@@ -12,7 +12,7 @@ export default function ReUseForm({ Method, inputs, onSubmit, btnText }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit({...formData});
   };
 
   return (

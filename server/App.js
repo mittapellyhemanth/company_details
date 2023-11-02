@@ -29,10 +29,13 @@ const start = async () => {
 start();
 // console.log(new Date().getFullYear());
 
+let projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted = ''
+const data = { projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted }
+console.log({...data});
+
 app.use("/user",userRouter); // Login Router
 app.use("/employee",employeeRouter); // Employee Router
 app.use("/admin",AdminRouter); // Admin Router
 app.use("/superAdmin",SuperAdmin)
 module.exports = start;
-// To start the server
-// use => nodemon start
+// To start the serverrs

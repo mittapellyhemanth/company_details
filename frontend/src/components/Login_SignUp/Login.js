@@ -25,7 +25,7 @@ useEffect(()=>{
     { type: 'password', placeholder: 'PASSWORD', name: 'password', required: true }
   ];
 
-  const LoginCheck = async ({...formData},serverURL)=>{
+  const LoginCheck = async (formData,serverURL)=>{
     try {
         const res = await axios.post(serverURL, formData); // fetching the post url and form data
         console.log(res.data.user.Name,'login'); 
@@ -40,12 +40,12 @@ useEffect(()=>{
       }
 };
 
-  const navigation = async ({ ...formData }, url, serverURL) => {
+  const navigation = async (formData , url, serverURL) => {
     try {
-      let res = await LoginCheck({ ...formData }, serverURL)
+      let res = await LoginCheck(formData , serverURL)
       // console.log(res,'res');
       if (res.status === 200) {
-        console.log(res);
+        // console.log(res);
         navigate(url);
       }
     } catch (error) {
@@ -53,22 +53,22 @@ useEffect(()=>{
     }
   };
 
-  const submitLogin = async ({ ...formData }) => {
+  const submitLogin = async (formData ) => {
     if (personLogin === "SuperAdmin") {
       // console.log(formData,'form');
       let url = "/v1"
       let serverURL = "http://localhost:8080/superAdmin/login"
-      return await navigation({ ...formData }, url, serverURL)
+      return await navigation(formData , url, serverURL)
     };
     if (personLogin === "Admin") {
-      let url = "/v2"
+      let url = "/ad/dashboard"
       let serverURL = "http://localhost:8080/admin/login"
-      return await navigation({ ...formData }, url, serverURL)
+      return await navigation(formData , url, serverURL)
     };
     if (personLogin === "Employee") {
       let url = "/v3"
       let serverURL = "http://localhost:8080/employee/login"
-      return await navigation({ ...formData }, url, serverURL)
+      return await navigation(formData , url, serverURL)
     };
 
   };

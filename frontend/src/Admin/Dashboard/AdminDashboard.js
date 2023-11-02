@@ -29,11 +29,11 @@ export default function AdminDashboard() {
       </div>
       <div className="card-container">
         <div className="cards">
-          <Link to="proj" className="card">
-            {" "}
-            <span className="link-title">PROJECTS</span>
+          <Link className="card" to="/v2/das/" >
+            
+           PROJECTS
           </Link>
-          <Link to="empy" className="card">
+          <Link to="/v2/empy" className="card">
             <span className="link-title">EMPLOYEE</span>
           </Link>
         </div>

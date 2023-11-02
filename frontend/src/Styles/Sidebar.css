@@ -7,23 +7,23 @@
     grid-template-areas: 'sider  side-content side-content side-content'
     'sider  side-content side-content side-content'
     'sider  side-content side-content side-content';
-}
+} 
 .sider{
     width:20vw;
     height: auto;
     grid-area: sider;
    background-color: rgb(221, 215, 112);
-}
-.side-content{
+} 
+ .side-content{
     grid-area: side-content;
-    width: 80vw;
-    height: auto;
-    background-color:aliceblue ;
+    width: fit-content;
+    height: fit-content;
+    background-color:white ;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    margin-top: 50px;
 padding: 15px; 
-column-gap: 15px;
+gap: 15px;
 
-}
+} 

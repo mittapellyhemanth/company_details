@@ -2,23 +2,23 @@ import React from "react";
 
 import { BsPersonFillAdd } from "react-icons/bs";
 import { MdAdminPanelSettings } from "react-icons/md";
-import "../Styles/SuperHome.css";
-// import DetailsContext from "../Context/CreateContext";
-import NavbarScroll from "../components/Navbar/NavbarScroll";
-import Sidebar from "../components/Sidebar/Sidebar";
-import UserName from "../Functions/UserName";
+import "../../Styles/SuperHome.css";
+
+import NavbarScroll from "../../components/Navbar/NavbarScroll";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import UserName from "../../Functions/UserName";
 
 
 
-export default function SuperAdminHome() {
+export default function ProjectsDashboard() {
   // const { setFlag, setPersonName } = useContext(DetailsContext);
  
   UserName()
 
-const sidebarData = [
-  {label:'Admins', to:'admins',icon:<MdAdminPanelSettings/>},
-  {label:'Add Admin', to:'addAdmin',icon:<BsPersonFillAdd/>}
-];
+  const sidebarData = [
+    {label:'PROJECTS', to:'/v2/das/proj',icon:<MdAdminPanelSettings/>},
+    {label:'ADD PROJECTS', to:'/v2/das/addProj',icon:<BsPersonFillAdd/>}
+  ];
 
   return (
     <>

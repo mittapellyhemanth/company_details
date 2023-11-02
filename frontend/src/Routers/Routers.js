@@ -9,12 +9,13 @@ import AddAdmin from "../SuperAdmin/AddAdmin";
 import SuperLogin from "../SuperAdmin/SuperLogin";
 import AddProjects from "../Admin/Projects/AddProjects";
 import Projects from "../Admin/Projects/Projects";
-import SEO from "../Admin/Employee/SEO/SEO";
+
 import Attendance from "../Admin/Employee/Attendance";
 import AddEmployee from "../Admin/Employee/AddEmployee";
-import Employee from "../Admin/Employee/Employee";
-import AdminDashboard from "../Admin/Dashboard/AdminDashboard";
+
 import EmployeeDashboard from "../Employee/Dashboard/EmployeeDashboard";
+import ProjectsDashboard from "../Admin/Projects/ProjectsDashboard";
+import AdminDashboard from "../Admin/Dashboard/AdminDashboard";
 
 
 export default function Router(){
@@ -27,17 +28,21 @@ export default function Router(){
         <Route path="addAdmin" element={<AddAdmin/>} />
         </Route>
             {/* Admin Routers */}
-        <Route path="/v2/" element={<AdminDashboard/>}>
+            <Route path="ad/dashboard" element={<AdminDashboard/>} />
+            <Route path="/v2/das/" element={<ProjectsDashboard/>}>
         <Route path="proj" element={<Projects/>} />
-        <Route path="addproj" element={<AddProjects/>} />
+        <Route path="addProj" element={<AddProjects/>} />
+        </Route>
+        
+      
+        
          {/* SEO Routers */}
-        <Route path="SEO" element={<SEO/>}>
-        <Route path="empy" element={<Employee/>} />
+       
         <Route path="addEmpy" element={<AddEmployee/>} />
         <Route path="atten" element={<Attendance/>} />
-        </Route>
+        
        
-        </Route>
+        {/* </Route> */}
 
         
               {/*  Employee Routers */}  

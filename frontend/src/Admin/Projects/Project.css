@@ -1,0 +1,22 @@
+.item-1{
+   
+  grid-area: header;
+
+}
+.item-2 {
+  grid-area: menu;
+}
+
+.item-3 {
+  grid-area: right;
+}
+
+.grid-container {
+
+  display: grid;
+  grid-template-areas:
+    "header header header header header "
+    "right right menu menu menu menu";
+    
+  gap: 10px;
+}

@@ -6,6 +6,7 @@ const AdminRouter = express.Router();
 require('dotenv').config();
 
 const AddAdminModel = require('../../Schemas/SuperAdmin/AddAdmin');
+ //..................LOGIN ADMIN .................................................................................
 const LoginDetails = require('../Login/Login');
 
 AdminRouter.post("/login", async (req, res) => {
@@ -22,7 +23,7 @@ AdminRouter.post("/login", async (req, res) => {
     })
 })
 
-
+ //..................Add project .................................................................................
 AdminRouter.post("/addProject", async (req, res) => {
 
     try {
@@ -48,9 +49,10 @@ AdminRouter.post("/addProject", async (req, res) => {
 
 
 })
+//..................Add Employee .................................................................................
 const postEmployee = require('../../Controllers/Admin/addEmployee');
-
 AdminRouter.post("/addEmployee", postEmployee.post);
 
-
+const getProjects = require('../../Controllers/Admin/getProject');
+AdminRouter.get("/getProject", getProjects.get);
 module.exports = AdminRouter;
