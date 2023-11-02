@@ -10,7 +10,7 @@ export default function AdminLogin(){
             }
             // eslint-disable-next-line
           }, [personLogin]);
-console.log(personLogin);
+// console.log(personLogin);
     return<>
     
     <div>

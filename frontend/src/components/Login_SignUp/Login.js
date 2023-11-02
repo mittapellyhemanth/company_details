@@ -1,18 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import ReUseForm from "../../Forms/ReUseForm";
 import "../../Styles/Login.css";
-import NavbarScroll from "../Navbar/NavbarScroll";
+
 import DetailsContext from "../../Context/CreateContext";
 import LoginCheck from "./LoginCheck";
 
 import { useNavigate } from "react-router-dom";
+import NavbarScroll from "../Navbar/NavbarScroll";
+
 
 export default function Login() {
 
-  const { personLogin } = useContext(DetailsContext);
+  const { personLogin ,setPersonName,flag,setFlag} = useContext(DetailsContext);
   const navigate = useNavigate();
-
+useEffect(()=>{
+  setPersonName(' ');
+  setFlag(false);
+},[setPersonName])
   const input = [
     { type: 'email', placeholder: 'USER NAME', name: 'email', required: true },
     { type: 'password', placeholder: 'PASSWORD', name: 'password', required: true }
@@ -49,9 +54,12 @@ export default function Login() {
     };
 
   }
+  
+  
   return <>
     <div>
-      <NavbarScroll />
+     
+     <NavbarScroll/>  
     </div>
     <div className="title">
       <h1>{personLogin}</h1>
