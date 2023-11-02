@@ -55,17 +55,17 @@ useEffect(()=>{
   const submitLogin = async ({ ...formData }) => {
     if (personLogin === "SuperAdmin") {
       // console.log(formData,'form');
-      let url = "/dashboard"
+      let url = "/v1"
       let serverURL = "http://localhost:8080/superAdmin/login"
       return await navigation({ ...formData }, url, serverURL)
     };
     if (personLogin === "Admin") {
-      let url = "/dashboard"
+      let url = "/v2"
       let serverURL = "http://localhost:8080/admin/login"
       return await navigation({ ...formData }, url, serverURL)
     };
     if (personLogin === "Employee") {
-      let url = "/dashboard"
+      let url = "/v3"
       let serverURL = "http://localhost:8080/admin/addEmployee"
       return await navigation({ ...formData }, url, serverURL)
     };
