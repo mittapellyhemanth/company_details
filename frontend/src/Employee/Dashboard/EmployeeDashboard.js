@@ -1,26 +1,25 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
 import { BsPersonFillAdd } from "react-icons/bs";
 import { MdAdminPanelSettings } from "react-icons/md";
 
 import "../../Styles/SuperHome.css";
-import DetailsContext from ".././../Context/CreateContext"
+
 import NavbarScroll from "../../components/Navbar/NavbarScroll";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import UserName from "../../Functions/UserName";
 
 
 
 export default function EmployeeDashboard() {
-  const { setFlag, setPersonName } = useContext(DetailsContext);
-  const name = localStorage.getItem("userName");
-  useEffect(() => {
-    setFlag(true);
-    setPersonName(name);
-  }, [setFlag, setPersonName,name]);
+  
+  UserName();
 
 const sidebarData = [
-  {label:'Admins', to:'admins',icon:<MdAdminPanelSettings/>},
-  {label:'Add Admin', to:'addAdmin',icon:<BsPersonFillAdd/>}
+  {label:'PROJECTS', to:'project',icon:<MdAdminPanelSettings/>},
+  {label:'APPLICATION FOR LEAVE', to:'leave',icon:<BsPersonFillAdd/>},
+  {label:'YOUR DETAILS', to:'details',icon:<MdAdminPanelSettings/>},
+  {label:'BREAK TIME', to:'break',icon:<BsPersonFillAdd/>}
 ];
 
   return (

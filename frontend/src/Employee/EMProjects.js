@@ -1,6 +1,6 @@
 import Projects from "../Admin/Projects/Projects";
 
-export default function Application(){
+export default function EMProjects(){
     return<>
     <Projects />
     </>

@@ -21,7 +21,7 @@ export default function NavbarScroll() {
       { to: "#", userName: personName },
 
       // Add more links as needed, including the user's profile link
-      { to: "/Logout", label: "Logout" },
+      { to: "/Logout", label: "Logout"},
     ];
   } else {
     homePageLinks = [
@@ -63,7 +63,7 @@ export default function NavbarScroll() {
                     link.userName ? (
                       ""
                     ) : (
-                      <Link key={index} to={link.to} className="link">
+                      <Link  key={index} to={link.to} className="link">
                         {link.label}
                       </Link>
                     )

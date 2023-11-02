@@ -12,7 +12,7 @@ import UserName from "../Functions/UserName";
 
 export default function SuperAdminHome() {
   // const { setFlag, setPersonName } = useContext(DetailsContext);
- 
+ console.log('super');
   UserName()
 
 const sidebarData = [

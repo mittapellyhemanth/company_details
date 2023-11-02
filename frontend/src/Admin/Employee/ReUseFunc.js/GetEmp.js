@@ -3,10 +3,12 @@ import React, { useState,useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-export default function Admins(){
+
+export default function GetEmply(){
+
   const [data,setData] = useState([])
   useEffect(()=>{
-    axios.get('http://localhost:8080/superAdmin/admins')
+    axios.get('http://localhost:8080/admin/getProject')
     .then((res) => {
       // console.log(res)
       if (res.status === 200) {
@@ -18,29 +20,24 @@ export default function Admins(){
   })
   .catch((err) => console.log(err));
      
-  },[]);
-  const handleClick = (id)=>{
-
-  }
+  },[])
     return <>
     {
       data.map((user)=>{
       return  <>
-         <Card style={{ width: '18rem' ,textAlign:"center"}} key='card'>
+         <Card style={{ width: '15rem', height:'7rem' }} key='card'>
         {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
         <Card.Body key='body'>
-          <Card.Title key={user.Name}>{user.Name}</Card.Title>
-          
+          <Card.Title key={user.projectName}>{user.projectName}</Card.Title>
          
-          {/* <button style={{ width: '4rem',borderRadius:"15px",borderColor:"black" ,textAlign:"center"}} onClick={()=>{handleClick(user._id)}} key={user.phoneNumber}>View</button> */}
+          <Button variant="primary" key={user.phoneNumber}>View</Button>
         </Card.Body>
       </Card>
         </>
        
       })
     }
-     
-
+    
   
     </>
 }
