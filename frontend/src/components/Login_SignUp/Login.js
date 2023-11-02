@@ -28,8 +28,8 @@ useEffect(()=>{
   const LoginCheck = async ({...formData},serverURL)=>{
     try {
         const res = await axios.post(serverURL, formData); // fetching the post url and form data
-        // console.log(res.data); 
-        localStorage.setItem("userName", res.data.email);
+        console.log(res.data.user.Name,'login'); 
+        localStorage.setItem("userName", res.data.user.Name);
         localStorage.setItem("token", res.data.Token);
         localStorage.setItem("personLogin", "SuperAdmin");
         // console.log(res);
@@ -45,6 +45,7 @@ useEffect(()=>{
       let res = await LoginCheck({ ...formData }, serverURL)
       // console.log(res,'res');
       if (res.status === 200) {
+        console.log(res);
         navigate(url);
       }
     } catch (error) {
@@ -66,7 +67,7 @@ useEffect(()=>{
     };
     if (personLogin === "Employee") {
       let url = "/v3"
-      let serverURL = "http://localhost:8080/admin/addEmployee"
+      let serverURL = "http://localhost:8080/employee/login"
       return await navigation({ ...formData }, url, serverURL)
     };
 

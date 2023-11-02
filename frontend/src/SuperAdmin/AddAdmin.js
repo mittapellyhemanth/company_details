@@ -3,6 +3,7 @@ import ReUseForm from "../Forms/ReUseForm";
 import axios from "axios";
 import DetailsContext from "../Context/CreateContext";
 import "../Styles/SuperHome.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AddAdmin() {
   const { err, setError } = useContext(DetailsContext);
@@ -10,7 +11,7 @@ export default function AddAdmin() {
     {
       type: "text",
       placeholder: "ADMIN NAME",
-      name: "adminName",
+      name: "Name",
       required: true,
     },
     { type: "text", placeholder: "ADDRESS", name: "address", required: true },
@@ -33,15 +34,16 @@ export default function AddAdmin() {
       required: true,
     },
   ];
-
+const navigate = useNavigate()
   const onSubmit = async ({ ...formData }) => {
     try {
       await axios
         .post("http://localhost:8080/superAdmin/addAdmin", { ...formData })
         .then((res) => {
           if (res.data.error) {
-            setError(res.data.error);
+           return setError(res.data.error);
           }
+          navigate('/v1/Admins')
           // console.log(res);
         });
     } catch (error) {

@@ -22,7 +22,8 @@ postEmployee.post = async (req, res) => {
     }else{
         newEmployeeID =new Date().getFullYear()+"001";
     }
-    const { employeeName, address, phoneNumber,email,password,aadhaar } = req.body;
+    console.log(req.body,"emp");
+    const { Name, address, phoneNumber,email,password,aadhaar } = req.body;
     const ExsistingUser = await addEmployee.findOne({ email: email });  // check user exsists or not
     if (ExsistingUser) {
         return res.json({ error: 'User Exsists' });
@@ -47,7 +48,7 @@ if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phon
     bcrypt.hash(password, 10).then(hashPass => { // encrypting password  times with bcrypt
 
         const employeeData = new addEmployee({
-            employeeName, address, phoneNumber,email,aadhaar,
+            Name, address, phoneNumber,email,aadhaar,
             password: hashPass,
             unique_id:newEmployeeID
         })

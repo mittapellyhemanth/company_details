@@ -10,6 +10,7 @@ const LoginDetails = async function(req,res,user){
 
         // if user found then it will encrypt password and compare with DB password 
      return   bcrypt.compare(loginCred.password, user.password).then(response => {
+        console.log(user,"aut");
             if (response) {  // password is correct then create web token
                 const jwtToken = jwt.sign({
                     email: user.email,
@@ -22,8 +23,7 @@ const LoginDetails = async function(req,res,user){
                 res.status(200).json({
                     message: "Login credential matched!!",
                     Token: jwtToken,
-                    name: user.email.split("@")[0],
-                    email: user.email,
+                   user:user
 
                 })
             } else {

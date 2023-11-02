@@ -9,9 +9,10 @@ const AddAdminModel = require('../../Schemas/SuperAdmin/AddAdmin');
 const LoginDetails = require('../Login/Login');
 
 AdminRouter.post("/login", async (req, res) => {
-    const loginCred =req.body.data;
-    console.log(req.body);
+    const loginCred =req.body;
     AddAdminModel.findOne({ email:loginCred.email }).then(user => {
+        console.log(req.body,'login');
+
         LoginDetails( req,res,user);
     }).catch(err => {
         // console.log(err);

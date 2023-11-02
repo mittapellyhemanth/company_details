@@ -16,8 +16,8 @@ export default function AddEmployee(){
   const input = [
     {
       type: "text",
-      placeholder: "ADMIN NAME",
-      name: "employeeName",
+      placeholder: "EMPLOYEE NAME",
+      name: "Name",
       required: true,
     },
     { type: "text", placeholder: "ADDRESS", name: "address", required: true },

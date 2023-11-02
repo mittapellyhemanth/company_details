@@ -22,7 +22,8 @@ postAdmin.post = async (req, res) => {
     }else{
         newAdminID =new Date().getFullYear()+"100";
     }
-    const { adminName, address,phoneNumber,email,password} = req.body;
+    console.log(req.body,"login");
+    const { Name, address,phoneNumber,email,password} = req.body;
     const ExsistingUser = await addAdmin.findOne({ email: email });  // check user exsists or not
     if (ExsistingUser) {
         return res.json({ error: 'User Exsists' });
@@ -43,7 +44,7 @@ if(phoneNumber.toString().length<10 || phoneNumber.toString().length>10){  // ch
     bcrypt.hash(password, 10).then(hashPass => { // encrypting password  times with bcrypt
 
         const AdminData = new addAdmin({
-            adminName, address,phoneNumber,email,
+            Name, address,phoneNumber,email,
             password: hashPass,
             unique_id:newAdminID
         })
