@@ -1,33 +1,27 @@
-
-
-
-import React, { useContext } from "react";
-import UserName from "../../../Functions/UserName";
-import DetailsContext from "../../../Context/CreateContext";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+// import ReUseForm from "../../Forms/ReUseForm";
+// import DetailsContext from "../../Context/CreateContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import DetailsContext from "../../../Context/CreateContext";
 import ReUseForm from "../../../Forms/ReUseForm";
 
+export default function UseAddEmployee({url}){
+console.log(url,'url');
 
-export default function UseAddEmployee() {
-  UserName();
-  const { err, setError } = useContext(DetailsContext);
+   
+    const { err, setError } = useContext(DetailsContext);
   const input = [
     {
       type: "text",
-      placeholder: "ADMIN NAME",
+      placeholder: "EMPLOYEE NAME",
       name: "Name",
       required: true,
     },
+    { type: "text", placeholder: "ADDRESS", name: "address", required: true },
     {
       type: "text",
-      placeholder: "ADDRESS",
-      name: "address",
-      required: true,
-    },
-    {
-      type: "text",
-      placeholder: "PHONE NUMBER",
+      placeholder: "PHONE NUMBER ",
       name: "phoneNumber",
       required: true,
     },
@@ -42,41 +36,50 @@ export default function UseAddEmployee() {
       placeholder: "PASSWORD",
       name: "password",
       required: true,
-    }
+    },
+    {
+        type: "text",
+        placeholder: "AADHAAR",
+        name: "aadhaar",
+        required: true,
+      },
   ];
- 
-  
-const navigate = useNavigate()
+const navigate = useNavigate();
 
-  const onSubmit = async( formData ) => {
-    // console.log(formData );
+
+  const onSubmit = async (formData,urlData) => {
+
+    console.log(formData,'form',urlData,'dd');
+    
     try {
       await axios
-        .post("http://localhost:8080/admin/addProject", formData)
+        .post(urlData.Url, formData )
         .then((res) => {
-          console.log(res);
           if (res.data.error) {
-           return setError(res.data.error);
+            setError(res.data.error);
+          }else{
+            return navigate(urlData.Navlink)
           }
-          navigate('/v2/proj')
           // console.log(res);
         });
     } catch (error) {
       // console.log(error,'error');
     }
   };
+
   return (
     <>
       {err && <h6 className="error">{err}</h6>}
 
-<div className="Login">
-  <ReUseForm
-    Method="POST"
-    inputs={input}
-    onSubmit={onSubmit}
-    btnText="Submit"
-  />
-</div>
+      <div className="Login">
+        <ReUseForm
+          Method="POST"
+          inputs={input}
+          onSubmit={onSubmit}
+          btnText="Submit"
+          urlData={url}
+        />
+      </div>
     </>
   );
 }

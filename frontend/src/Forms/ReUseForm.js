@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 import "../Styles/Login.css";
-export default function ReUseForm({ Method, inputs, onSubmit, btnText }) {
+export default function ReUseForm({ Method, inputs, onSubmit, btnText,urlData }) {
+  console.log(urlData,'data');
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
@@ -12,7 +13,8 @@ export default function ReUseForm({ Method, inputs, onSubmit, btnText }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({...formData});
+    console.log(urlData,'ff');
+    onSubmit({...formData},urlData);
   };
 
   return (

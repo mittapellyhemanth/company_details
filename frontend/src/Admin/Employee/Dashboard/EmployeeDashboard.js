@@ -22,13 +22,13 @@ console.log('employee');
           <Link className="card" to="/v2/em/">
             SEO
           </Link>
-          <Link to="/v2/writer/" className="card">
+          <Link to="/v2/writer" className="card">
             <span className="link-title">WRITER</span>
           </Link>
           <Link to="/v2/sales" className="card">
             <span className="link-title">SALES</span>
           </Link>
-          <Link to="/v2/design/" className="card">
+          <Link to="/v2/design" className="card">
             <span className="link-title">DESIGNER</span>
           </Link>
         </div>

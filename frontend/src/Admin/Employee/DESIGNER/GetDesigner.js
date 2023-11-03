@@ -2,9 +2,9 @@
 import GetEmply from "../ReUseFunc.js/GetEmp";
 
 
-export default function Employee() {
+export default function GetDesigner() {
 
-  let URL =  "http://localhost:8080/admin/getEmployee";
+  let URL =  "http://localhost:8080/admin/getDesigner";
   
   return (
     <>

@@ -29,9 +29,7 @@ const start = async () => {
 start();
 // console.log(new Date().getFullYear());
 
-let projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted = ''
-const data = { projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted }
-console.log({...data});
+
 
 app.use("/user",userRouter); // Login Router
 app.use("/employee",employeeRouter); // Employee Router

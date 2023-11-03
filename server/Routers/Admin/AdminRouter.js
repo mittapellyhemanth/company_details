@@ -49,10 +49,34 @@ AdminRouter.post("/addProject", async (req, res) => {
 
 
 })
-//..................Add Employee .................................................................................
-const postEmployee = require('../../Controllers/Admin/addEmployee');
-AdminRouter.post("/addEmployee", postEmployee.post);
 
+//..................get PROJECTS .................................................................................
 const getProjects = require('../../Controllers/Admin/getProject');
 AdminRouter.get("/getProject", getProjects.get);
+
+//..................Add,Get Employee .................................................................................
+const postEmployee = require('../../Controllers/Admin/SEO/AddSeo');
+AdminRouter.post("/addSeo", postEmployee.post);
+//....get Employee .....
+const getEmployee = require('../../Controllers/Admin/getEmployee');
+AdminRouter.get("/getEmployee", getEmployee.get);
+
+
+//..................Add,Get DESIGNER .................................................................................
+const addDesigner = require('../../Controllers/Admin/Designer/AddDesigner');
+AdminRouter.post("/addDesigner", addDesigner.post);
+//GET designer
+const getDesginer = require('../../Controllers/Admin/Designer/GetDesigner');
+AdminRouter.get("/getDesigner", getDesginer.get);
+
+
+
+//..................Add,Get Writer .................................................................................
+const addWriter = require('../../Controllers/Admin/Writer/addWriterr');
+AdminRouter.post("/addWriter", addWriter.post);
+//GET designer
+const getWriter = require('../../Controllers/Admin/Writer/getWriter');
+AdminRouter.get("/getWriter", getWriter.get);
+
+
 module.exports = AdminRouter;

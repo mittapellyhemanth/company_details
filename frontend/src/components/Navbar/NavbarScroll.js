@@ -11,7 +11,7 @@ import "../../Styles/Navbar.css";
 
 export default function NavbarScroll() {
   const { personName, flag } = useContext(DetailsContext);
-
+ 
   // console.log(personName, "p");
 
   let otherPageLinks = [];
@@ -36,7 +36,8 @@ export default function NavbarScroll() {
 
   return (
     <>
-      {["sm"].map((expand) => (
+    <div className="sticky">
+    {["sm"].map((expand) => (
         <Navbar
           key={expand}
           expand={expand}
@@ -44,7 +45,7 @@ export default function NavbarScroll() {
         >
           <Container fluid>
             <Navbar.Brand href="/" className="nav-title">
-              {flag ? links[0].userName : "Awesome Tech"}
+              {flag ? links[0].userName : "woohooweb"}
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
@@ -54,7 +55,7 @@ export default function NavbarScroll() {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  {flag ? links[0].userName : "Awesome Tech"}
+                  {flag ? links[0].userName  : "woohooweb"}
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
@@ -74,6 +75,8 @@ export default function NavbarScroll() {
           </Container>
         </Navbar>
       ))}
+    </div>
+    
     </>
   );
 }

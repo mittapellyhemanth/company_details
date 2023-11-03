@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "../../Styles/Sidebar.css";
 // {label:'Add Admin', to:'/addAdmin',icon: <BsPersonFillAdd />}
 export default function Sidebar({ children }) {
   // console.log(children);
+  const [isActive,setIsactive] = useState(false);
+  const handleClick = ()=>{
+    setIsactive(true)
+  }
   return (
     <>
       <div className="side-container">
@@ -21,9 +25,10 @@ export default function Sidebar({ children }) {
                         key={idx}
                         to={child.to}
                         style={{ color: "#2289FF" }}
-                        className="nav-link align-middle px-0"
+                        className="nav-link align-middle px-0 link-text"
+                        onClick={()=>handleClick}
                       >
-                        <i className="fs-4 bi-house">{child.icon}</i>
+                        <i className='fs-4 bi-house'>{child.icon}</i>
                         <span className="ms-1 d-none d-sm-inline mx-2">
                           {child.label}
                         </span>
@@ -35,6 +40,7 @@ export default function Sidebar({ children }) {
             </div>
           </div>
         </div>
+          
 
         <div className="side-content">
           <Outlet />

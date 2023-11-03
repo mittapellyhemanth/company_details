@@ -1,15 +1,12 @@
-const express = require("express");
-const addEmployee = require("../../Schemas/Admin/Employees/SEO");  //schema
+
 const bcrypt = require('bcrypt')
-const postEmployee = {};
-
-
-postEmployee.post = async (req, res) => {
+const Post =  async(req, res,designation)=>  {
+console.log(designation,'design');
     let newEmployeeID ; 
     let previousEmployeeID =0; 
 
     // would give last registred user
-    const lastEmployeeID = await addEmployee.findOne({}, {}, { sort: { _id: -1 } }, function (err, employeeID) {
+    const lastEmployeeID = await designation.findOne({}, {}, { sort: { _id: -1 } }, function (err, employeeID) {
         return employeeID;
     });
     
@@ -22,9 +19,9 @@ postEmployee.post = async (req, res) => {
     }else{
         newEmployeeID =new Date().getFullYear()+"001";
     }
-    console.log(req.body,"emp");
+ 
     const { Name, address, phoneNumber,email,password,aadhaar } = req.body;
-    const ExsistingUser = await addEmployee.findOne({ email: email });  // check user exsists or not
+    const ExsistingUser = await designation.findOne({ email: email });  // check user exsists or not
     if (ExsistingUser) {
         return res.json({ error: 'User Exsists' });
     }
@@ -47,7 +44,7 @@ if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phon
 }
     bcrypt.hash(password, 10).then(hashPass => { // encrypting password  times with bcrypt
 
-        const employeeData = new addEmployee({
+        const employeeData = new designation({
             Name, address, phoneNumber,email,aadhaar,
             password: hashPass,
             unique_id:newEmployeeID
@@ -77,4 +74,4 @@ if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phon
 
 }
 
-module.exports = postEmployee;
+module.exports = Post;

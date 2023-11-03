@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-export default function GetEmply(){
-
+export default function GetEmply({url}){
+// console.log(url,'url');
   const [data,setData] = useState([])
   useEffect(()=>{
-    axios.get('http://localhost:8080/admin/getProject')
+    axios.get(url)
     .then((res) => {
       // console.log(res)
       if (res.status === 200) {
@@ -20,7 +20,7 @@ export default function GetEmply(){
   })
   .catch((err) => console.log(err));
      
-  },[])
+  },[url])
     return <>
     {
       data.map((user)=>{
@@ -28,7 +28,7 @@ export default function GetEmply(){
          <Card style={{ width: '15rem', height:'7rem' }} key='card'>
         {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
         <Card.Body key='body'>
-          <Card.Title key={user.projectName}>{user.projectName}</Card.Title>
+          <Card.Title key={user._id}>{user.Name}</Card.Title>
          
           <Button variant="primary" key={user.phoneNumber}>View</Button>
         </Card.Body>

@@ -11,21 +11,34 @@ import AddProjects from "../Admin/Projects/AddProjects";
 import Projects from "../Admin/Projects/Projects";
 
 
-import AddEmployee from "../Admin/Employee/AddEmployee";
+
 
 import ProjectsDashboard from "../Admin/Projects/ProjectsDashboard";
 import AdminDashboard from "../Admin/Dashboard/AdminDashboard";
 import EmployeeDashboard from "../Admin/Employee/Dashboard/EmployeeDashboard";
 import SEO from "../Admin/Employee/SEO/SEO";
 import Employee from "../Admin/Employee/SEO/Employee";
-import Writer from "../Admin/Employee/WRITER/Writer";
+
 import Sales from "../Admin/Employee/SALES/Sales";
-import Designer from "../Admin/Employee/DESIGNER/Designer";
+
 import Logout from "../components/Login_SignUp/Logout";
 import EMProjects from "../Employee/EMProjects";
 import Application from "../Employee/ApplicationForLeave";
 import BreakTime from "../Employee/BreakTime";
 import Details from "../Employee/YourDetails";
+import AddSEO from "../Admin/Employee/SEO/AddSEO";
+import DesignerDash from "../Admin/Employee/DESIGNER/DesignerDash";
+// import GetDesigner from "../Admin/Employee/DESIGNER/GetDesigneretDesigner";
+// import AddDesigner from "../Admin/Employee/DESIGNER/addDesigner";
+import AttendanceDesigner from "../Admin/Employee/DESIGNER/AttendanceDesigner";
+import SeoAttendance from "../Admin/Employee/SEO/Attendance";
+import GetDesigner from "../Admin/Employee/DESIGNER/GetDesigner";
+import AddDesigner from "../Admin/Employee/DESIGNER/AddDesigner";
+import AddWriter from "../Admin/Employee/WRITER/AddWriter";
+import WriterDashboard from "../Admin/Employee/WRITER/WriterDashboard";
+import GetWriter from '../Admin/Employee/WRITER/GetWriter'
+import AttendanceWriter from '../Admin/Employee/WRITER/AttendanceWriter'
+
 
 export default function Router() {
   return (
@@ -33,10 +46,11 @@ export default function Router() {
       <Route path="/" element={<Deatils />} />
       <Route path="/superAdmin" element={<SuperLogin />} />
 <Route path="/Logout" element={<Logout/>} />
-      <Route path="/Admin" element={<AdminLogin />} />
+      <Route  path="/Admin" element={<AdminLogin />} />
       <Route path="/Employee" element={<EmployeeLogin />} />
       {/* ...............................Super Admin Routers ......................*/}
       <Route path="/v1/" element={<SuperAdminHome />}>
+      <Route index element={<Admins />} />                        {/* by default we get this route*/}
         <Route path="admins" element={<Admins />} />
         <Route path="addAdmin" element={<AddAdmin />} />
       </Route>
@@ -47,25 +61,43 @@ export default function Router() {
 
       {/*........................ Admin PROJECT Routers............................. */}
       <Route path="/v2/das/" element={<ProjectsDashboard />}>
-        <Route path="proj" element={<Projects />} />
+      <Route  index element={<Projects />} />
+        <Route  path="proj" element={<Projects />} />
         <Route path="addProj" element={<AddProjects />} />
       </Route>
             {/*........................ EMPLOYEE SEO Routers............................. */}
       <Route path="/v2/em/" element={<SEO />}>
-        <Route path="empy" element={<Employee />} />
-        <Route path="addempy" element={<AddEmployee />} />
-        <Route path="attend" element={<Employee />} />
+      <Route index  element={<Employee />} />                    {/* by default we get this route*/}
+        <Route index  path="empy" element={<Employee />} />       
+        <Route path="addempy" element={<AddSEO />} />
+        <Route path="attend" element={<SeoAttendance />} />
       </Route>
       {/*........................ EMPLOYEE WRITER Routers............................. */}
-      <Route path="/v2/writer/" element={<Writer />}/>
+      <Route path="/v2/writer/" element={<WriterDashboard />}> 
+      <Route index   element={<GetWriter />} />                                                     {/* by default we get this route*/}
+ <Route index  path="wr/empy" element={<GetWriter />} />       
+        <Route path="wr/addempy" element={<AddWriter />} />
+        <Route path="wr/attend" element={<AttendanceWriter />} />
+
+      </Route>
+
       {/*........................ EMPLOYEE DESIGNER Routers............................. */}
-      <Route path="/v2/design/" element={<Designer />}/>
+      <Route path="/v2/design/" element={<DesignerDash />}>
+      <Route index   element={<GetDesigner />} />                                                     {/* by default we get this route*/}
+ <Route index  path="de/empy" element={<GetDesigner />} />       
+        <Route path="de/addempy" element={<AddDesigner />} />
+        <Route path="de/attend" element={<AttendanceDesigner />} />
+
+      </Route>
+    
+     
         
       {/*........................ EMPLOYEE SALES Routers............................. */}
-      <Route path="/v2/sales/" element={<Sales />}/>
+      <Route path="/v2/sales" element={<Sales />}/>
             {/*........................ EMPLOYEE  Routers............................. */}
       <Route path="/v3/empy/" element={<EmployeeDashboard />}>
-        <Route path="project" element={<EMProjects />} />
+      <Route index element={<EMProjects />} />                             {/* by default we get this route*/}
+        <Route  path="project" element={<EMProjects />} />
         <Route path="leave" element={<Application />} />
         <Route path="details" element={<Details />} />
         <Route path="break" element={<BreakTime />} />
