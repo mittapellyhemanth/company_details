@@ -5,7 +5,7 @@ const PostWriter = {};
 PostWriter.post = async(req,res)=>{
     try {
         
-      return  Post(req,res,addWriter)
+      return  Post(req,res,addWriter,WRITER)
         
     } catch (error) {
         return error

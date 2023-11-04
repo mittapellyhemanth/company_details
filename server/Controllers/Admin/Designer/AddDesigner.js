@@ -5,7 +5,7 @@ const PostDesigner = {};
 PostDesigner.post = async(req,res)=>{
     try {
         
-      return  Post(req,res,addDesginer)
+      return  Post(req,res,addDesginer,'DESIGNER')
         
     } catch (error) {
         return error

@@ -1,11 +1,11 @@
 
 const bcrypt = require('bcrypt')
-const Post =  async(req, res,designation)=>  {
+const Post =  async(req, res,UserModel,type)=>  {
 console.log(req.body,'design');
   
  
     const { Name, address, phoneNumber,email,password,aadhaar } = req.body;
-    const ExsistingUser = await designation.findOne({ email: email });  // check user exsists or not
+    const ExsistingUser = await UserModel.findOne({ email: email });  // check user exsists or not
     if (ExsistingUser) {
         return res.json({ error: 'User Exsists' });
     }
@@ -28,10 +28,10 @@ if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phon
 }
     bcrypt.hash(password, 10).then(hashPass => { // encrypting password  times with bcrypt
 
-        const employeeData = new designation({
+        const employeeData = new UserModel({
             Name, address, phoneNumber,email,aadhaar,
             password: hashPass,
-           
+            designation:type
         })
 
         // saving email and encrypted password to DB

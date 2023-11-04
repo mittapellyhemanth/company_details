@@ -5,8 +5,8 @@ const Post = require('../../Controllers/CRUD/POST');
 const PostSuperAdmin = express.Router();;
 PostSuperAdmin.post = async(req,res)=>{
     try {
-        
-      return  Post(req,res,addSuperAdmin)
+        //here we  will send request,response,and usermodel and type
+      return  Post(req,res,addSuperAdmin,'SUPER ADMIN')   
         
     } catch (error) {
         return error

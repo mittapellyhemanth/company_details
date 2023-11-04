@@ -5,7 +5,7 @@ const PostSeo = {};
 PostSeo.post = async(req,res)=>{
     try {
         
-      return  Post(req,res,addSEO)
+      return  Post(req,res,addSEO,'SEO')
         
     } catch (error) {
         return error

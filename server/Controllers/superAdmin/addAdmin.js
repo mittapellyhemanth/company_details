@@ -5,7 +5,7 @@ const PostAdmin = {};
 PostAdmin.post = async(req,res)=>{
     try {
         
-      return  Post(req,res,addAdmin)
+      return  Post(req,res,addAdmin,"ADMIN")
         
     } catch (error) {
         return error
