@@ -1,9 +1,13 @@
 const express = require("express");
 
 const SuperAdminRouter = express.Router();
-const User = require('../../Schemas/User/Register')
+const User = require('../../Schemas/CEO/Register')
 require('dotenv').config();
 const LoginDetails = require('../Login/Login');
+
+const RegisterSuperAdmin = require('../Register/Register')
+SuperAdminRouter.post('/Register',RegisterSuperAdmin.post)
+
 
 SuperAdminRouter.post("/login", async (req, res) => {
     const loginCred =req.body;
@@ -17,10 +21,16 @@ SuperAdminRouter.post("/login", async (req, res) => {
         })
     })
 })
+
+
+
 const postAdmin = require('../../Controllers/superAdmin/addAdmin')
 SuperAdminRouter.post('/addAdmin',postAdmin.post);
 
 const getAdmins = require('../../Controllers/superAdmin/getAdmins');
-SuperAdminRouter.get('/admins',getAdmins.get)
+SuperAdminRouter.get('/admins',getAdmins.get);
+
+const getOneAdmin = require('../../Controllers/superAdmin/getAdmins');
+getOneAdmin.get('/admins',getAdmins.get)
 
 module.exports = SuperAdminRouter;

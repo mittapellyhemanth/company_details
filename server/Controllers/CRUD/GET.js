@@ -13,10 +13,9 @@ const GET = async (req, res,designation) => {
         });
       });
   } catch (error) {
-    res.status(500).json({
-      message: "Internal server error",
-      error: err,
-    });
+    
+      return error
+   
   }
 };
 

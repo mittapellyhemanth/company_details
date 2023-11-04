@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const LoginDetails = async function(req,res,user){
     const loginCred =req.body;
-    // console.log(loginCred);
+    console.log(loginCred,'req');
     if (user) {  // will give response from DB
 
         // if user found then it will encrypt password and compare with DB password 
@@ -28,7 +28,7 @@ const LoginDetails = async function(req,res,user){
                 })
             } else {
                 res.status(400).json({
-                    message: "Email or password does not match!!"
+                   message: "Email or password does not match!!"
                 })
             }
         })

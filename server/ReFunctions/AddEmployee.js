@@ -8,9 +8,8 @@ function AddEmployee(AddModel) {
         phoneNumber: { type: Number, required: true },
         email: { type: String, required: true },
         password: { type: String, required: true },
-        aadhaar: { type: Number, required: true },
-        unique_id: { type: String }
-    });
+        aadhaar: { type: Number, required: true},
+        });
 
     return mongoose.model(AddModel, schema);
 }

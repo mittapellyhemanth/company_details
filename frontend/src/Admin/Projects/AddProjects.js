@@ -62,7 +62,7 @@ const navigate = useNavigate()
           if (res.data.error) {
            return setError(res.data.error);
           }
-          navigate('/v2/proj')
+          navigate('/v2/das/proj')
           // console.log(res);
         });
     } catch (error) {

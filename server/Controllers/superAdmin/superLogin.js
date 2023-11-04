@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../../Schemas/User/Register");  //schema
+const User = require("../../Schemas/CEO/Register");  //schema
 const SuperAdminLogin = {};
 
 const LoginDetails = require('../../Routers/Login/Login')

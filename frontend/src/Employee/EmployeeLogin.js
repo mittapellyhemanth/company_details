@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Login from "../components/Login_SignUp/Login";
 import DetailsContext from "../Context/CreateContext";
 export default function EmployeeLogin(){
-    const {setPersonLogin,personLogin} = useContext(DetailsContext)
+    const {setPersonLogin,personLogin,empyId , setEmpyId} = useContext(DetailsContext)
        
     useEffect(() => {
             if (personLogin !== 'Employee') {

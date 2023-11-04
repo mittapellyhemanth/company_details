@@ -33,6 +33,12 @@ export default function AddAdmin() {
       name: "password",
       required: true,
     },
+    {
+      type: "text",
+      placeholder: "AADHAAR",
+      name: "aadhaar",
+    
+    },
   ];
 const navigate = useNavigate()
   const onSubmit = async (formData) => {

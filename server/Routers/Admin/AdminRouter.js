@@ -1,5 +1,5 @@
 const express = require("express");
-const AddEmployee = require("../../Schemas/Admin/AddEmployee");  //schema
+
 const AddProject = require('../../Schemas/Admin/AddProjects');
 const AdminRouter = express.Router();
 
@@ -58,8 +58,8 @@ AdminRouter.get("/getProject", getProjects.get);
 const postEmployee = require('../../Controllers/Admin/SEO/AddSeo');
 AdminRouter.post("/addSeo", postEmployee.post);
 //....get Employee .....
-const getEmployee = require('../../Controllers/Admin/getEmployee');
-AdminRouter.get("/getEmployee", getEmployee.get);
+const getEmployee = require('../../Controllers/Admin/SEO/GetSeo');
+AdminRouter.get("/getSeo", getEmployee.get);
 
 
 //..................Add,Get DESIGNER .................................................................................
@@ -72,11 +72,13 @@ AdminRouter.get("/getDesigner", getDesginer.get);
 
 
 //..................Add,Get Writer .................................................................................
-const addWriter = require('../../Controllers/Admin/Writer/addWriterr');
+const addWriter = require('../../Controllers/Admin/Writer/addWriter');
 AdminRouter.post("/addWriter", addWriter.post);
 //GET designer
 const getWriter = require('../../Controllers/Admin/Writer/getWriter');
 AdminRouter.get("/getWriter", getWriter.get);
 
+const getOneSeo = require('../../Controllers/Admin/SEO/GetSeo');
+AdminRouter.get("/getOneSeo/:id", getOneSeo.getOne);
 
 module.exports = AdminRouter;

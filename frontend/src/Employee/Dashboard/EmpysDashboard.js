@@ -11,7 +11,7 @@ import UserName from "../../Functions/UserName";
 
 
 
-export default function EmployeeDashboard() {
+export default function EmpysDashboard() {
   
   UserName();
 

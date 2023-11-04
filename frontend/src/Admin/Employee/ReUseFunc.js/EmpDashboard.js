@@ -30,7 +30,7 @@ export default function EmpDashboard(){
    if (designation === "writer") {
     sidebarData = [
       {label:'EMPLOYEE', to:'/v2/writer/wr/empy',icon:<MdAdminPanelSettings/>},
-      {label:'ADD EMPLOYEE', to:'/v2/writer/wr/de/addempy',icon:<BsPersonFillAdd/>},
+      {label:'ADD EMPLOYEE', to:'/v2/writer/wr/addempy',icon:<BsPersonFillAdd/>},
       {label:'ATTENDANCE', to:'/v2/writer/wr/attend',icon:<BsPersonFillAdd/>}
     ];
   } 

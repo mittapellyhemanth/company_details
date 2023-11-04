@@ -1,24 +1,8 @@
 
 const bcrypt = require('bcrypt')
 const Post =  async(req, res,designation)=>  {
-console.log(designation,'design');
-    let newEmployeeID ; 
-    let previousEmployeeID =0; 
-
-    // would give last registred user
-    const lastEmployeeID = await designation.findOne({}, {}, { sort: { _id: -1 } }, function (err, employeeID) {
-        return employeeID;
-    });
-    
-    if(lastEmployeeID != null){
-          for(let i=5 ;i<lastEmployeeID.unique_id.length ;i++){
-            previousEmployeeID+=lastEmployeeID.unique_id[i]
-          }
-          newEmployeeID = new Date().getFullYear()+"001" +(parseInt(previousEmployeeID) +1)
-          
-    }else{
-        newEmployeeID =new Date().getFullYear()+"001";
-    }
+console.log(req.body,'design');
+  
  
     const { Name, address, phoneNumber,email,password,aadhaar } = req.body;
     const ExsistingUser = await designation.findOne({ email: email });  // check user exsists or not
@@ -47,7 +31,7 @@ if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phon
         const employeeData = new designation({
             Name, address, phoneNumber,email,aadhaar,
             password: hashPass,
-            unique_id:newEmployeeID
+           
         })
 
         // saving email and encrypted password to DB

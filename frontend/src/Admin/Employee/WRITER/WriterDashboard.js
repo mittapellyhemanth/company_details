@@ -1,16 +1,19 @@
+import { useContext, useEffect } from "react";
 import EmpDashboard from "../ReUseFunc.js/EmpDashboard";
-import SEO from "../SEO/SEO";
 
-export default function WriterDashboard(){
-    const{designation, setDesignation} = useContext(DetailsContext);
-    
-    useEffect(()=>{
+import DetailsContext from "../../../Context/CreateContext";
 
-        setDesignation('writer')
-    },[setDesignation])
-    console.log(designation);
+export default function WriterDashboard() {
+  const { designation, setDesignation } = useContext(DetailsContext);
 
-    return <>
-   <EmpDashboard />
+  useEffect(() => {
+    setDesignation("writer");
+  }, [setDesignation]);
+  console.log(designation);
+
+  return (
+    <>
+      <EmpDashboard />
     </>
+  );
 }

@@ -1,4 +1,4 @@
-const addWriter = require('../../../Schemas/Admin/Employees/Designer');
+const addWriter = require('../../../Schemas/Admin/Employees/Writer');
 const Post = require('../../CRUD/POST');
 
 const PostWriter = {};

@@ -12,7 +12,7 @@ import NavbarScroll from "../Navbar/NavbarScroll";
 
 export default function Login() {
 
-  const { personLogin ,setPersonName,setFlag} = useContext(DetailsContext);
+  const { personLogin ,setPersonName,setFlag } = useContext(DetailsContext);
 
   const navigate = useNavigate();
 useEffect(()=>{
@@ -32,7 +32,8 @@ useEffect(()=>{
         localStorage.setItem("userName", res.data.user.Name);
         localStorage.setItem("token", res.data.Token);
         localStorage.setItem("personLogin", "SuperAdmin");
-        // console.log(res);
+        localStorage.setItem("Id", res.data.user._id);
+        console.log(res.data.user._id,'idddddddddd');
         return res;    // returning response 
       } catch (error) {
         // console.error(error);
@@ -66,7 +67,7 @@ useEffect(()=>{
       return await navigation(formData , url, serverURL)
     };
     if (personLogin === "Employee") {
-      let url = "/v3"
+      let url = "/v3/empy/"
       let serverURL = "http://localhost:8080/employee/login"
       return await navigation(formData , url, serverURL)
     };

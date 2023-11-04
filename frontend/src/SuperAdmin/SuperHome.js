@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { BsPersonFillAdd } from "react-icons/bs";
 import { MdAdminPanelSettings } from "react-icons/md";
@@ -8,10 +8,10 @@ import NavbarScroll from "../components/Navbar/NavbarScroll";
 import Sidebar from "../components/Sidebar/Sidebar";
 import UserName from "../Functions/UserName";
 
-
+import axios from 'axios'
 
 export default function SuperAdminHome() {
-  // const { setFlag, setPersonName } = useContext(DetailsContext);
+  const { data, setData } = useState([])
  console.log('super');
   UserName()
 
@@ -19,7 +19,18 @@ const sidebarData = [
   {label:'Admins', to:'admins',icon:<MdAdminPanelSettings/>},
   {label:'Add Admin', to:'addAdmin',icon:<BsPersonFillAdd/>}
 ];
-
+useEffect(() => {
+  axios
+    .get()
+    .then((res) => {
+      // console.log(res)
+      if (res.status === 200) {
+        console.log(res.data.data, "got");
+         setData(res.data.data);
+      }
+    })
+    .catch((err) => console.log(err));
+}, []);
   return (
     <>
       <div className="grid-container">
