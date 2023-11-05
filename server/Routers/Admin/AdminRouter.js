@@ -25,7 +25,7 @@ AdminRouter.post("/login", async (req, res) => {
 
  //..................Add project .................................................................................
 AdminRouter.post("/addProject",auth, async (req, res) => {
-
+console.log(auth);
     try {
         const { projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted } = req.body;
 

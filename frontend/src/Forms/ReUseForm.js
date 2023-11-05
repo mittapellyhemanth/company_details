@@ -26,9 +26,10 @@ export default function ReUseForm({ Method, inputs, onSubmit, btnText,urlData })
       >
         {inputs.map((input) => (
           <div key={input.name} className={input.clasename}>
-            <Form.Group className="mb-3" controlId={`formGroup${input.name}`}>
+            <Form.Group className="mb-3 input-text" controlId={`formGroup${input.name}`}>
               {input.type !== "select" && (
                 <Form.Control
+              
                   type={input.type}
                   placeholder={input.placeholder}
                   name={input.name}

@@ -1,0 +1,19 @@
+.view{
+    width: fit-content;
+    height: 70vh;
+    background-color:white;
+    border: 2px solid black;
+   margin-top: 50px;
+   filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.5));
+}
+.your-card{
+    border: 0.3px solid black;
+    filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.5));
+   margin: 50px;
+   padding: 50px;
+}
+.your-title{
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    color: black;
+}

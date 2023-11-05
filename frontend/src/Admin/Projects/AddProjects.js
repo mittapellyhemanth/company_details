@@ -53,10 +53,13 @@ export default function AddProjects() {
 const navigate = useNavigate()
 
   const onSubmit = async( formData ) => {
-    // console.log(formData );
+    const key = localStorage.getItem("token");
+    const headers = {
+      Authorization: key
+    };
     try {
       await axios
-        .post("http://localhost:8080/admin/addProject", formData)
+        .post("http://localhost:8080/admin/addProject", formData,{headers})
         .then((res) => {
           console.log(res);
           if (res.data.error) {
@@ -71,16 +74,22 @@ const navigate = useNavigate()
   };
   return (
     <>
-      {err && <h6 className="error">{err}</h6>}
 
-<div className="Login">
+<div className="form-addpro">
+  <div className="form-addpro-box">
+    <div>
+
+      {err && <h6 className="error">{err}</h6>}
+  </div>
   <ReUseForm
     Method="POST"
     inputs={input}
     onSubmit={onSubmit}
     btnText="Submit"
-  />
+    />
 </div>
+  </div>
+ 
     </>
   );
 }

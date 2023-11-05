@@ -2,13 +2,13 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 import { useContext, useEffect, useState } from "react";
 import DetailsContext from "../Context/CreateContext";
-
+import './Yourdetails.css'
 import axios from "axios";
 
 export default function Details() {
   
-  const { designation } = useContext(DetailsContext);
-  console.log(designation,'dis');
+  // const { designation } = useContext(DetailsContext);
+  
   const id = localStorage.getItem("Id");
 
   const [getOneData, setOneData] = useState([]);
@@ -31,12 +31,12 @@ export default function Details() {
   return (
     <>
       <div className="view">
-        <Card style={{ width: "25rem" }}>
-          <Card.Img variant="center" src="holder.js/100px180?text=Image cap" />
+        <Card className="your-card">
+         
           <Card.Body>
-            <Card.Title>{designation}</Card.Title>
+            <Card.Title className="your-title">{getOneData.designation}</Card.Title>
           </Card.Body>
-          <ListGroup className="list-group-flush">
+          <ListGroup className="">
           <ListGroup.Item>
               <label>ID:</label>
               <span>{getOneData.unique_id}</span>
@@ -50,8 +50,8 @@ export default function Details() {
               <span>{getOneData.email}</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              <label>Password:</label>
-              <span>{getOneData.phoneNumber}</span>
+              {/* <label>Password:</label>
+              <span>{getOneData.phoneNumber}</span> */}
             </ListGroup.Item>
             <ListGroup.Item>
               <label>Address:</label>
