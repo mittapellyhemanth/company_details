@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import UserName from "../../../Functions/UserName";
+
 
 import EmpDashboard from "../ReUseFunc.js/EmpDashboard";
 import DetailsContext from "../../../Context/CreateContext";
@@ -8,11 +8,11 @@ import DetailsContext from "../../../Context/CreateContext";
 
 export default function SEO(){
  
-  const{designation, setDesignation} = useContext(DetailsContext);
+  const{ setDesignationType} = useContext(DetailsContext);
     
   useEffect(()=>{
- setDesignation('seo')
-  },[setDesignation]);
+    setDesignationType('seo')
+  },[setDesignationType]);
 
   
     return (

@@ -8,6 +8,7 @@ import NavbarScroll from "../components/Navbar/NavbarScroll";
 import Sidebar from "../components/Sidebar/Sidebar";
 import UserName from "../Functions/UserName";
 
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import axios from 'axios'
 
 export default function SuperAdminHome() {
@@ -16,8 +17,8 @@ export default function SuperAdminHome() {
   UserName()
 
 const sidebarData = [
-  {label:'Admins', to:'admins',icon:<MdAdminPanelSettings/>},
-  {label:'Add Admin', to:'addAdmin',icon:<BsPersonFillAdd/>}
+  {label:'Admins', to:'admins',icon:<MdAdminPanelSettings size='30px'/>},
+  {label:'Add Admin', to:'addAdmin',icon:<BsPersonFillAdd size='30px'/>}
 ];
 useEffect(() => {
   axios

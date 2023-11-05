@@ -1,11 +1,13 @@
 .card-container{
     width: auto;
-    height: 70vh;
+    height: 90vh;
    margin: auto;
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
+   text-align: center;
+   background-color: rgb(235, 229, 229);
 }
 
 .cards{
@@ -14,28 +16,44 @@
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
-  
+   text-align: center;
 }
 .cards>.card{
     min-width: 250px;
    height: 250px;
     border: 1px solid black;
-    margin: 10px;
+   
  display: flex;
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
+  margin: 20px;
    font-size: 1.5rem;
    color: black;
+  
 font-weight: 800;
    text-decoration: none;
-   
+   filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.5));
+   background-color:rgb(207, 238, 228);
+   text-align: center;
 }
 
+.cards>.card:nth-child(2){
+background-color: rgb(235, 163, 163);
+text-align: center;
+}
+.cards>.card:nth-child(4){
+    background-color: rgb(235, 163, 163);
+    text-align: center;
+    }
 
-.cards>.card:hover , .link-title:hover{
+.cards>.card:hover {
+    min-width: 260px;
+    height: 260px;
     background-color: black;
     color: white;
+    text-align: center;
+    filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.5));
 }
 
 @media only screen and (max-width:280px) {

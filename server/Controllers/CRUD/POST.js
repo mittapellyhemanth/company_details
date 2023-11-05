@@ -2,7 +2,28 @@
 const bcrypt = require('bcrypt')
 const Post =  async(req, res,UserModel,type)=>  {
 console.log(req.body,'design');
-  
+let newUserID ; 
+// 
+let previousUserID =0; // it will store digit of last inserted of ppd_id
+
+// would give last registred user
+const lastUserID = await UserModel.findOne({}, {}, { sort: { _id: -1 } }, function (err, userID) {
+    return userID;
+});
+
+if(lastUserID != null){
+      for(let i=5 ;i<lastUserID.unique_id.length ;i++){
+        previousUserID+=lastUserID.unique_id[i]
+      }
+      newUserID = type.substring(0,1) +(parseInt(previousUserID) +1)
+    
+      
+}else{
+   
+    
+    newUserID = type.substring(0,1)+ new Date().getFullYear() + "01";
+}
+
  
     const { Name, address, phoneNumber,email,password,aadhaar } = req.body;
     const ExsistingUser = await UserModel.findOne({ email: email });  // check user exsists or not
@@ -31,7 +52,8 @@ if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phon
         const employeeData = new UserModel({
             Name, address, phoneNumber,email,aadhaar,
             password: hashPass,
-            designation:type
+            designation:type,
+            unique_id : newUserID
         })
 
         // saving email and encrypted password to DB

@@ -1,5 +1,5 @@
 const express = require("express");
-
+const auth = require('../../Authentication/Auth')
 const AddProject = require('../../Schemas/Admin/AddProjects');
 const AdminRouter = express.Router();
 
@@ -24,7 +24,7 @@ AdminRouter.post("/login", async (req, res) => {
 })
 
  //..................Add project .................................................................................
-AdminRouter.post("/addProject", async (req, res) => {
+AdminRouter.post("/addProject",auth, async (req, res) => {
 
     try {
         const { projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted } = req.body;
@@ -52,33 +52,33 @@ AdminRouter.post("/addProject", async (req, res) => {
 
 //..................get PROJECTS .................................................................................
 const getProjects = require('../../Controllers/Admin/getProject');
-AdminRouter.get("/getProject", getProjects.get);
+AdminRouter.get("/getProject",auth, getProjects.get);
 
 //..................Add,Get Employee .................................................................................
 const postEmployee = require('../../Controllers/Admin/SEO/AddSeo');
-AdminRouter.post("/addSeo", postEmployee.post);
+AdminRouter.post("/addSeo",auth, postEmployee.post);
 //....get Employee .....
 const getEmployee = require('../../Controllers/Admin/SEO/GetSeo');
-AdminRouter.get("/getSeo", getEmployee.get);
+AdminRouter.get("/getSeo",auth, getEmployee.get);
 
 
 //..................Add,Get DESIGNER .................................................................................
 const addDesigner = require('../../Controllers/Admin/Designer/AddDesigner');
-AdminRouter.post("/addDesigner", addDesigner.post);
+AdminRouter.post("/addDesigner",auth, addDesigner.post);
 //GET designer
 const getDesginer = require('../../Controllers/Admin/Designer/GetDesigner');
-AdminRouter.get("/getDesigner", getDesginer.get);
+AdminRouter.get("/getDesigner",auth, getDesginer.get);
 
 
 
 //..................Add,Get Writer .................................................................................
 const addWriter = require('../../Controllers/Admin/Writer/addWriter');
-AdminRouter.post("/addWriter", addWriter.post);
+AdminRouter.post("/addWriter",auth, addWriter.post);
 //GET designer
 const getWriter = require('../../Controllers/Admin/Writer/getWriter');
-AdminRouter.get("/getWriter", getWriter.get);
+AdminRouter.get("/getWriter",auth, getWriter.get);
 
 const getOneSeo = require('../../Controllers/Admin/SEO/GetSeo');
-AdminRouter.get("/getOneSeo/:id", getOneSeo.getOne);
+AdminRouter.get("/getOneSeo/:id",auth, getOneSeo.getOne);
 
 module.exports = AdminRouter;

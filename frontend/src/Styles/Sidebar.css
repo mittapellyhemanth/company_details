@@ -1,70 +1,108 @@
 .side-container {
-  width: 100vw;
-  height: 100vh;
 
   display: grid;
-
-  grid-template-areas:
-    "sider  side-content side-content side-content"
-    "sider  side-content side-content side-content"
-    "sider  side-content side-content side-content";
+grid-template-areas:
+   "sider  side-content side-content side-content"
+   "sider  side-content side-content side-content"
+   "sider  side-content side-content side-content";
+ 
 }
 .sider {
-  width: 20vw;
-  height: auto;
-  grid-area: sider;
-  background-color: white;
-  border: 1px solid black;
-  padding-top: 20px;
+ 
+ width: 20vw;
+ height:auto;
+ grid-area: sider;
+ background-color: white;
+ padding-top: 20px;
+ background-color: rgb(185, 210, 210);
+ border: 3px solid rgb(177, 213, 213);
+
+
 }
 .side-content {
-  grid-area: side-content;
-  width: fit-content;
-  height: fit-content;
-  background-color: white;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 50px;
-  padding: 15px;
-  gap: 15px;
+ grid-area: side-content;
+ width: 80vw;
+ height:fit-content;
+
+display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ /* margin-top: 50px; */
+gap: 10px;
+
 }
 
+
 .link-text > span {
+ 
+ color: black;
+ font-size: 15px;
+ font-family: Outfit;
+}
+
+
+.link-text > span:hover {
+ width: fit-content;
+ height: fit-content;
+ border: 1px solid black;
+ background-color: black;
+ color: white;
+ border-radius: 5px;
+ padding: 5px;
+ display: flex;
+ flex-wrap: wrap;
+ 
+}
+
+/* .side-title{
+ width: fit-content;
+ height: fit-content;
+ margin: auto;
+ display: flex;
+ flex-wrap: wrap;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ border: 2px solid lightgray;
+ box-shadow: 1px 1px 5px 5px lightgray;
+ padding: 5px;
+ box-sizing: border-box;
+} */
+/* .person-icon{
+} */
+.icon{
+ color: rgb(137, 126, 254);
+
+}
+.personName{
+
+ font-family: Outfit;
+ font-size: 1.3rem;
+ font-weight: 400;
   color: black;
 }
-.link-text > span:hover {
-  width: fit-content;
-  height: fit-content;
-  border: 1px solid black;
-  background-color: black;
-  color: white;
-  border-radius: 5px;
-  padding: 5px;
-  display: flex;
-  flex-wrap: wrap;
-}
+
 
 
 @media only screen and (max-width: 360px) {
-  .side-content {
-    grid-area: side-content;
-    max-width: 200px;
-    height: fit-content;
-    background-color: white;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 50px;
-    padding: 15px;
-    gap: 15px;
-  }
+ .side-content {
+   grid-area: side-content;
+   max-width: 200px;
+   height: fit-content;
+   background-color: white;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 50px;
+   padding: 15px;
+   gap: 15px;
+ }
 }
 @media only screen and (max-width: 250px) {
-    .side-content {
-     
-      max-width: 130px;
-  
-    }
+   .side-content {
     
-  }
+     max-width: 130px;
+ 
+   }
+   
+ }

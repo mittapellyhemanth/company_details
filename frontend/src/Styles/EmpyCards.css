@@ -1,0 +1,36 @@
+.person-card {
+  height: fit-content;
+  color: black;
+  border: 2px solid rgb(153, 255, 0);
+  margin: 10px;
+}
+.person-card:hover {
+  width: 18.5rem !important;
+  height: 70px;
+  border: 2px solid rgb(153, 255, 0);
+  box-shadow: 0.5px 0.5px 2px 1px rgb(153, 255, 0);
+  box-sizing: border-box;
+}
+
+.person-card-view {
+  width: 4rem;
+  border-radius: 15px;
+  background-color: rgb(204, 255, 237);
+}
+@media only screen and (max-width: 472px) {
+  .person-card {
+    width: 12rem !important;
+    margin: 15px;
+  }
+  .person-card:hover {
+    width: 13rem !important;
+  }
+}
+@media only screen and (max-width: 440px) {
+  .person-card {
+    width: 7rem !important;
+  }
+  .person-card:hover {
+    width: 8rem !important;
+  }
+}

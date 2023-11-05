@@ -7,7 +7,7 @@ const Writer = require("../../Schemas/Admin/Employees/Writer");
 const Sales = require("../../Schemas/Admin/Employees/Sales");
 const LoginDetails = require('../Login/Login')
 const EmployeeRouter = express.Router();
-
+const auth = require('../../Authentication/Auth')
 require("dotenv").config();
 
 EmployeeRouter.post("/login", async (req, res) => {
@@ -44,7 +44,7 @@ try {
 
 });
 
-EmployeeRouter.post("/project", async (req, res) => {
+EmployeeRouter.post("/project",auth, async (req, res) => {
   try {
     const { BackLink, Keyword, Type, Status, Remark, TimeTaken } = req.body;
 
@@ -70,7 +70,7 @@ EmployeeRouter.post("/project", async (req, res) => {
   }
 });
 
-EmployeeRouter.post("/leave", async (req, res) => {
+EmployeeRouter.post("/leave",auth, async (req, res) => {
   try {
     const { ReasonForAbsent, ChooseDate, NoOfDays } = req.body;
 

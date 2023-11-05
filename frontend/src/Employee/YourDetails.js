@@ -14,15 +14,19 @@ export default function Details() {
   const [getOneData, setOneData] = useState([]);
 
   useEffect(() => {
+    const key = localStorage.getItem("token");
+    const headers = {
+      Authorization: key
+    };
     axios
-      .get(`http://localhost:8080/admin/getOneSeo/${id}`)
+      .get(`http://localhost:8080/admin/getOneSeo/${id}`,{headers})
       .then((res) => {
         if (res.status === 200) {
           setOneData(res.data.data);
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -33,6 +37,10 @@ export default function Details() {
             <Card.Title>{designation}</Card.Title>
           </Card.Body>
           <ListGroup className="list-group-flush">
+          <ListGroup.Item>
+              <label>ID:</label>
+              <span>{getOneData.unique_id}</span>
+            </ListGroup.Item>
             <ListGroup.Item>
               <label>Name:</label>
               <span>{getOneData.Name}</span>

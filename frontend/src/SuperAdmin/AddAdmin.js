@@ -41,10 +41,14 @@ export default function AddAdmin() {
     },
   ];
 const navigate = useNavigate()
-  const onSubmit = async (formData) => {
+const onSubmit = async (formData) => {
+    const key = localStorage.getItem("token");
+      const headers = {
+        Authorization: key
+      };
     try {
       await axios
-        .post("http://localhost:8080/superAdmin/addAdmin", formData)
+        .post("http://localhost:8080/superAdmin/addAdmin",formData,{headers})
         .then((res) => {
           if (res.data.error) {
            return setError(res.data.error);

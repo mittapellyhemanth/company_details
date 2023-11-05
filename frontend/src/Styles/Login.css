@@ -9,7 +9,7 @@
     margin-top: 50px;
     border-radius: 5px;
     box-shadow: 10px 10px 25px 0px #07070721;
-  
+  font-style: normal;
 }
 .Login-container:hover{
     max-width:410px;
@@ -32,7 +32,7 @@
     color: blueviolet;
     padding-top: 15px;
     font-weight: 800;
-    font-style: oblique;
+    font-style: normal;
 }
 .placeholder-text{
     text-align: center !important;

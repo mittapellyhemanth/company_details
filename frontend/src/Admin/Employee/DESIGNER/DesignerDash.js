@@ -5,13 +5,13 @@ import EmpDashboard from "../ReUseFunc.js/EmpDashboard";
 
 
 export default function DesignerDash(){
-    const{designation, setDesignation} = useContext(DetailsContext);
+    const{setDesignationType} = useContext(DetailsContext);
     
     useEffect(()=>{
 
-        setDesignation('designer')
-    },[setDesignation])
-    console.log(designation);
+        setDesignationType('designer')
+    },[setDesignationType])
+ 
     return <>
     <EmpDashboard />
     </>

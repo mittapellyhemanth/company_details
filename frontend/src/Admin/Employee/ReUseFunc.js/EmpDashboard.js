@@ -11,30 +11,30 @@ import DetailsContext from "../../../Context/CreateContext";
 export default function EmpDashboard(){
   UserName()
 
-  const{designation, setDesignation} = useContext(DetailsContext);
+  const{designationType} = useContext(DetailsContext);
   let sidebarData = [];
-  if (designation === "seo") {
+  if (designationType === "seo") {
      sidebarData = [
         {label:'EMPLOYEE', to:'/v2/em/empy',icon:<MdAdminPanelSettings/>},
         {label:'ADD EMPLOYEE', to:'/v2/em/addempy',icon:<BsPersonFillAdd/>},
         {label:'ATTENDANCE', to:'/v2/em/attend',icon:<BsPersonFillAdd/>}
       ];
  }
-   if (designation === "designer") {
+   if (designationType === "designer") {
     sidebarData = [
         {label:'EMPLOYEE', to:'/v2/design/de/empy',icon:<MdAdminPanelSettings/>},
         {label:'ADD EMPLOYEE', to:'/v2/design/de/addempy',icon:<BsPersonFillAdd/>},
         {label:'ATTENDANCE', to:'/v2/design/de/attend',icon:<BsPersonFillAdd/>}
       ];
   }
-   if (designation === "writer") {
+   if (designationType === "writer") {
     sidebarData = [
       {label:'EMPLOYEE', to:'/v2/writer/wr/empy',icon:<MdAdminPanelSettings/>},
       {label:'ADD EMPLOYEE', to:'/v2/writer/wr/addempy',icon:<BsPersonFillAdd/>},
       {label:'ATTENDANCE', to:'/v2/writer/wr/attend',icon:<BsPersonFillAdd/>}
     ];
   } 
-  if (designation === "sales") {
+  if (designationType === "sales") {
     // sidebarData = [
     //     {label:'EMPLOYEE', to:'/v2/em/empy',icon:<MdAdminPanelSettings/>},
     //     {label:'ADD EMPLOYEE', to:'/v2/em/addempy',icon:<BsPersonFillAdd/>},

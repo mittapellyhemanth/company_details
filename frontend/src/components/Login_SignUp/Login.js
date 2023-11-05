@@ -31,10 +31,11 @@ useEffect(()=>{
         
         localStorage.setItem("userName", res.data.user.Name);
         localStorage.setItem("token", res.data.Token);
-        localStorage.setItem("personLogin", "SuperAdmin");
+       localStorage.setItem("personLogin", "SuperAdmin");
         localStorage.setItem("Id", res.data.user._id);
         localStorage.setItem("designation", res.data.user.designation);
         console.log(res.data.user._id,'idddddddddd');
+      
         return res;    // returning response 
       } catch (error) {
         // console.error(error);
