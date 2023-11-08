@@ -1,0 +1,46 @@
+.card-btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 70px;
+}
+
+.cancel-btn {
+  display: block;
+  
+}
+.bg-wh{
+  border-radius: 0px !important;
+
+}
+.bg-red {
+  border-radius: 0px !important;
+  background-color: rgb(241, 71, 71);
+  color: rgb(40, 38, 38);
+  font-weight: 600;
+}
+.bg-blue {
+  border-radius: 0px !important;
+  background-color: rgb(129, 137, 235);
+  color: rgb(40, 38, 38);
+  font-weight: 600;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../image/backimg.jpg");
+  display: flex;
+  flex-wrap: wrap;
+/* flex-start: start; */
+  justify-content: center;
+}
+.user-text {
+  text-transform: uppercase;
+}
+
+.btn{
+  border-radius: 0px !important;
+}

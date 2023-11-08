@@ -4,43 +4,40 @@ import "../../Styles/Sidebar.css";
 // {label:'Add Admin', to:'/addAdmin',icon: <BsPersonFillAdd />}
 export default function Sidebar({ children }) {
   // console.log(children);
-  const [isActive,setIsactive] = useState(false);
-  const handleClick = ()=>{
-    setIsactive(true)
-  }
+  const [isActive, setIsactive] = useState(false);
+  const handleClick = () => {
+    setIsactive(true);
+  };
   return (
     <>
       <div className="side-container">
-        <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0  sider">
-          <div className="d-flex flex-column align-items-center min-vh-100">
+        <div className="  sider">
+          <div className=" ">
             <div>
               <div>
                 <ul
-                  className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                  className="nav  flex-column  align-items-sm-start"
                   id="menu"
                 >
-                  <li className="nav-item">
-                    {children.map((child, idx) => (
-                      <Link
-                        key={idx}
-                        to={child.to}
-                        style={{ color: "#2289FF" }}
-                        className="nav-link align-middle px-0 link-text"
-                        onClick={()=>handleClick}
-                      >
-                        <i className='fs-4 bi-house'>{child.icon}</i>
-                        <span className="ms-1 d-none d-sm-inline mx-2">
+                  <div className="nav-div">
+                    <li className="nav-item">
+                      {children.map((child, idx) => (
+                        <Link
+                          key={idx}
+                          to={child.to}
+                          className="  link-text"
+                          onClick={() => handleClick}
+                        >
                           {child.label}
-                        </span>
-                      </Link>
-                    ))}
-                  </li>
+                        </Link>
+                      ))}
+                    </li>
+                  </div>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-          
 
         <div className="side-content">
           <Outlet />

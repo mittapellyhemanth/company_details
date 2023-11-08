@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-
+import Col from 'react-bootstrap/Col';
 import "../Styles/Login.css";
+import './Form.css'
+
 export default function ReUseForm({ Method, inputs, onSubmit, btnText,urlData }) {
   console.log(urlData,'data');
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name,value);
     setFormData({ ...formData, [name]: value });
   };
 
@@ -28,7 +31,7 @@ export default function ReUseForm({ Method, inputs, onSubmit, btnText,urlData })
           <div key={input.name} className={input.clasename}>
             <Form.Group className="mb-3 input-text" controlId={`formGroup${input.name}`}>
               {input.type !== "select" && (
-                <Form.Control
+              <Form.Control
               
                   type={input.type}
                   placeholder={input.placeholder}
@@ -36,24 +39,24 @@ export default function ReUseForm({ Method, inputs, onSubmit, btnText,urlData })
                   value={formData[input.name] || ""}
                   onChange={handleChange}
                   required={input.required}
-                />
-              )}
+                  />
+                  )}
+                  </Form.Group>
+              <div className="select-my">
 
               {input.type === "select" && (
-                <select
-                  type={input.type}
-                  placeholder={input.placeholder}
-                  name={input.name}
-                  value={formData[input.value] || ""}
-                  onChange={handleChange}
-                  required={input.required}
-                >
-                  {input.options.map((option, index) => (
-                    <option key={index} value={option.value}></option>
+                <Form.Group as={Col} controlId="formGridState  mb-3 input-text " >
+          
+                <Form.Select name={input.name} value={formData[input.name] || ""} onChange={handleChange}>
+                <option disabled value='' >select</option>
+                {input.options.map((option, index) => (
+                    <option key={index}  name={option.name}  value={option.value}>{option.value}</option>
                   ))}
-                </select>
+                </Form.Select>
+              </Form.Group>
+               
               )}
-            </Form.Group>
+              </div>
           </div>
         ))}
         <button type="submit">{btnText}</button>

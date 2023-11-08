@@ -1,7 +1,8 @@
 
 const bcrypt = require('bcrypt')
 const Post =  async(req, res,UserModel,type)=>  {
-console.log(req.body,'design');
+console.log(req.body,'design',req);
+
 let newUserID ; 
 // 
 let previousUserID =0; // it will store digit of last inserted of ppd_id
@@ -15,7 +16,8 @@ if(lastUserID != null){
       for(let i=5 ;i<lastUserID.unique_id.length ;i++){
         previousUserID+=lastUserID.unique_id[i]
       }
-      newUserID = type.substring(0,1) +(parseInt(previousUserID) +1)
+      
+      newUserID = type.substring(0,1)+new Date().getFullYear() +(parseInt(previousUserID) +1)
     
       
 }else{
@@ -50,6 +52,7 @@ if(aadhaar.toString().length<12 || aadhaar.toString().length>12){  // check phon
     bcrypt.hash(password, 10).then(hashPass => { // encrypting password  times with bcrypt
 
         const employeeData = new UserModel({
+            addedAdminId:req.params.id,
             Name, address, phoneNumber,email,aadhaar,
             password: hashPass,
             designation:type,

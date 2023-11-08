@@ -3,8 +3,8 @@ import GetEmply from "../ReUseFunc.js/GetEmp";
 
 
 export default function Employee() {
-
-  let URL =  "http://localhost:8080/admin/getSeo";
+  const AdminId = localStorage.getItem('unique_id')
+  let URL =  `http://localhost:8080/admin/getSeo/${AdminId}`;
   
   return (
     <>

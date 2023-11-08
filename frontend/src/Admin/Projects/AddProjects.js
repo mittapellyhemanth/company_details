@@ -42,9 +42,27 @@ export default function AddProjects() {
       required: true,
     },
     {
+      type: "select",
+      // placeholder: "EMPLOYEE ALLOTED",
+     name:"empyDesignation",
+      required: true,
+      options:[
+        { value: "SEO", name: "empyDesignation"},
+        { value: "WRITER", name: "empyDesignation", },
+        { value: "DESIGNER", name: "empyDesignation",},
+        { value: "SALES", name: "empyDesignation",}
+      ]
+    },
+    {
       type: "text",
       placeholder: "EMPLOYEE ALLOTED",
       name: "employeeAlloted",
+      required: true,
+    },
+    {
+      type: "text",
+      placeholder: "EMPLOYEE ID",
+      name: "employID",
       required: true,
     },
   ];
@@ -53,13 +71,15 @@ export default function AddProjects() {
 const navigate = useNavigate()
 
   const onSubmit = async( formData ) => {
+    console.log(formData);
     const key = localStorage.getItem("token");
     const headers = {
       Authorization: key
     };
+    const adminId = localStorage.getItem('unique_id')
     try {
       await axios
-        .post("http://localhost:8080/admin/addProject", formData,{headers})
+        .post(`http://localhost:8080/admin/addProject/${adminId}`, formData,{headers})
         .then((res) => {
           console.log(res);
           if (res.data.error) {
@@ -69,7 +89,7 @@ const navigate = useNavigate()
           // console.log(res);
         });
     } catch (error) {
-      // console.log(error,'error');
+      return setError('check details');
     }
   };
   return (

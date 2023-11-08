@@ -1,13 +1,15 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import '../../../Styles/EmpyCards.css'
 import "../../../Styles/OneView.css";
+import DetailsContext from "../../../Context/CreateContext";
 
 export default function GetEmply({ url }) {
   const [data, setData] = useState([]);
-
+const {  setError} = useContext(DetailsContext)
+setError('')
   useEffect(() => {
     const key = localStorage.getItem("token");
     const headers = {
@@ -30,24 +32,35 @@ export default function GetEmply({ url }) {
     <>
       {/* {flag ? links[0].userName : "woohooweb"} */}
 
-      {data.map((user) => {
-        return (
-          <>
-           <div >
-      <Card style={{ width: '18rem' ,textAlign:"center"}} key={user.Name} className='person-card'>
-        {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-        <Card.Body key='body'>
-          <Card.Title key={user.Name}>{user.Name}</Card.Title>
-          
-         
-          <button className='person-card-view'  key={user.phoneNumber}>View</button>
-        </Card.Body>
-      </Card>
+      <div className='bg-img'>
+<div className='card-top'>
+
+  
+{
+  data.map((user)=>{
+  return  <>
+  <div className='super-container' >
+    <div className='super'>
+    <Card style={{ width: '18rem' ,textAlign:"center"}} key={user.Name} className='person-card'>
+    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+    <Card.Body key='body'>
+      <Card.Title  key={user.Name} className='user-text'>{user.Name}</Card.Title>
+      {/* onClick={()=>{handleClick(user._id)}} */}
+     
+      {/* <button className='person-card-view' }key={user.phoneNumber}>View</button> */}
+    </Card.Body>
+  </Card>
+    </div>
+  
+  </div>
+     
+    </>
+   
+  })
+}
+ 
+ </div>
       </div>
-            
-          </>
-        );
-      })}
     </>
   );
 }

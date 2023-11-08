@@ -2,6 +2,7 @@ const express = require("express");
 const adminDetails = require("../../Schemas/SuperAdmin/AddAdmin"); //schema
 const getOne = require('../CRUD/getOne')
 const Get =  require('../CRUD/GET')
+const Put = require('../CRUD/Put')
 const getAdmins = {};
 
 getAdmins.get = async(req,res)=>{
@@ -21,5 +22,14 @@ getAdmins.getOne = async(req,res)=>{
   } catch (error) {
       return error
   }
+}
+
+getAdmins.update= async(req,res)=>{
+  try {
+    return  Put(req,res,adminDetails)
+        
+    } catch (error) {
+        return error
+    }
 }
 module.exports = getAdmins;

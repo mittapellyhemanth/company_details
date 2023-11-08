@@ -11,6 +11,7 @@ const LoginDetails = require('../Login/Login');
 
 AdminRouter.post("/login", async (req, res) => {
     const loginCred =req.body;
+    console.log(loginCred,'adminlog');
     AddAdminModel.findOne({ email:loginCred.email }).then(user => {
         console.log(req.body,'login');
 
@@ -24,20 +25,28 @@ AdminRouter.post("/login", async (req, res) => {
 })
 
  //..................Add project .................................................................................
-AdminRouter.post("/addProject",auth, async (req, res) => {
-console.log(auth);
+AdminRouter.post("/addProject/:id",auth, async (req, res) => {
+
+
     try {
-        const { projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted } = req.body;
+        const { projectName, websiteAddress, clientName, startDate, monthlyPrice,empyDesignation, employeeAlloted,employID} = req.body;
 
         const AddedprojectData = new AddProject({
-
-            projectName, websiteAddress, clientName, startDate, monthlyPrice, employeeAlloted
+            addedAdminId:req.params.id,
+            projectName, websiteAddress, clientName, startDate, monthlyPrice,empyDesignation, employeeAlloted,employID
+           
         })
-
-        AddedprojectData.save()
-        res.status(200).json({
-            message: "AddedprojectData saved sucessfully"
-        })
+if(empyDesignation){
+   await AddedprojectData.save()
+    res.status(200).json({
+        message: "AddedprojectData saved sucessfully"
+    })
+}else{
+    res.status(400).json({
+        message: "please check details"
+    })
+}
+       
     }
     catch (err) {
         res.status(500).json({
@@ -52,31 +61,36 @@ console.log(auth);
 
 //..................get PROJECTS .................................................................................
 const getProjects = require('../../Controllers/Admin/getProject');
-AdminRouter.get("/getProject",auth, getProjects.get);
+AdminRouter.get("/getProject/:id",auth, getProjects.get);
 
 //..................Add,Get Employee .................................................................................
 const postEmployee = require('../../Controllers/Admin/SEO/AddSeo');
-AdminRouter.post("/addSeo",auth, postEmployee.post);
+AdminRouter.post("/addSeo/:id",auth, postEmployee.post);
 //....get Employee .....
 const getEmployee = require('../../Controllers/Admin/SEO/GetSeo');
-AdminRouter.get("/getSeo",auth, getEmployee.get);
+AdminRouter.get("/getSeo/:id",auth, getEmployee.get);
 
 
 //..................Add,Get DESIGNER .................................................................................
 const addDesigner = require('../../Controllers/Admin/Designer/AddDesigner');
-AdminRouter.post("/addDesigner",auth, addDesigner.post);
+AdminRouter.post("/addDesigner/:id",auth, addDesigner.post);
 //GET designer
 const getDesginer = require('../../Controllers/Admin/Designer/GetDesigner');
-AdminRouter.get("/getDesigner",auth, getDesginer.get);
+AdminRouter.get("/getDesigner/:id",auth, getDesginer.get);
 
-
+const getOneDesginer = require('../../Controllers/Admin/Designer/GetDesigner');
+AdminRouter.get("/getOneDesigner/:id",auth, getOneDesginer.getOne);
 
 //..................Add,Get Writer .................................................................................
 const addWriter = require('../../Controllers/Admin/Writer/addWriter');
-AdminRouter.post("/addWriter",auth, addWriter.post);
+AdminRouter.post("/addWriter/:id",auth, addWriter.post);
 //GET designer
 const getWriter = require('../../Controllers/Admin/Writer/getWriter');
-AdminRouter.get("/getWriter",auth, getWriter.get);
+AdminRouter.get("/getWriter/:id",auth, getWriter.get);
+
+const getOneWriter = require('../../Controllers/Admin/Writer/getWriter');
+AdminRouter.get("/getOneWriter/:id",auth, getOneWriter.getOne);
+
 
 const getOneSeo = require('../../Controllers/Admin/SEO/GetSeo');
 AdminRouter.get("/getOneSeo/:id",auth, getOneSeo.getOne);

@@ -5,8 +5,8 @@
 const GET = async (req, res,designation) => {
   try {
     console.log("Getting the properties");
-
-    await designation.find().then((result) => {
+console.log(req.params,"params");
+    await designation.find({addedAdminId:req.params.id}).then((result) => {
         res.status(200).json({
           message: "Property details fetched successfully",
           data: result,

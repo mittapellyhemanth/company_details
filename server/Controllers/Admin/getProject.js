@@ -4,9 +4,9 @@ const getProjects = {};
 
 getProjects.get = async (req, res) => {
   try {
-    console.log("Getting the properties");
+    console.log("Getting the properties",req.params);
 
-    await ProjectsDetails.find().then((result) => {
+    await ProjectsDetails.find({addedAdminId:req.params.id}).then((result) => {
         res.status(200).json({
           message: "Property details fetched successfully",
           data: result,

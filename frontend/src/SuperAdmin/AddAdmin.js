@@ -46,9 +46,10 @@ const onSubmit = async (formData) => {
       const headers = {
         Authorization: key
       };
+      const SuperAdminId = localStorage.getItem("unique_id")
     try {
       await axios
-        .post("http://localhost:8080/superAdmin/addAdmin",formData,{headers})
+        .post(`http://localhost:8080/superAdmin/addAdmin/${SuperAdminId}`,formData,{headers})
         .then((res) => {
           if (res.data.error) {
            return setError(res.data.error);
@@ -63,16 +64,20 @@ const onSubmit = async (formData) => {
 
   return (
     <>
-      {err && <h6 className="error">{err}</h6>}
+  <div className="form-addpro">
+  <div className="form-addpro-box">
+    <div>
 
-      <div className="Login">
-        <ReUseForm
-          Method="POST"
-          inputs={input}
-          onSubmit={onSubmit}
-          btnText="Submit"
-        />
-      </div>
+      {err && <h6 className="error">{err}</h6>}
+  </div>
+  <ReUseForm
+    Method="POST"
+    inputs={input}
+    onSubmit={onSubmit}
+    btnText="Submit"
+    />
+</div>
+  </div>
     </>
   );
 }

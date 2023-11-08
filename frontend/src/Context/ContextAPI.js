@@ -13,11 +13,12 @@ export default function ContextAPI({ children }) {
   const [empyId , setEmpyId] = useState('')
 let [personName,setPersonName] = useState("")
 const [auth,setAuth] = useState({})
+const[getOneData,setGetOneData] = useState([])
 // const [input,setInput] = useState('')
   
 
   const contextValue = {
-    flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,
+    flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
     result,
     setResult,
     personLogin,

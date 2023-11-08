@@ -1,0 +1,90 @@
+import React, { useContext } from "react";
+import ReUseForm from "../Forms/ReUseForm";
+import axios from "axios";
+import DetailsContext from "../Context/CreateContext";
+import "../Styles/SuperHome.css";
+import { useNavigate } from "react-router-dom";
+
+export default function EditAdmin() {
+  // const getOneData = localStorage.getItem("empyId")
+  const { getOneData } = useContext(DetailsContext);
+  const { err, setError } = useContext(DetailsContext);
+  const name = localStorage.getItem("name");
+  const address = localStorage.getItem("address");
+  const email = localStorage.getItem("email");
+  const phoneNumber = localStorage.getItem("phoneNumber");
+  const id = localStorage.getItem("empyId");
+
+  const input = [
+    {
+      type: "text",
+      placeholder: name,
+      name: "Name",
+
+      required: false,
+    },
+    { type: "text", placeholder: address, name: "address", required: false },
+    {
+      type: "text",
+      placeholder: phoneNumber,
+      name: "phoneNumber",
+      required: false,
+    },
+    {
+      type: "email",
+      placeholder: email,
+      name: "email",
+      required: false,
+    },
+    {
+      type: "password",
+      placeholder: "PASSWORD",
+      name: "password",
+      required: false,
+    },
+  ];
+  const navigate = useNavigate();
+  const onSubmit = async (formData) => {
+    console.log(formData, id);
+    const key = localStorage.getItem("token");
+    const headers = {
+      Authorization: key
+    };
+    try {
+      await axios
+        .put(`http://localhost:8080/superAdmin/admin/update/${id}`, formData,{headers})
+        .then((res) => {
+          console.log(res, "ress");
+          if (res.data.error) {
+            return setError(res.data.error);
+          }
+          localStorage.removeItem("name");
+          localStorage.removeItem("address");
+          localStorage.removeItem("email");
+          localStorage.removeItem("phoneNumber");
+          localStorage.removeItem("empyId");
+          navigate("/v1/Admins");
+          // console.log(res);
+        });
+    } catch (error) {
+      // console.log(error,'error');
+    }
+  };
+
+  return (
+    <>
+      <div className="form-addpro">
+        <div className="form-addpro-box">
+          <div>{err && <h6 className="error">{err}</h6>}</div>
+
+          <ReUseForm
+            Method="POST"
+            inputs={input}
+            onSubmit={onSubmit}
+            btnText="Submit"
+          />
+        </div>
+      </div>
+    </>
+  );
+}

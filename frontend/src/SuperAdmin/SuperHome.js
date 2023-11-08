@@ -17,8 +17,8 @@ export default function SuperAdminHome() {
   UserName()
 
 const sidebarData = [
-  {label:'Admins', to:'admins',icon:<MdAdminPanelSettings size='30px'/>},
-  {label:'Add Admin', to:'addAdmin',icon:<BsPersonFillAdd size='30px'/>}
+  {label:'Admins', to:'admins'},
+  {label:'Add Admin', to:'addAdmin'}
 ];
 useEffect(() => {
   axios

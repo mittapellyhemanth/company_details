@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import ReUseForm from "../../Forms/ReUseForm";
 import "../../Styles/Login.css";
@@ -13,7 +13,7 @@ import NavbarScroll from "../Navbar/NavbarScroll";
 export default function Login() {
 
   const { personLogin ,setPersonName,setFlag } = useContext(DetailsContext);
-
+const[err,setError] = useState('')
   const navigate = useNavigate();
 useEffect(()=>{
   setPersonName(' ');
@@ -31,7 +31,8 @@ useEffect(()=>{
         
         localStorage.setItem("userName", res.data.user.Name);
         localStorage.setItem("token", res.data.Token);
-       localStorage.setItem("personLogin", "SuperAdmin");
+        localStorage.setItem("unique_id",res.data.user.unique_id)
+      //  localStorage.setItem("personLogin", "SuperAdmin");
         localStorage.setItem("Id", res.data.user._id);
         localStorage.setItem("designation", res.data.user.designation);
         console.log(res.data.user._id,'idddddddddd');
@@ -46,11 +47,17 @@ useEffect(()=>{
   const navigation = async (formData , url, serverURL) => {
     try {
       let res = await LoginCheck(formData , serverURL)
-      // console.log(res,'res');
+      console.log(res,'res',formData);
       if (res.status === 200) {
         // console.log(res);
         navigate(url);
       }
+      if (res.status === 400) {
+        console.log(res,"400");
+        console.log(res.message);
+        setError(res.message);
+      }
+      
     } catch (error) {
       console.log(error);
     }
@@ -78,21 +85,25 @@ useEffect(()=>{
   
   
   return <>
+  
     <div>
      
      <NavbarScroll/>  
     </div>
+    <div className="login-parent-cont">
     <div className="title">
       <h1>{personLogin}</h1>
     </div>
     <div className="Login-container">
       <div className="login-text">
-        <p>Enter your credentials to access your account</p>
+        <p>Enter your credentials</p>
       </div>
       <div className="Login">
         <ReUseForm Method='POST' inputs={input} onSubmit={submitLogin} btnText='Sign In' />
       </div>
     </div>
+    </div>
+   
 
   </>
 }

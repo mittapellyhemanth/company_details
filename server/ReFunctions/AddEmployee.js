@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 function AddEmployee(AddModel) {
     const schema = new Schema({
+        addedAdminId:{type: String, required: true},
         Name: { type: String, required: true },
         address: { type: String, required: true },
         phoneNumber: { type: Number, required: true },

@@ -19,9 +19,9 @@
    text-align: center;
 }
 .cards>.card{
-    min-width: 250px;
-   height: 250px;
-    border: 1px solid black;
+    min-width: 280px;
+   height: 280px;
+    border: 2px solid black;
    
  display: flex;
    flex-wrap: wrap;
@@ -31,21 +31,13 @@
    font-size: 1.5rem;
    color: black;
   
-font-weight: 800;
+font-weight: 600;
    text-decoration: none;
-   filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.5));
-   background-color:rgb(207, 238, 228);
+  
+   background-color: white;
    text-align: center;
 }
 
-.cards>.card:nth-child(2){
-background-color: rgb(163, 208, 235);
-text-align: center;
-}
-.cards>.card:nth-child(4){
-    background-color: rgb(163, 208, 235);
-    text-align: center;
-    }
 
 .cards>.card:hover {
     min-width: 280px;
@@ -53,7 +45,7 @@ text-align: center;
     background-color: black;
     color: white;
     text-align: center;
-    filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.5));
+    /* filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.5)); */
 }
 
 @media only screen and (max-width:280px) {

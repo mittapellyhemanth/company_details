@@ -3,8 +3,8 @@ import GetEmply from "../ReUseFunc.js/GetEmp";
 
 
 export default function GetDesigner() {
-
-  let URL =  "http://localhost:8080/admin/getDesigner";
+  const AdminId = localStorage.getItem('unique_id')
+  let URL =  `http://localhost:8080/admin/getDesigner/${AdminId}`;
   
   return (
     <>

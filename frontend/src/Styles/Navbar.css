@@ -12,7 +12,8 @@
     font-style: normal;
 }
 .link{
-    border: 0.2px solid lightgray;
+   
+    background-color: #191B1B;
     margin: 10px;
      padding: 10px;
     
@@ -35,22 +36,21 @@
 }
 .link:hover{
     
-    border: 1px solid green;
-    border-radius: 5px;
-    text-align: center;
-    background-color: lightgreen;
-    color:rgb(4, 66, 4);
-}
-.logout{
-    width: fit-content;
-    height: fit-content;
   
-    margin: 10px;
-     padding: 5px;
-    
-     color:rgb(108, 89, 95);
+  
+    text-align: center;
+    background-color:white;
+    color:black ;
+}
+.logout,.Name{
+    width:fit-content ;
+    height:fit-content;
+    margin: 2px;
+     padding: 10px;
+  color: white;
+    background-color: #191B1B;
         text-decoration: none;
-        font-size: 15px;
+        font-size: 18px;
         font-style: normal;
         font-variant: normal;
         font-weight: 500;
@@ -65,24 +65,20 @@
         word-spacing: 0px;
         box-sizing: border-box;
         border: 1px solid lightgray;
-        box-shadow: 0.5px 0.5px 5px 0.5px lightgray;
+        /* box-shadow: 0.5px 0.5px 5px 0.5px lightgray; */
 }
-.logout-icon{
-    color: red;
-    padding: 5px;
+.Name{
+    text-transform: uppercase;
 }
 .logout:hover{
     width: fit-content;
     height:fit-content;
-    border: 5px solid red;
-color:black ;
-background-color: aliceblue;
-box-shadow: 1px 1px 20px 5px #f7070721;
+    border: 2px solid white;
+color:white ;
+background-color: black;
+/* box-shadow: 1px 1px 20px 5px #f7070721; */
 }
-.logo{
-    
-    margin: 5px;
-}
+
 .designation{
    width: fit-content;
    height: fit-content;
@@ -96,41 +92,19 @@ box-shadow: 1px 1px 20px 5px #f7070721;
   font-style: normal;
   font-family: Outfit;
   word-spacing: 2px;
-  box-shadow: 15px 15px 20px 5px #f7070721;
+  text-transform: uppercase;
+  /* box-shadow: 15px 15px 20px 5px #f7070721; */
 }
-.Name{
-    width: fit-content;
-    height: fit-content;
-    margin: 10px;
-    padding: 5px;
-     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid lightgray;
-    box-shadow: 0.5px 0.5px 5px 0.5px lightgray;
- 
-    box-sizing: border-box;
-}
+
 
 @media only screen and (max-width:572px) {
     .link{
         width:100px;
         height: auto;
-        border: 1px solid black;
-         text-align: center;
-        background-color: black;
-        color:white;
+       
         margin: 10px;
     }
-    .link:focus{
-        border: 1px solid green;
-        border-radius: 20px;
-        text-align: center;
-        background-color: lightgreen;
-        color:rgb(4, 66, 4);
-    }
+   
 }
 @media only screen and (max-width:250px) {
     .navbar{

@@ -1,19 +1,26 @@
+.login-parent-cont{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+
 .Login-container{
     max-width:400px;
-    height: 100%;
-    border: 1px solid blueviolet;
+    
+    
     margin: auto;
     text-align: center;
-    background-color: rgb(243, 215, 173);
+    background-color:white;
+
     padding: 50px;
     margin-top: 50px;
     border-radius: 5px;
-    box-shadow: 10px 10px 25px 0px #07070721;
+   
   font-style: normal;
 }
 .Login-container:hover{
     max-width:410px;
-    box-shadow: 10px 10px 25px 10px #00000021;
+   
 }
 .Login{
     
@@ -24,14 +31,16 @@
     text-align: center;
 }
 .login-text{
-    font-weight: 400;
-    font-size: 0.9rem;
-    color:rgb(85, 76, 76);
+    font-weight: 700;
+    font-size:18px;
+    color:#19191b;
+    text-transform: uppercase;
 }
 .title{
-    color: blueviolet;
+    text-transform: uppercase;
+    color:white;
     padding-top: 15px;
-    font-weight: 800;
+    font-weight: 700;
     font-style: normal;
 }
 .placeholder-text{

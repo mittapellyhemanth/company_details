@@ -11,7 +11,7 @@ SuperAdminRouter.post('/Register',RegisterSuperAdmin.post)
 
 SuperAdminRouter.post("/login", async (req, res) => {
     const loginCred =req.body;
-    console.log(req.body);
+    // console.log(req.body);
     User.findOne({ email: loginCred.email }).then(user => {
         LoginDetails( req,res,user);
     }).catch(err => {
@@ -25,12 +25,21 @@ SuperAdminRouter.post("/login", async (req, res) => {
 
 
 const postAdmin = require('../../Controllers/superAdmin/addAdmin')
-SuperAdminRouter.post('/addAdmin',auth,postAdmin.post);
+SuperAdminRouter.post('/addAdmin/:id',auth,postAdmin.post);
 
 const getAdmins = require('../../Controllers/superAdmin/getAdmins');
-SuperAdminRouter.get('/admins',getAdmins.get);
+SuperAdminRouter.get('/admins/:id',auth,getAdmins.get);
 
 const getOneAdmin = require('../../Controllers/superAdmin/getAdmins');
-getOneAdmin.get('/admins',auth,getAdmins.get)
+SuperAdminRouter.get('/admin/view/:id',auth,getOneAdmin.getOne)
+
+
+const updateOneAdmin = require('../../Controllers/superAdmin/getAdmins');
+SuperAdminRouter.put('/admin/update/:id',auth,updateOneAdmin.update)
+
+
+
+const DeleteOneAdmin = require('../../Controllers/superAdmin/deleteAdmin');
+SuperAdminRouter.delete('/admin/delete/:id',DeleteOneAdmin.deleteOne)
 
 module.exports = SuperAdminRouter;

@@ -35,6 +35,10 @@ import AddWriter from "../Admin/Employee/WRITER/AddWriter";
 import GetWriter from "../Admin/Employee/WRITER/GetWriter";
 import AttendanceWriter from "../Admin/Employee/WRITER/AttendanceWriter";
 import EmpysDashboard from "../Employee/Dashboard/EmpysDashboard";
+import AdminView from "../SuperAdmin/AdminView";
+import EditAdmin from "../SuperAdmin/EditAdmin";
+import ProjSend from "../Employee/ProjSend";
+import ProjectView from "../Admin/Projects/ProjectView";
 
 export default function Router() {
   return (
@@ -49,6 +53,8 @@ export default function Router() {
         <Route index element={<Admins />} /> {/* by default we get this route*/}
         <Route path="admins" element={<Admins />} />
         <Route path="addAdmin" element={<AddAdmin />} />
+        <Route path="admin/view" element={<AdminView />} />
+        <Route path="admin/Edit" element={<EditAdmin />} />
       </Route>
       {/*........................ Admin Routers............................. */}
       <Route path="ad/dashboard" element={<AdminDashboard />} />
@@ -59,7 +65,12 @@ export default function Router() {
       <Route path="/v2/das/" element={<ProjectsDashboard />}>
         <Route index element={<Projects />} />
         <Route path="proj" element={<Projects />} />
+
+        <Route path="pro/view" element={<ProjectView />} />
+       
         <Route path="addProj" element={<AddProjects />} />
+
+       
       </Route>
       {/*........................  SEO Routers............................. */}
       <Route path="/v2/em/" element={<SEO />}>
@@ -92,6 +103,7 @@ export default function Router() {
       <Route path="/v3/empy/" element={<EmpysDashboard />}>
         <Route index element={<EMProjects />} />
         <Route path="project" element={<EMProjects />} />
+        <Route path="project/post" element={<ProjSend />} />
         <Route path="leave" element={<Application />} />
         <Route path="details" element={<Details />} />
         <Route path="break" element={<BreakTime />} />

@@ -4,11 +4,11 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DetailsContext from "../../../Context/CreateContext";
-// import ReUseForm from "../../../Forms/ReUseForm";
+import ReUseForm from "../../../Forms/ReUseForm";
 import Form from "react-bootstrap/Form";
 import "./addEmpy.css";
 export default function UseAddEmployee({ url }) {
-  // console.log(url,'url');
+  console.log(url,'url');
 
   const { err, setError } = useContext(DetailsContext);
   const inputs = [
@@ -46,15 +46,15 @@ export default function UseAddEmployee({ url }) {
   ];
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({});
+  // const [formData, setFormData] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
  
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async ({...formData}) => {
+    console.log(formData);
     const key = localStorage.getItem("token");
     const headers = {
       Authorization: key
@@ -62,6 +62,7 @@ export default function UseAddEmployee({ url }) {
 // console.log({...formData},{headers},url.Url);
     try {
       await axios.post(url.Url, { ...formData },{headers}).then((res) => {
+        console.log(res,'res');
         if (res.data.error) {
           setError(res.data.error);
         } else {
@@ -76,60 +77,20 @@ export default function UseAddEmployee({ url }) {
 
   return (
     <>
-      <div className="use-Form">
-        <Form
-          className="form-addEmployee"
-          method="POST"
-          onSubmit={(e, url) => onSubmit(e, url)}
-          encType="multipart/form-data"
-        >
-          <div className="form-box">
-            {err ? (
-              <>
-                <div className="err">{err}</div>
-              </>
-            ) : (
-              ""
-            )}
+      <div className="form-addpro">
+  <div className="form-addpro-box">
+    <div>
 
-            {inputs.map((input) => (
-              <div key={input.name} className="">
-                <Form.Group
-                  className="mb-3 input-holder"
-                  controlId={`formGroup${input.name}`}
-                >
-                  {input.type !== "select" && (
-                    <Form.Control
-                      type={input.type}
-                      placeholder={input.placeholder}
-                      name={input.name}
-                      value={formData[input.name] || ""}
-                      onChange={handleChange}
-                      required={input.required}
-                    />
-                  )}
-
-                  {input.type === "select" && (
-                    <select
-                      type={input.type}
-                      placeholder={input.placeholder}
-                      name={input.name}
-                      value={formData[input.value] || ""}
-                      onChange={handleChange}
-                      required={input.required}
-                    >
-                      {input.options.map((option, index) => (
-                        <option key={index} value={option.value}></option>
-                      ))}
-                    </select>
-                  )}
-                </Form.Group>
-              </div>
-            ))}
-            <button type="submit">Submit</button>
-          </div>
-        </Form>
-      </div>
+      {err && <h6 className="error">{err}</h6>}
+  </div>
+  <ReUseForm
+    Method="POST"
+    inputs={inputs}
+    onSubmit={onSubmit}
+    btnText="Submit"
+    />
+</div>
+  </div>
     </>
   );
 }

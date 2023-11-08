@@ -9,24 +9,52 @@ export default function Details() {
   
   // const { designation } = useContext(DetailsContext);
   
-  const id = localStorage.getItem("Id");
+
 
   const [getOneData, setOneData] = useState([]);
 
+const getDetails = async(url,token)=>{
+  const key = localStorage.getItem("token");
+  const headers = {
+    Authorization: key
+  };
+  axios
+    .get(url,token)
+    .then((res) => {
+      if (res.status === 200) {
+        return  setOneData( res.data.data)
+      ;
+      }
+    })
+    .catch((err) => console.log(err));
+
+}
   useEffect(() => {
     const key = localStorage.getItem("token");
+    const id = localStorage.getItem("Id");
+   const type = localStorage.getItem('designation')
+
+   console.log(id,'id',type,key);
     const headers = {
       Authorization: key
     };
-    axios
-      .get(`http://localhost:8080/admin/getOneSeo/${id}`,{headers})
-      .then((res) => {
-        if (res.status === 200) {
-          setOneData(res.data.data);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [id]);
+    if(type === 'SEO'){
+      getDetails(`http://localhost:8080/admin/getOneSeo/${id}`,{headers})
+    
+    }
+    if(type === 'WRITER'){
+      getDetails(`http://localhost:8080/admin/getOneWriter/${id}`,{headers})
+    
+    }
+    if(type === 'DESIGNER'){
+      getDetails(`http://localhost:8080/admin/getOneDesigner/${id}`,{headers})
+    
+    }
+    if(type === 'SEO'){
+      getDetails(`http://localhost:8080/admin/getOneSeo/${id}`,{headers})
+    
+    }
+  },[setOneData]);
 
   return (
     <>

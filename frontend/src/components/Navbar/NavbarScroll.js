@@ -13,11 +13,12 @@ import { AiOutlineLogin } from "react-icons/ai";
 import "../../Styles/Navbar.css";
 
 export default function NavbarScroll() {
-  const { flag, setFlag,setDesignation,setPersonName } = useContext(DetailsContext);
+  const { flag, setFlag, setDesignation, setPersonName } =
+    useContext(DetailsContext);
   const designation = localStorage.getItem("designation");
-  setDesignation(designation)
+  setDesignation(designation);
   const Name = localStorage.getItem("userName");
-  setPersonName(Name)
+  setPersonName(Name);
   const key = localStorage.getItem("token");
 
   // console.log(personName, "p");
@@ -26,12 +27,11 @@ export default function NavbarScroll() {
   let homePageLinks = [];
 
   if (flag) {
-    otherPageLinks = [{ to: "#", userName: Name }, ];
-    
-      otherPageLinks.push( { to: "/", label: "Logout" })
-    
-      // otherPageLinks.push( { to: "/", label: "Login" })
-    
+    otherPageLinks = [{ to: "#", userName: Name }];
+
+    otherPageLinks.push({ to: "/", label: "Logout" });
+
+    // otherPageLinks.push( { to: "/", label: "Login" })
   } else {
     homePageLinks = [
       { to: "/employee", label: "Employee" },
@@ -42,13 +42,12 @@ export default function NavbarScroll() {
   }
 
   const links = [...homePageLinks, ...otherPageLinks]; // Combine both sets of links
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLogout = () => {
     setFlag(false);
     localStorage.removeItem("token");
-    navigate('/')
+    navigate("/");
     window.location.reload();
-
   };
   return (
     <>
@@ -86,9 +85,7 @@ export default function NavbarScroll() {
                   <Nav className="justify-content-end flex-grow-1 pe-5 gap-2 ">
                     {links.map((link, index) =>
                       link.userName ? (
-                        <span className="Name">
-                          <BsPersonCircle /> {Name}
-                        </span>
+                        <span className="Name">{Name}</span>
                       ) : (
                         <Link
                           key={index}
@@ -97,20 +94,15 @@ export default function NavbarScroll() {
                         >
                           {flag ? (
                             <>
-                            <span className="logout-icon">
-                              <IoIosLogOut />
-                            </span>
-                            <span
-                              onClick={() => {
-                                handleLogout();
-                              }}
-                            >
-                              {link.label}
-                            </span>
-                          </>
-                              
-                            )
-                          : (
+                              <span
+                                onClick={() => {
+                                  handleLogout();
+                                }}
+                              >
+                                {link.label}
+                              </span>
+                            </>
+                          ) : (
                             <span>{link.label}</span>
                           )}
                         </Link>
