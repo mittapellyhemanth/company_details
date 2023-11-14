@@ -9,8 +9,11 @@ const AddProjects =new mongoose.Schema({
     monthlyPrice: { type: String, required: true },
     empyDesignation:{type: String, required: true},
     employeeAlloted: { type: String, required: true },
-    employID:{type:String,required:true}
-   
+    employID:{type:String,required:true},
+    date : {
+        type: String,
+        default: Date.now
+    },
 })
 
 const Admin_Add_ProjectssModel = mongoose.model("AddProjects", AddProjects);

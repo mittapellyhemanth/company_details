@@ -29,8 +29,22 @@ export default function EMProjects() {
       .catch((err) => console.log(err));
   }, []);
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/v3/empy/project/post");
+
+  const handleClick = (ProjectName) => {
+    const designation = localStorage.getItem('designation')
+    localStorage.setItem('ProjectName',ProjectName)
+    if(designation === "SEO"){
+
+ return     navigate("/v3/empy/project/post");
+    }
+    if(designation === "WRITER"){
+
+  return    navigate("/v3/empy/writer/project/post");
+    }
+    if(designation === "DESIGNER"){
+
+     return navigate("/v3/empy/designer/project/post");
+    }
   };
 
   return  <>
@@ -48,7 +62,7 @@ export default function EMProjects() {
                   <Card.Body key="body">
                     <Card.Title
                       onClick={() => {
-                        handleClick();
+                        handleClick(user.projectName);
                       }}
                       key={user.projectName}
                     >

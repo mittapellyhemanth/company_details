@@ -17,7 +17,7 @@ export default function EmpDashboard(){
      sidebarData = [
         {label:'EMPLOYEE', to:'/v2/em/empy',icon:<MdAdminPanelSettings/>},
         {label:'ADD EMPLOYEE', to:'/v2/em/addempy',icon:<BsPersonFillAdd/>},
-        {label:'ATTENDANCE', to:'/v2/em/attend',icon:<BsPersonFillAdd/>}
+        {label:'ATTENDANCE', to:'/v2/em/attendance/status',icon:<BsPersonFillAdd/>}
       ];
  }
    if (designationType === "designer") {

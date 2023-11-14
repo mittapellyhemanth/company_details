@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const Break =new mongoose.Schema({
-   //need to check with client
+  
+   EmployeeId:{type:String},
+   Date:{type:String},
+   BreakTaken:{type:String,required:true},
   
 })
 

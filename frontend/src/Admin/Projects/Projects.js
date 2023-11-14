@@ -1,13 +1,19 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Navigate, useNavigate } from "react-router-dom";
+import DetailsContext from "../../Context/CreateContext";
 
 export default function Projects(click) {
   const [data, setData] = useState([]);
+const { setProDesignation,setProjectName} = useContext(DetailsContext)
+  useEffect(()=>{
+    setProDesignation('');
+    setProjectName("");
+  },[setProjectName,setProDesignation])
 
-  useEffect(() => {
+useEffect(() => {
     const key = localStorage.getItem("token");
     const headers = {
       Authorization: key,
@@ -26,7 +32,10 @@ export default function Projects(click) {
       .catch((err) => console.log(err));
   }, []);
   const navigate = useNavigate();
-  const handleClick = () => {
+  const handleClick = (designation,projectName) => {
+    // console.log(designation,projectName);
+    setProDesignation(designation)
+    setProjectName(projectName)
     navigate("/v2/das/pro/view");
   };
 
@@ -46,7 +55,8 @@ export default function Projects(click) {
                   <Card.Body key="body">
                     <Card.Title
                       onClick={() => {
-                        handleClick();
+                        handleClick(
+                          user.empyDesignation,user.projectName);
                       }}
                       key={user.projectName}
                     >

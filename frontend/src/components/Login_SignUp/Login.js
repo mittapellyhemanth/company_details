@@ -64,8 +64,27 @@ useEffect(()=>{
   };
 
   const submitLogin = async (formData ) => {
+  
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = currentDate.getMonth() + 1; 
+const day = currentDate.getDate();
+let hours = currentDate.getHours();
+const minutes = currentDate.getMinutes();
+const seconds = currentDate.getSeconds();
+const ampm = hours >= 12 ? 'PM' : 'AM';
+
+// Convert hours to 12-hour format
+hours = hours % 12;
+hours = hours ? hours : 12; 
+
+
+
+let date = day+"-"+month+"-"+year
+let LoginTime = hours + ":" + minutes + ":" + seconds + " " + ampm
     if (personLogin === "SuperAdmin") {
       // console.log(formData,'form');
+      
       let url = "/v1"
       let serverURL = "http://localhost:8080/superAdmin/login"
       return await navigation(formData , url, serverURL)
@@ -76,6 +95,8 @@ useEffect(()=>{
       return await navigation(formData , url, serverURL)
     };
     if (personLogin === "Employee") {
+      localStorage.setItem("date",date)
+      localStorage.setItem("LogTime",LoginTime)
       let url = "/v3/empy/"
       let serverURL = "http://localhost:8080/employee/login"
       return await navigation(formData , url, serverURL)

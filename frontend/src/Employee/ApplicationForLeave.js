@@ -60,9 +60,9 @@ export default function Application() {
     const headers = {
       Authorization: key,
     };
-    // console.log({...formData},{headers},url.Url);
+    console.log({...formData},{headers});
     try {
-      await axios.post("", { ...formData }, { headers }).then((res) => {
+      await axios.post("http://localhost:8080/employee/leave", { headers }, { ...formData }).then((res) => {
         if (res.data.error) {
           setError(res.data.error);
         } else {
@@ -78,13 +78,13 @@ export default function Application() {
   return (
     <>
       <div className="form-addpro">
-        <div className="form-addpro-box">
+        {/* <div className="orm-addpro-box"> */}
           <div>{err && <h6 className="error">{err}</h6>}</div>
 
           <Form  method="POST" onSubmit={onSubmit} encType="multipart/form-data">
             
               
-          {[...Array(4)].map((_, index) => (
+          {/* {[...Array(4)].map((_, index) => ( */}
  <Row className="mb-3">
  {inputs.map((input) => (
 
@@ -92,25 +92,25 @@ export default function Application() {
      <Form.Control
       type={input.type}
       placeholder={input.placeholder}
-      name={`${input.name}_${index}`} // to keep name as unique added index
+      name={`${input.name}`} // to keep name as unique added index
       required={input.required}
-      value={formData[`${input.name}_${index}`] || ''}
+      value={formData[`${input.name}`] || ''}
       onChange={handleChange}
      />
    </Form.Group>
 
  ))}
 </Row>
-          ))}
+          {/* ))} */}
            
           
 
-            <Button variant="primary" type="submit">
+            <button  type="submit" className="submit-btn">
               Submit
-            </Button>
+            </button>
           </Form>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

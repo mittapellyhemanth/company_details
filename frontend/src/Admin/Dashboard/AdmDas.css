@@ -9,7 +9,14 @@
    text-align: center;
    background-color: rgb(235, 229, 229);
 }
-
+.card-top{
+    width: 70vw;
+    
+    display: flex;
+    flex-wrap: wrap;
+align-items: flex-start;
+  
+}
 .cards{
 
  display: flex;

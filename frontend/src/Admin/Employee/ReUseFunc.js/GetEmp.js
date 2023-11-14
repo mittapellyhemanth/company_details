@@ -5,9 +5,12 @@ import Card from "react-bootstrap/Card";
 import '../../../Styles/EmpyCards.css'
 import "../../../Styles/OneView.css";
 import DetailsContext from "../../../Context/CreateContext";
+import {  useNavigate } from "react-router-dom";
 
-export default function GetEmply({ url }) {
+
+export default function GetEmply({ url,NavigateUrl }) {
   const [data, setData] = useState([]);
+ 
 const {  setError} = useContext(DetailsContext)
 setError('')
   useEffect(() => {
@@ -28,6 +31,26 @@ setError('')
       .catch((err) => console.log(err));
   }, [url]);
 
+const navigate = useNavigate()
+const handleClick = (emplyId,designation)=>{
+  
+  localStorage.setItem("projEmId",emplyId)
+  
+console.log(designation);
+  if(designation === "SEO"){
+
+    return  navigate(NavigateUrl)
+       }
+       if(designation === "WRITER"){
+ 
+     return navigate(NavigateUrl);
+       }
+       if(designation === "DESIGNER"){
+   
+        return navigate(NavigateUrl);
+       }
+}
+
   return (
     <>
       {/* {flag ? links[0].userName : "woohooweb"} */}
@@ -44,10 +67,8 @@ setError('')
     <Card style={{ width: '18rem' ,textAlign:"center"}} key={user.Name} className='person-card'>
     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
     <Card.Body key='body'>
-      <Card.Title  key={user.Name} className='user-text'>{user.Name}</Card.Title>
-      {/* onClick={()=>{handleClick(user._id)}} */}
+      <Card.Title  key={user.Name} className='user-text' onClick={()=>{handleClick(user.unique_id,user.designation)}}>{user.Name}</Card.Title>
      
-      {/* <button className='person-card-view' }key={user.phoneNumber}>View</button> */}
     </Card.Body>
   </Card>
     </div>

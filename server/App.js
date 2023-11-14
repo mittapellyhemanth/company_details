@@ -5,36 +5,50 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
-app.use(cors({}));
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+app.set('view engine', 'ejs');
+// app.use(express.static("uploads"));
+
 app.use(bodyParser.json());
+
+
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+
 
 //Routers  
 const userRouter = require('./Routers/Register/Register');
 const employeeRouter = require('./Routers/Employee/EmployeeRouter');
 const AdminRouter = require('./Routers/Admin/AdminRouter');
 const SuperAdmin = require('./Routers/SuperAdmin/SuperAdmin')
+const Imgpost = require('./Routers/Employee/DesignerProjectSubmit')
 const port = process.env.PORT;
 const URL = process.env.DB_URL;
 
-const start = async () => {
-  await app.listen(port, () => console.log(`connected to the port ${port}`));
-  await mongoose
-    .connect(URL, {
-      useNewUrlParser: true,
-      useUnifiedToPology: true,
-    })
-    .then((res) => console.log("connected to db"));
-};
 
-start();
-// console.log(new Date().getFullYear());
 
-      
-// console.log(t[0]);
-
+app.use("/designer",Imgpost);
 app.use("/user",userRouter); // Login Router
 app.use("/employee",employeeRouter); // Employee Router
 app.use("/admin",AdminRouter); // Admin Router
 app.use("/superAdmin",SuperAdmin)
-module.exports = start;
-// To start the serverrs
+
+
+
+
+
+
+
+
+
+
+app.use(express.static("uploads"));
+
+
+
+
+
+
+
+app.listen(process.env.PORT, () => console.log('Server connected on port', process.env.PORT));

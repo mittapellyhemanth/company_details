@@ -15,10 +15,10 @@ let [personName,setPersonName] = useState("")
 const [auth,setAuth] = useState({})
 const[getOneData,setGetOneData] = useState([])
 // const [input,setInput] = useState('')
-  
-
+const[Prodesignation,setProDesignation]=useState('')  
+const[ProjectName,setProjectName] = useState('')
   const contextValue = {
-    flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
+    Prodesignation,setProDesignation,ProjectName,setProjectName, flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
     result,
     setResult,
     personLogin,

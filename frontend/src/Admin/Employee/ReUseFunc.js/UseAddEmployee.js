@@ -18,9 +18,9 @@ export default function UseAddEmployee({ url }) {
       name: "Name",
       required: true,
     },
-    { type: "text", placeholder: "ADDRESS", name: "address", required: true },
+    { type: "date", placeholder: "START DATE", name: "StartDate", required: true },
     {
-      type: "text",
+      type: "number",
       placeholder: "PHONE NUMBER ",
       name: "phoneNumber",
       required: true,

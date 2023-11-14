@@ -1,11 +1,14 @@
+const express = require("express");
 const addAdmin = require('../../Schemas/SuperAdmin/AddAdmin');
-const Post = require('../CRUD/POST');
+const Post = require('../../Controllers/CRUD/POST');
 
-const PostAdmin = {};
+const PostAdmin = express.Router();;
 PostAdmin.post = async(req,res)=>{
+  const  addedAdminId = req.params.id;
+  
     try {
-        
-      return  Post(req,res,addAdmin,"ADMIN")
+        //here we  will send request,response,and usermodel and type,data
+      return  Post(req,res,addAdmin,'SUPER ADMIN',addedAdminId)   
         
     } catch (error) {
         return error

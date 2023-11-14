@@ -11,6 +11,8 @@ import { IoIosLogOut } from "react-icons/io";
 
 import { AiOutlineLogin } from "react-icons/ai";
 import "../../Styles/Navbar.css";
+import axios from "axios";
+import Logout from "../Login_SignUp/Logout";
 
 export default function NavbarScroll() {
   const { flag, setFlag, setDesignation, setPersonName } =
@@ -36,16 +38,24 @@ export default function NavbarScroll() {
     homePageLinks = [
       { to: "/employee", label: "Employee" },
       { to: "/Admin", label: "Admin" },
-      { to: "/superAdmin", label: "superAdmin" },
+      { to: "/", label: "superAdmin" },
       // Add more links as needed
     ];
   }
 
   const links = [...homePageLinks, ...otherPageLinks]; // Combine both sets of links
   const navigate = useNavigate();
-  const handleLogout = () => {
+
+  // logOut Handle
+  const handleLogout = async () => {
     setFlag(false);
-    localStorage.removeItem("token");
+    await Logout()
+    localStorage.removeItem("unique_id");
+    localStorage.removeItem("LogTime");
+ localStorage.removeItem("date");
+   localStorage.removeItem("breakTaken")
+    localStorage.clear()
+    
     navigate("/");
     window.location.reload();
   };

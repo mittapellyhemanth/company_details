@@ -1,6 +1,16 @@
 const express = require('express');
-const createSchema = require('../../ReFunctions/AddEmployee'); // Import the schema creation function
+const mongoose = require('mongoose');
 
-const userModel = createSchema('SuperAdmin'); // Create the dynamic model with the name 'User'
-// const employeeModel = createSchema('Employee'); // Create another dynamic model with the name 'Employee'
-module.exports = userModel
+const SuperAdmin =new mongoose.Schema({
+    Name: { type: String, required: true },
+    StartDate: { type: String, required: true },
+    phoneNumber: { type: Number, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    aadhaar: { type: Number, required: true},
+    designation:{type:String,required:true},
+    unique_id:{type:String,required:true},
+  
+})
+const superAdminModel = mongoose.model("SuperAdmin",SuperAdmin)
+module.exports = superAdminModel

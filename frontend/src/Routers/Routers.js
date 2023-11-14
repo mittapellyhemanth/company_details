@@ -39,12 +39,21 @@ import AdminView from "../SuperAdmin/AdminView";
 import EditAdmin from "../SuperAdmin/EditAdmin";
 import ProjSend from "../Employee/ProjSend";
 import ProjectView from "../Admin/Projects/ProjectView";
+import SeoEmployeeProject from "../Admin/Employee/SEO/SeoEmployeeProjects";
+import SeoProjectSubmit from "../Employee/ProjectSubmitByEmployees/SeoProjectSubmit";
+import WriterProjectSubmit from "../Employee/ProjectSubmitByEmployees/WriterProjectSubmit";
+import WriterProjectStatus from "../Admin/Employee/WRITER/WriterProjectStatus";
+import DesignerProjectSubmit from "../Employee/ProjectSubmitByEmployees/DesignerProjectSubmit";
+import AttendanceStatus from "../Admin/Employee/SEO/AttendanceStatus";
+import DesignerAttendanceStatus from "../Admin/Employee/DESIGNER/DesignerAttendanceStatus";
+import WriterAttendStatus from "../Admin/Employee/WRITER/WriterAttendStatus";
+import DesignerProjectStatus from "../Admin/Employee/DESIGNER/DesignerProjectStatus";
 
 export default function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Deatils />} />
-      <Route path="/superAdmin" element={<SuperLogin />} />
+      {/* <Route path="/" element={<Deatils />} /> */}
+      <Route path="/" element={<SuperLogin />} />
       <Route path="/Logout" element={<Logout />} />
       <Route path="/Admin" element={<AdminLogin />} />
       <Route path="/Employee" element={<EmployeeLogin />} />
@@ -76,24 +85,31 @@ export default function Router() {
       <Route path="/v2/em/" element={<SEO />}>
         <Route index element={<Employee />} />{" "}
         <Route index path="empy" element={<Employee />} />
+        <Route path="project/status" element={<SeoEmployeeProject/>} />
         <Route path="addempy" element={<AddSEO />} />
-        <Route path="attend" element={<SeoAttendance />} />
+        <Route path="attendance/status" element={<SeoAttendance />} />
+        <Route path="attendance/seo/status" element={<AttendanceStatus />} />
       </Route>
       {/*........................  WRITER Routers............................. */}
       <Route path="/v2/writer" element={<WriterDashboard />} />
       <Route path="/v2/writer/" element={<WriterDashboard />}>
         <Route index element={<GetWriter />} />{" "}
-        <Route path="wr/empy/" element={<GetWriter />} />
-        <Route path="wr/addempy" element={<AddWriter />} />
+        <Route path="wr/empy" element={<GetWriter />} />
         <Route path="wr/attend" element={<AttendanceWriter />} />
+        <Route path="attend/status" element={<WriterAttendStatus />} />
+        <Route path="project/status" element={<WriterProjectStatus/>} />
+       
+        <Route path="wr/addempy" element={<AddWriter />} />
       </Route>
 
       {/*........................  DESIGNER Routers............................. */}
       <Route path="/v2/design/" element={<DesignerDash />}>
         <Route index element={<GetDesigner />} />{" "}
         <Route index path="de/empy" element={<GetDesigner />} />
+        <Route path="project/status" element={<DesignerProjectStatus/>} />
         <Route path="de/addempy" element={<AddDesigner />} />
         <Route path="de/attend" element={<AttendanceDesigner />} />
+        <Route path="attendance/designer/status" element={<DesignerAttendanceStatus />} />
       </Route>
 
       {/*........................  SALES Routers............................. */}
@@ -103,7 +119,9 @@ export default function Router() {
       <Route path="/v3/empy/" element={<EmpysDashboard />}>
         <Route index element={<EMProjects />} />
         <Route path="project" element={<EMProjects />} />
-        <Route path="project/post" element={<ProjSend />} />
+        <Route path="project/post" element={<SeoProjectSubmit/>} />
+        <Route path="writer/project/post" element={<WriterProjectSubmit/>} />
+        <Route  path="designer/project/post" element={<DesignerProjectSubmit />} />
         <Route path="leave" element={<Application />} />
         <Route path="details" element={<Details />} />
         <Route path="break" element={<BreakTime />} />

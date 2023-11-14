@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Col from "react-bootstrap/Col";
 import axios from "axios";
@@ -12,18 +12,19 @@ export default function ProjectSendForm({Method,
   inputs,
   onSubmit,
   btnText,
-  urlData,}) {
-  const [formData, setFormData] = useState(
-    [...Array(4)].map(() => ({
-      BackLink: "",
-      Keyword: "",
-      Type: "",
-      Status: "",
-      Remark: "",
-      TimeTaken: "",
-    }))
-  );
-  const [err, setError] = useState("")
+  urlData,
+  formData,
+  setFormData,
+action
+}) {
+    
+    // const designation = localStorage.getItem('designation')
+   
+    
+  const[err,setErr] = useState('')
+  useEffect(()=>{
+    setErr("");
+  },[setErr])
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const [inputName] = name.split("_");
@@ -39,40 +40,43 @@ export default function ProjectSendForm({Method,
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData,'formdata');
-    let newData = [];
-    for (let i = 0; i < formData.length; i++) {
-      let obj = formData[i];
-      let values = Object.values(obj);
-      let totalValues = 0;
-      let emptyValues = 0;
-      for (let i = 0; i < values.length; i++) {
-        // console.log(values[i],i, "prev");
-        if (values[i] !== "") {
-          totalValues++;
-        } else {
-          emptyValues++;
-        }
-      }
+    console.log(formData,'formdata');
+    // let newData = [];
+    // for (let i = 0; i < formData.length; i++) {
+    //   let obj = formData[i];
+    //   let values = Object.values(obj);
+    //   let totalValues = 0;
+    //   let emptyValues = 0;
+    //   for (let i = 0; i < values.length; i++) {
+    //     // console.log(values[i],i, "prev");
+    //     if (values[i] !== "") {
+    //       totalValues++;
+    //     } else {
+    //       emptyValues++;
+    //     }
+    //   }
 
-      if (emptyValues !== 6 && emptyValues !== 0) {
-        return setError("please Check fields");
-      }
-      if (emptyValues === 0 && totalValues === Object.keys(obj).length) {
-        newData.push(formData[i]);
-      }
-    }
-   onSubmit(newData,urlData)
+    //   if (emptyValues !== 6 && emptyValues !== 0) {
+    //     return setErr("please Check fields");
+    //   }
+    //   if (emptyValues === 0 && totalValues === Object.keys(obj).length) {
+    //     newData.push(formData[i]);
+    //   }
+    // }
+   onSubmit(formData,urlData)
   };
   return (
     <>
       <div className="form-addpro">
         <div className="form-addpro-box">
-          <div className="err">{err}</div>
+        
+         
+         {err ?  <div className="err">{err}</div>:"" }
 
           <Form
             method={Method}
             onSubmit={handleSubmit}
+            action={action}
             encType="multipart/form-data"
           >
             {formData.map((formFields, index) => (
@@ -83,7 +87,7 @@ export default function ProjectSendForm({Method,
                     controlId={`form${input.name}_${index}`}
                     key={input.name}
                   >
-                    {input.type === "text" && (
+                    {(input.type === "text" ||input.type === "number")  && (
                       <Form.Control
                         type={input.type}
                         placeholder={input.placeholder}
@@ -93,6 +97,17 @@ export default function ProjectSendForm({Method,
                         onChange={(e) => handleInputChange(e, index)}
                       />
                     )}
+                    {
+                      input.type === "file" && (
+                        <Form.Control
+                        type={input.type}
+                       
+                        name={`${input.name}_${index}`} 
+                        required={input.required}
+                       onChange={(e) => handleInputChange(e, index)}
+                      />
+                      )
+                    }
                     {input.type === "select" && (
                       <Form.Select
                         name={`${input.name}_${index}`}
@@ -113,9 +128,9 @@ export default function ProjectSendForm({Method,
                 ))}
               </Row>
             ))}
-            <Button variant="primary" type="submit">
+            <button  type="submit" className="submit-btn">
               {btnText}
-            </Button>
+            </button>
           </Form>
         </div>
       </div>

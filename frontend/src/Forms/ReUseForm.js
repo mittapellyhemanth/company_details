@@ -34,6 +34,7 @@ export default function ReUseForm({ Method, inputs, onSubmit, btnText,urlData })
               <Form.Control
               
                   type={input.type}
+                 
                   placeholder={input.placeholder}
                   name={input.name}
                   value={formData[input.name] || ""}

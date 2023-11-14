@@ -75,34 +75,51 @@ const handleDelete =()=>{
     return<>
    
      
-        <div className="view">
-        <Card className="your-card">
+        <div className="form-addpro">
+        <Card className="your-card-admin">
          
-          <Card.Body>
+          <Card.Body className="card-body">
             <Card.Title className="your-title">{getOneData.designation}</Card.Title>
           </Card.Body>
-         
-          <ListGroup.Item className="unerLine">
-              <label>ID:</label>
-              <span>{getOneData.unique_id}</span>
+         <div className="details-box">
+         <ListGroup.Item className="unerLine">
+              <strong>ID :</strong>
+              <span className="name">{getOneData.unique_id}</span>
             </ListGroup.Item>
             <ListGroup.Item className="unerLine">
-              <label>Name:</label>
-              <span>{getOneData.Name}</span>
+              <strong>NAME :</strong>
+              <span className="name">{getOneData.Name}</span>
             </ListGroup.Item>
             <ListGroup.Item className="unerLine">
-              <label>Email:</label>
-              <span>{getOneData.email}</span>
+              <strong>EMAIL :</strong>
+              <span className="name">{getOneData.email}</span>
             </ListGroup.Item>
            
             <ListGroup.Item className="unerLine">
-              <label>Address:</label>
-              <span>{getOneData.address}</span>
+              <strong>START DATE :</strong>
+              <span className="name">{getOneData.StartDate}</span>
             </ListGroup.Item>
             <ListGroup.Item className="unerLine">
-              <label>phoneNumber:</label>
-              <span>{getOneData.phoneNumber}</span>
+              <strong>CONTACT :</strong>
+              <span className="name">{getOneData.phoneNumber}</span>
             </ListGroup.Item>
+            <ListGroup.Item className="unerLine">
+              <strong>COMPANY NAME :</strong>
+              <span className="name">{getOneData.CompanyName}</span>
+            </ListGroup.Item>
+            <ListGroup.Item className="unerLine">
+              <strong>COMPANY LOCATION :</strong>
+              <span className="name">{getOneData.CompanyLocation}</span>
+            </ListGroup.Item>
+            <ListGroup.Item className="unerLine">
+              <strong>INDUSTRY :</strong>
+              <span className="name">{getOneData.Industry}</span>
+            </ListGroup.Item>
+            <ListGroup.Item className="unerLine">
+              <strong>WEBSITE :</strong>
+              <span className="name">{getOneData.Website}</span>
+            </ListGroup.Item>
+         </div>
         
     <div className="card-btn">
     <div>

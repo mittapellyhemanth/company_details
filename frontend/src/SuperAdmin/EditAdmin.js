@@ -23,9 +23,9 @@ export default function EditAdmin() {
 
       required: false,
     },
-    { type: "text", placeholder: address, name: "address", required: false },
+    { type: "date", placeholder:"START DATE", name: "StartDate", required: false },
     {
-      type: "text",
+      type: "number",
       placeholder: phoneNumber,
       name: "phoneNumber",
       required: false,
@@ -41,6 +41,25 @@ export default function EditAdmin() {
       placeholder: "PASSWORD",
       name: "password",
       required: false,
+    },
+    {
+      type: "text",
+      placeholder: "COMPANY LOCATION",
+      name: "CompanyLocation",
+    
+    },
+
+    {
+      type: "text",
+      placeholder: "INDUSTRY",
+      name: "Industry",
+    
+    },
+    {
+      type: "text",
+      placeholder: "WEBSITE",
+      name: "Website",
+    
     },
   ];
   const navigate = useNavigate();
@@ -73,7 +92,7 @@ export default function EditAdmin() {
 
   return (
     <>
-      <div className="form-addpro">
+       <div className="form-addpro">
         <div className="form-addpro-box">
           <div>{err && <h6 className="error">{err}</h6>}</div>
 

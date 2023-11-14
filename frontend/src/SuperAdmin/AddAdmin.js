@@ -14,9 +14,9 @@ export default function AddAdmin() {
       name: "Name",
       required: true,
     },
-    { type: "text", placeholder: "ADDRESS", name: "address", required: true },
+    { type: "date", placeholder: "START DATE", name: "StartDate", required: true },
     {
-      type: "text",
+      type: "number",
       placeholder: "PHONE NUMBER ",
       name: "phoneNumber",
       required: true,
@@ -37,6 +37,31 @@ export default function AddAdmin() {
       type: "text",
       placeholder: "AADHAAR",
       name: "aadhaar",
+    
+    },
+    {
+      type: "text",
+      placeholder: "COMPANY NAME",
+      name: "CompanyName",
+    
+    },
+    {
+      type: "text",
+      placeholder: "COMPANY LOCATION",
+      name: "CompanyLocation",
+    
+    },
+
+    {
+      type: "text",
+      placeholder: "INDUSTRY",
+      name: "Industry",
+    
+    },
+    {
+      type: "text",
+      placeholder: "WEBSITE",
+      name: "Website",
     
     },
   ];

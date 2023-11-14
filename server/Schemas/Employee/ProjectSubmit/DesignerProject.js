@@ -1,15 +1,31 @@
+
 const mongoose = require("mongoose");
 
-const DesignerProjectSubmit =new mongoose.Schema({
-    EmployeeId:{type:String},
-    Image: { type: File},
-    Keyword: { type: String },
-    Type: { type: String },
-    Status: { type: String },
-    Remark: { type: String },
-    TimeTaken: { type: String },
-})
+// ProjectName:{type:String},
+const designerProjectSubmit =  mongoose.Schema({
+  EmployeeId:{type:String},
+  ImgTitle:{
+    type: String,
+    required: true,
+  },
+  PostImage:{
+    type: String,
+    required: true,
+  },
+  Type :{
+    type : String,
+    required: true,
+    },
+  
+  description:{
+    type: String,
+    required: true,
+  },
 
-const DesignerProjectsModel = mongoose.model("DesignerProjectSubmit", DesignerProjectSubmit);
+ 
+}
+);
 
-module.exports = DesignerProjectsModel;
+const DesignerPostModel = mongoose.model("designerProjectSubmit", designerProjectSubmit);
+
+module.exports = DesignerPostModel;

@@ -7,10 +7,7 @@ export default function Deatils(){
     <div>
         <NavbarScroll/>
     </div>
-    <div>
-
-   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis dicta fuga, iure eaque tempore magni, itaque placeat molestias esse, vitae culpa perspiciatis deserunt. Quaerat omnis incidunt eius ducimus sequi rem.</p>
-    </div>
+   
     </div>
    
     </>

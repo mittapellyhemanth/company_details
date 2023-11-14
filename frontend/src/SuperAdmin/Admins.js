@@ -62,12 +62,11 @@ const navigate = useNavigate()
   <div className='super-container' >
     <div className='super'>
     <Card style={{ width: '18rem' ,textAlign:"center"}} key={user.Name} className='person-card'>
-    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+    
     <Card.Body key='body'>
       <Card.Title onClick={()=>{handleClick(user._id)}} key={user.Name} className='user-text'>{user.Name}</Card.Title>
       
      
-      {/* <button className='person-card-view' }key={user.phoneNumber}>View</button> */}
     </Card.Body>
   </Card>
     </div>

@@ -8,18 +8,34 @@
   
 }
 .your-card{
-    height: 400px;
+    width: 500px;
+    height: 500px;
     border: 2px solid black;
-    
-   margin: 50px;
+    font-size: 18px;
+  
    padding: 60px;
+  
+   text-align: justify;
+  
+}
+ /* .details-box{
+     width: fit-content;
+    height: fit-content; 
+     border: 1px solid red; 
+     margin: auto; 
+}  */
+.card-body{
+    margin: auto;
 }
 .your-title{
+    align-items: center;
     text-transform: uppercase;
     font-size: 1.5rem;
     color: black;
 }
 .unerLine{
-    border-bottom: 2px solid #19191b;
+
+    /* border-bottom: 2px solid #19191b; */
     line-height:2;
+    margin-bottom: 10px;
 }

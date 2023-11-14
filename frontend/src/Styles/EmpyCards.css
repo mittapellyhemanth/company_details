@@ -3,6 +3,7 @@
 
 
 .person-card {
+  width: 80%;
   height: fit-content;
   color: black;
   /* border: 2px solid rgb(153, 255, 0); */
