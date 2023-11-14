@@ -8,7 +8,8 @@ export default function GetDesigner() {
   const navUrl = "/v2/design/project/status"
   return (
     <>
-      <GetEmply url={URL} NavigateUrl={navUrl}/>
+    
+      <GetEmply url={URL} NavigateUrl={navUrl} type="DESIGNER"/>
     </>
   );
 }

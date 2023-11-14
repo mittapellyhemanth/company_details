@@ -10,7 +10,7 @@ export default function GetWriter() {
   let  Navlink = "/v2/writer/project/status"
   return (
     <>
-      <GetEmply url={URL} NavigateUrl={Navlink}/>
+      <GetEmply url={URL} NavigateUrl={Navlink} type="WRITER"/>
     </>
   );
 }

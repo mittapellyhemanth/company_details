@@ -7,9 +7,10 @@ export default function Employee() {
   
   const URL =  `http://localhost:8080/admin/getSeo/${AdminId}`;
   const navigateUrl = '/v2/em/project/status'
+ 
   return (
     <>
-      <GetEmply url={URL} NavigateUrl={navigateUrl} />
+      <GetEmply url={URL} NavigateUrl={navigateUrl} type="SEO" />
     </>
   );
 }

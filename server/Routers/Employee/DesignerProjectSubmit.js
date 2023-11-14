@@ -66,6 +66,7 @@ router.post("/proj/submit/:id", upload.single("PostImage"),async (req,res)=>{
       ...req.body,
       
       PostImage: req.file.filename,
+    
     });
 
     await post.save();

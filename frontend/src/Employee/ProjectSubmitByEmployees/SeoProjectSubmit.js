@@ -6,7 +6,9 @@ import axios from "axios";
 import ProjectSendForm from "../ProjectSendForm";
 
 export default function SeoProjectSubmit() {
-  const[sucess,setSucess] = useState('')
+  const[sucess,setSucess] = useState('');
+  const date = localStorage.getItem("date");
+
     const [formData, setFormData] = useState(
         // [...Array(4)].map(() => ({
         
@@ -15,7 +17,9 @@ export default function SeoProjectSubmit() {
           Type: "",
           Status: "",
           Remark: "",
-          TimeTaken: ""}
+          TimeTaken: "",
+        Date:date
+        }
         // }))
       );
   const inputs = [
@@ -72,11 +76,12 @@ export default function SeoProjectSubmit() {
   const projectName= localStorage.getItem('ProjectName')
  const URL = `http://localhost:8080/employee/project/submit/${employID}/${projectName}`
 
-  const onSubmit = async (formData,url) => {
-    
+  const onSubmit = async (formData,url,TIMETAKEN) => {
+    console.log(formData,url);
+    const dataToSend = { ...formData, TimeTaken: TIMETAKEN };
   try {
     // Send POST request to the server
-    const response = await axios.post(url,formData);
+    const response = await axios.post(url,dataToSend);
     setSucess('Posted Successfully');
     
 

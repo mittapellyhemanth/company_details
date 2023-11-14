@@ -50,14 +50,16 @@ export default function NavbarScroll() {
   const handleLogout = async () => {
     setFlag(false);
     await Logout()
-    localStorage.removeItem("unique_id");
-    localStorage.removeItem("LogTime");
- localStorage.removeItem("date");
-   localStorage.removeItem("breakTaken")
-    localStorage.clear()
-    
-    navigate("/");
-    window.location.reload();
+//     localStorage.removeItem("unique_id");
+//     localStorage.removeItem("LogTime");
+//  localStorage.removeItem("date");
+//    localStorage.removeItem("breakTaken")
+try {
+  localStorage.clear();
+  console.log('Local storage cleared successfully.');
+} catch (error) {
+  console.error('Error clearing local storage:', error);
+}
   };
   return (
     <>

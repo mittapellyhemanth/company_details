@@ -6,7 +6,7 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-import Button from "react-bootstrap/Button";
+
 
 export default function ProjectSendForm({Method,
   inputs,
@@ -18,52 +18,33 @@ export default function ProjectSendForm({Method,
 action
 }) {
     
-    // const designation = localStorage.getItem('designation')
-   
+  const currentDate = new Date();
+    let hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const seconds = currentDate.getSeconds();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    
+    // Convert hours to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+      let TIMETAKEN = hours + ":" + minutes + ":" + seconds + " " + ampm
     
   const[err,setErr] = useState('')
   useEffect(()=>{
     setErr("");
   },[setErr])
-  const handleInputChange = (e, index) => {
+  const handleInputChange = (e,TIMETAKEN) => {
     const { name, value } = e.target;
-    const [inputName] = name.split("_");
-
-    setFormData((prevState) => {
-      const newState = [...prevState];
-      newState[index][inputName] = value;
-      console.log(newState, "newstate");
-
-      return newState;
-    });
+    console.log(name,value);
+    if (name !== 'TimeTaken') {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData,'formdata');
-    // let newData = [];
-    // for (let i = 0; i < formData.length; i++) {
-    //   let obj = formData[i];
-    //   let values = Object.values(obj);
-    //   let totalValues = 0;
-    //   let emptyValues = 0;
-    //   for (let i = 0; i < values.length; i++) {
-    //     // console.log(values[i],i, "prev");
-    //     if (values[i] !== "") {
-    //       totalValues++;
-    //     } else {
-    //       emptyValues++;
-    //     }
-    //   }
-
-    //   if (emptyValues !== 6 && emptyValues !== 0) {
-    //     return setErr("please Check fields");
-    //   }
-    //   if (emptyValues === 0 && totalValues === Object.keys(obj).length) {
-    //     newData.push(formData[i]);
-    //   }
-    // }
-   onSubmit(formData,urlData)
+    onSubmit(formData,urlData, TIMETAKEN)
   };
   return (
     <>
@@ -79,22 +60,31 @@ action
             action={action}
             encType="multipart/form-data"
           >
-            {formData.map((formFields, index) => (
-              <Row className="mb-3" key={index}>
+            {/* {formData.map((formFields, index) => ( */}
+              <Row className="mb-3" >
                 {inputs.map((input) => (
                   <Form.Group
                     as={Col}
-                    controlId={`form${input.name}_${index}`}
+                    controlId={`form${input.name}`}
                     key={input.name}
                   >
-                    {(input.type === "text" ||input.type === "number")  && (
+                    {( input.name === "TimeTaken")  && (
+                      <Form.Control
+                      type={input.type}
+                      name={`${input.name}`}
+                      required={input.required}
+                      value={TIMETAKEN}
+                      readOnly
+                      />
+                    )}
+                    {(input.name !== "TimeTaken" && input.type === "text" ||input.type === "number")  && (
                       <Form.Control
                         type={input.type}
                         placeholder={input.placeholder}
-                        name={`${input.name}_${index}`} // For example, "BackLink_0"
+                        name={`${input.name}`} // For example, "BackLink_0"
                         required={input.required}
-                        value={formFields[input.name] || ""}
-                        onChange={(e) => handleInputChange(e, index)}
+                        value={formData[input.name] || ""}
+                        onChange={(e) => handleInputChange(e)}
                       />
                     )}
                     {
@@ -102,17 +92,17 @@ action
                         <Form.Control
                         type={input.type}
                        
-                        name={`${input.name}_${index}`} 
+                        name={`${input.name}`} 
                         required={input.required}
-                       onChange={(e) => handleInputChange(e, index)}
+                       onChange={(e) => handleInputChange(e)}
                       />
                       )
                     }
                     {input.type === "select" && (
                       <Form.Select
-                        name={`${input.name}_${index}`}
-                        value={formFields[input.name] || ""}
-                        onChange={(e) => handleInputChange(e, index)}
+                        name={`${input.name}`}
+                        value={formData[input.name] || ""}
+                        onChange={(e) => handleInputChange(e)}
                       >
                         <option disabled value="">
                           Select {input.name}
@@ -127,7 +117,7 @@ action
                   </Form.Group>
                 ))}
               </Row>
-            ))}
+            {/* ))} */}
             <button  type="submit" className="submit-btn">
               {btnText}
             </button>

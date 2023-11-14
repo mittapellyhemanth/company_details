@@ -25,6 +25,7 @@ export default function DesignerProjectSubmit() {
     }
   };
   // const navigate = useNavigate();
+  const date = localStorage.getItem("date");
   async function submit(e) {
     e.preventDefault();
 
@@ -34,7 +35,8 @@ export default function DesignerProjectSubmit() {
       formDataToSend.append("PostImage", PostImage);
       formDataToSend.append("Type", Type);
       formDataToSend.append("description", description);
-      console.log(formDataToSend,"formmmmm");
+      formDataToSend.append("Date", date);
+      // console.log(formDataToSend,"formmmmm");
       const EmplyId=localStorage.getItem('unique_id')
       const res = await axios.post(
         `${process.env.REACT_APP_PROXY_URL}/designer/proj/submit/${EmplyId}`,

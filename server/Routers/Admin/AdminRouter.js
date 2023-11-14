@@ -88,12 +88,46 @@ if ( req.body.projectName && req.body.clientName && req.body.employeeAlloted && 
 const getProjects = require("../../Controllers/Admin/getProject");
 AdminRouter.get("/getProject/:id", auth, getProjects.get);
 
+
+AdminRouter.get("/oneProject/:Name",async(req,res)=>{
+  const name = req.params.Name.toUpperCase()
+  try {
+    await AddProject.findOne({projectName:name}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      // console.log(result);
+    })
+  } catch (error) {
+    
+  }
+})
+
 //..................Add,Get Employee .................................................................................
 const postEmployee = require("../../Controllers/Admin/SEO/AddSeo");
 AdminRouter.post("/addSeo/:id", auth, postEmployee.post);
 //....get Employee .....
 
-AdminRouter.get("/getSeo/:id", auth, getEmployee.get);
+AdminRouter.get("/getSeo/:id", auth, getEmployee.get);//getting with id
+
+// const getOneEmployee = require('../../Controllers/Admin/SEO/GetSeo')
+const getEmployeeSeo = require('../../Schemas/Admin/Employees/SEO')
+AdminRouter.get("/oneEmpy/getSeo/:Name",async(req,res)=>{
+  const name = req.params.Name.toUpperCase()
+  try {
+    await getEmployeeSeo.findOne({Name:name}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      console.log(result);
+    })
+  } catch (error) {
+    
+  }
+});//getting only employee name
+const seoProjectDetails = require("../../Controllers/Admin/SEO/GetSeo");
+AdminRouter.get("/search/date", seoProjectDetails.getSeoProject);
+
 
 //..................Add,Get DESIGNER .................................................................................
 const addDesigner = require("../../Controllers/Admin/Designer/AddDesigner");
@@ -104,6 +138,27 @@ AdminRouter.get("/getDesigner/:id", auth, getDesginer.get);
 
 const getOneDesginer = require("../../Controllers/Admin/Designer/GetDesigner");
 AdminRouter.get("/getOneDesigner/:id", auth, getOneDesginer.getOne);
+
+
+const DesignerProjectDetails = require("../../Controllers/Admin/Designer/GetDesigner");
+AdminRouter.get("/designer/search/date",  DesignerProjectDetails.getDesignerProject);
+
+
+const getEmployeeDesigner = require('../../Schemas/Admin/Employees/Designer')
+AdminRouter.get("/oneEmpy/getDesigner/:Name",async(req,res)=>{
+  const name = req.params.Name.toUpperCase()
+  try {
+    await getEmployeeDesigner.findOne({Name:name}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      console.log(result);
+    })
+  } catch (error) {
+    
+  }
+});//getting only employee name
+
 
 //..................Add,Get Writer .................................................................................
 const addWriter = require("../../Controllers/Admin/Writer/addWriter");
@@ -118,7 +173,28 @@ AdminRouter.get("/getOneWriter/:id", auth, getOneWriter.getOne);
 const getOneSeo = require("../../Controllers/Admin/SEO/GetSeo");
 AdminRouter.get("/getOneSeo/:id", auth, getOneSeo.getOne);
 
+const WriterProjectDetails = require("../../Controllers/Admin/Writer/getWriter");
+AdminRouter.get("/writer/search/date",  WriterProjectDetails.getWriterProject);
 // tracking attendance
+
+
+const getEmployeeWriter = require('../../Schemas/Admin/Employees/Writer')
+AdminRouter.get("/oneEmpy/getWriter/:Name",async(req,res)=>{
+  const name = req.params.Name.toUpperCase()
+  try {
+    await getEmployeeWriter.findOne({Name:name}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      console.log(result);
+    })
+  } catch (error) {
+    
+  }
+});//getting only employee name
+
+
+
 
 const AttendanceOfEmployee = require("../../Schemas/Admin/Employees/Attendance");
 AdminRouter.post("/trackAttendance/:id", async (req, res) => {

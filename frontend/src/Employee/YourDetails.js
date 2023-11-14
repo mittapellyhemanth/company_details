@@ -22,6 +22,7 @@ const getDetails = async(url,token)=>{
     .get(url,token)
     .then((res) => {
       if (res.status === 200) {
+        console.log(res);
         return  setOneData( res.data.data)
       ;
       }
@@ -58,41 +59,39 @@ const getDetails = async(url,token)=>{
 
   return (
     <>
-      <div className="view">
-        <Card className="your-card">
+     
+  <div className="form-addpro">
          
-          <Card.Body>
+        <Card className="your-card-admin">
+          <Card.Body className="card-body">
             <Card.Title className="your-title">{getOneData.designation}</Card.Title>
           </Card.Body>
-          <ListGroup className="">
-          <ListGroup.Item>
-              <label>ID:</label>
-              <span>{getOneData.unique_id}</span>
+         <div className="details-box">
+         <ListGroup.Item className="unerLine">
+              <strong>ID :</strong>
+              <span className="name">{getOneData.unique_id}</span>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <label>Name:</label>
-              <span>{getOneData.Name}</span>
+            <ListGroup.Item className="unerLine">
+              <strong>NAME :</strong>
+              <span className="name">{getOneData.Name}</span>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <label>Email:</label>
-              <span>{getOneData.email}</span>
+            <ListGroup.Item className="unerLine">
+              <strong>EMAIL :</strong>
+              <span className="name">{getOneData.email}</span>
             </ListGroup.Item>
-            <ListGroup.Item>
-              {/* <label>Password:</label>
-              <span>{getOneData.phoneNumber}</span> */}
+           
+            <ListGroup.Item className="unerLine">
+              <strong>START DATE :</strong>
+              <span className="name">{getOneData.StartDate}</span>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <label>Address:</label>
-              <span>{getOneData.address}</span>
+            <ListGroup.Item className="unerLine">
+              <strong>CONTACT :</strong>
+              <span className="name">{getOneData.phoneNumber}</span>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <label>phoneNumber:</label>
-              <span>{getOneData.phoneNumber}</span>
-            </ListGroup.Item>
-          </ListGroup>
-         
-        </Card>
-      </div>
+           
+         </div> 
+            </Card>
+         </div> 
     </>
   );
 }

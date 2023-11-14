@@ -10,7 +10,7 @@ grid-template-areas:
 .sider {
  
  width: 20vw;
- height:auto;
+ height:100%;
 
  grid-area:sider;
  background-color: white;

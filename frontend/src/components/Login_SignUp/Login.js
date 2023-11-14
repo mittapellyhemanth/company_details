@@ -35,7 +35,7 @@ useEffect(()=>{
       //  localStorage.setItem("personLogin", "SuperAdmin");
         localStorage.setItem("Id", res.data.user._id);
         localStorage.setItem("designation", res.data.user.designation);
-        console.log(res.data.user._id,'idddddddddd');
+        // console.log(res.data.user._id,'idddddddddd');
       
         return res;    // returning response 
       } catch (error) {
@@ -80,7 +80,7 @@ hours = hours ? hours : 12;
 
 
 
-let date = day+"-"+month+"-"+year
+let date = year+"-"+month+"-"+day
 let LoginTime = hours + ":" + minutes + ":" + seconds + " " + ampm
     if (personLogin === "SuperAdmin") {
       // console.log(formData,'form');

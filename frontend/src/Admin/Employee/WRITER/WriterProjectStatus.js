@@ -17,17 +17,71 @@ export default function WriterProjectStatus() {
       });
   }, [projectEmplyId]);
 
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+
+  const fetchData = async () => {
+    try {
+      await axios
+        .get(
+          `http://localhost:8080/admin/writer/search/date?fromDate=${fromDate}&toDate=${toDate}`
+        )
+        .then((result) => {
+          if (result.status === 200) {
+            // console.log(result);
+            setData(result.data.data);
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchData();
+  };
+
   return (
     <>
       <div className="project-status">
-        <div className="search-container">
-          <div className="search-filter"></div>
-          <div className="search-filter"></div>
-          <div className="search-filter"></div>
-          <div className="search-filter"></div>
+     <div className="filter">
+          <form onSubmit={handleSubmit} className="form-filter">
+            <label>
+              From Date:
+              <input
+                type="date"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+              />
+            </label>
+            <label>
+              To Date:
+              <input
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+              />
+            </label>
+            <button type="submit">Fetch Data</button>
+          </form>
         </div>
+       
         <div className="project-status-box">
-          {data.map((projectStatus) => (
+        <div className="heading">
+            <div className="backlink-title">CONTENT TITLE</div>
+            <div className="backlink-title">CONTENT LINK</div>
+           
+            {/* <div className="timetaken-title">
+          DETAILS
+          </div> */}
+          </div>
+          {data.length === 0 ? (
+        <div  className="heading backlink-title">NO DATA FOUND</div>
+        )
+          :
+          
+          data.map((projectStatus) => (
             <>
               <div className="data-box">
                 <span className="time-taken">{projectStatus.ContentTitle}</span>

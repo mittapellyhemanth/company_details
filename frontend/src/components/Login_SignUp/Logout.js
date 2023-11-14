@@ -74,5 +74,6 @@ const Logout = async () => {
     `http://localhost:8080/admin/trackAttendance/${employID}`,
     data
   );
+   
 };
 export default Logout;

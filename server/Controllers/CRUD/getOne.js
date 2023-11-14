@@ -19,7 +19,7 @@ const getOne = async (req, res,designation) => {
     }
     
   
-  
+    
   
   module.exports = getOne;
   

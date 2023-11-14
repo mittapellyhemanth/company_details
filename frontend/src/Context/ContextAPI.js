@@ -12,7 +12,7 @@ export default function ContextAPI({ children }) {
   const [designationType , setDesignationType ] = useState('')
   const [empyId , setEmpyId] = useState('')
 let [personName,setPersonName] = useState("")
-const [auth,setAuth] = useState({})
+
 const[getOneData,setGetOneData] = useState([])
 // const [input,setInput] = useState('')
 const[Prodesignation,setProDesignation]=useState('')  

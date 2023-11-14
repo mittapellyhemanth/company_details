@@ -116,41 +116,31 @@ EmployeeRouter.get("/details/:id", async (req, res) => {
 const SeoProjectSubmit = require("../../Schemas/Employee/ProjectSubmit/SeoProject");
 
 EmployeeRouter.post("/project/submit/:id/:projectName", async (req, res) => {
+  console.log(req.body,req.params);
   try {
     const emplyId = req.params.id.toUpperCase();
 
-    const formDataArray = req.body;
-    const projects = [];
+   
     // console.log(formDataArray, "formDataArray");
 
     // Iterating through form data array and creating new project documents
-    if (formDataArray.length >= 1) {
-      for (let i = 0; i < formDataArray.length; i++) {
-        const formData = formDataArray[i];
-        const { BackLink, Keyword, Type, Status, Remark, TimeTaken } = formData;
+  const {BackLink,Keyword,Type,Status,Remark,TimeTaken} = req.body
 
         if (BackLink && Keyword && Type && Status && Remark && TimeTaken) {
           const project = new SeoProjectSubmit({
             EmployeeId: emplyId,
-            ProjectName:req.params.projectName,
-            BackLink,
-            Keyword,
-            Type,
-            Status,
-            Remark,
-            TimeTaken,
-            date: new Date().toLocaleDateString("en-US", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            })
+            ProjectTitle:req.params.projectName,
+            ...req.body
+           
           });
-          projects.push(project);
+        
           await project.save();
+          res.status(200).json({
+            data:project
+          });
         }
-      }
-      res.status(200).json(projects);
-    }
+      
+    
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -191,7 +181,21 @@ async function ProjectDetailsStatus(req,res,Model){
 EmployeeRouter.get("/proj/status/:id/:projectName", async (req, res) => {
   await ProjectDetailsStatus(req,res,SeoProjectSubmit)
 });
-
+EmployeeRouter.get("/proj/view/:id", async (req, res) => {
+  try {
+    // console.log(req.params.id, "id");
+    await SeoProjectSubmit.findOne({_id:req.params.id}).then((result)=>{
+       res.status(200).json({
+        data: result,
+        message: "got the status",
+      });
+    })
+    
+  
+  } catch (error) {
+    return error
+  }
+});
 //......................................Writer project post get  ......................
 
 const WriterProjectSubmit = require("../../Schemas/Employee/ProjectSubmit/WriterProject");
@@ -200,33 +204,25 @@ EmployeeRouter.post("/writer/project/submit/:id", async (req, res) => {
     console.log(req,"req");
     const emplyId = req.params.id.toUpperCase();
 
-    const formDataArray = req.body;
-    const projects = [];
+    
     // console.log(formDataArray, "formDataArray");
 
     // Iterating through form data array and creating new project documents
-    if (formDataArray.length >= 1) {
-      for (let i = 0; i < formDataArray.length; i++) {
-        const formData = formDataArray[i];
-        const {  ContentTitle, Keyword, Type, Plagiarism, Ai, WordCount } = formData;
+    
+        const {  ContentTitle, Keyword, Type, Plagiarism, Ai, WordCount } = req.body;
 
         if (ContentTitle && Keyword && Type && Plagiarism && Ai && WordCount) {
           const project = new WriterProjectSubmit({
             EmployeeId: emplyId,
-             ContentTitle,
-             Keyword,
-            Type,
-            Plagiarism,
-            Ai,
-            WordCount,
+            ...req.body
            
           });
-          projects.push(project);
+        
           await project.save();
+          res.status(200).json(project);
         }
-      }
-      res.status(200).json(projects);
-    }
+      
+    
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

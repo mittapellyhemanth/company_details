@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 // ProjectName:{type:String},
 const designerProjectSubmit =  mongoose.Schema({
   EmployeeId:{type:String},
+  ProjectTitle:{ type: String },
   ImgTitle:{
     type: String,
     required: true,
@@ -21,8 +22,11 @@ const designerProjectSubmit =  mongoose.Schema({
     type: String,
     required: true,
   },
+  Date:{type:String},
 
- 
+},
+{
+  timestamps  : true,
 }
 );
 

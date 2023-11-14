@@ -6,17 +6,20 @@ import axios from "axios";
 import ProjectSendForm from "../ProjectSendForm";
 
 export default function WriterProjectSubmit() {
-  const[sucess,setSucess] = useState('')
+  const[sucess,setSucess] = useState('');
+  const date = localStorage.getItem("date");
   const [formData, setFormData] = useState(
-    [...Array(4)].map(() => ({
+    // [...Array(4)].map(() => ({
     
-      ContentTitle: "",
+     { ContentTitle: "",
       ContentLink: "",
       Type: "",
       Plagiarism: "",
       Ai: "",
       WordCount: "",
-    }))
+      Date:date,}
+    // }
+  //   ))
   );
   const inputs = [
     {

@@ -39,11 +39,43 @@ useEffect(() => {
     navigate("/v2/das/pro/view");
   };
 
+  const [name, setName] = useState("");
+  // console.log(name);
+  const handleSearch = async () => {
+
+      await axios
+        .get(`http://localhost:8080/admin/oneProject/${name}`)
+        .then((result) => {
+          // console.log(result);
+          setData(result.data.data);
+        }).catch((Err)=>{
+setData('') 
+        })
+    
+   
+  };
   return (
     <>
       <div className="bg-img">
+        
         <div className="card-top">
-          {data.map((user) => {
+        <div className="search">
+            <input
+              placeholder="ENTER  PROJECT  NAME"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <button
+              className="btn-search"
+              onClick={() => {
+                handleSearch();
+              }}
+            >
+              SEARCH
+            </button>
+          </div>
+
+{!data ? <div className="heading backlink-title">DATA NOT FOUND</div> : (  data.length > 0 ? (data.map((user) => {
             return (
               <>
                 <Card
@@ -68,7 +100,34 @@ useEffect(() => {
                 </Card>
               </>
             );
-          })}
+          }))
+        :
+        (
+          
+          <Card
+                  style={{ width: "18rem", textAlign: "center" }}
+                  key="card"
+                  className="person-card"
+                >
+                  {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+                  <Card.Body key="body">
+                    <Card.Title
+                      onClick={() => {
+                        handleClick(
+                          data.empyDesignation,data.projectName);
+                      }}
+                      key={data.projectName}
+                    >
+                      {data.projectName}
+                    </Card.Title>
+
+                    {/* <button className='person-card-view'   key={user.phoneNumber}>View</button> */}
+                  </Card.Body>
+                </Card>
+        )
+        
+        )}
+        
         </div>
       </div>
     </>
