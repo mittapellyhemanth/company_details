@@ -137,7 +137,7 @@ const addDesigner = require("../../Controllers/Admin/Designer/AddDesigner");
 AdminRouter.post("/addDesigner/:id", auth, addDesigner.post);
 //GET designer
 
-AdminRouter.get("/getDesigner/:id", auth, getDesginer.get);
+AdminRouter.get("/getDesigner/:id", getDesginer.get);
 
 const getOneDesginer = require("../../Controllers/Admin/Designer/GetDesigner");
 AdminRouter.get("/getOneDesigner/:id", auth, getOneDesginer.getOne);
