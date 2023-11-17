@@ -1,17 +1,17 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import Button from "react-bootstrap/Button";
+
 import Card from "react-bootstrap/Card";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import DetailsContext from "../../Context/CreateContext";
 
 export default function Projects(click) {
   const [data, setData] = useState([]);
-const { setProDesignation,setProjectName} = useContext(DetailsContext)
+const {setProjectName} = useContext(DetailsContext)
   useEffect(()=>{
-    setProDesignation('');
+    
     setProjectName("");
-  },[setProjectName,setProDesignation])
+  },[setProjectName])
 
 useEffect(() => {
     const key = localStorage.getItem("token");
@@ -31,10 +31,11 @@ useEffect(() => {
       })
       .catch((err) => console.log(err));
   }, []);
+
   const navigate = useNavigate();
-  const handleClick = (designation,projectName) => {
-    // console.log(designation,projectName);
-    setProDesignation(designation)
+
+  const handleClick = (projectName) => {
+    
     setProjectName(projectName)
     navigate("/v2/das/pro/view");
   };
@@ -54,6 +55,13 @@ setData('')
     
    
   };
+
+  // /getProject/:addedAdminId/:projectName
+
+
+  
+
+
   return (
     <>
       <div className="bg-img">
@@ -88,7 +96,7 @@ setData('')
                     <Card.Title
                       onClick={() => {
                         handleClick(
-                          user.empyDesignation,user.projectName);
+                         user.projectName);
                       }}
                       key={user.projectName}
                     >

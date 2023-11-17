@@ -2,20 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
+import Filters from "../ReUseFunc.js/Filters";
 
-export default function DesignerProjectStatus() {
+export default function SalesProjectStatus() {
   const [data, setData] = useState([]);
 
   const projectEmplyId = localStorage.getItem("projEmId");
+  const ProjectName = localStorage.getItem('ProjectName')
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/designer/getPosts/${projectEmplyId}`)
+      .get(`http://localhost:8080/employee/sales/proj/status/${projectEmplyId}/${ProjectName}`)
       .then((res) => {
-        console.log(res.data.result, "emply res");
-        setData(res.data.result);
+        console.log(res,ProjectName, "emply res");
+        setData(res.data.data);
       });
   }, [projectEmplyId]);
 
+ 
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
 
@@ -23,7 +26,7 @@ export default function DesignerProjectStatus() {
     try {
       await axios
         .get(
-          `http://localhost:8080/admin/designer/search/date?fromDate=${fromDate}&toDate=${toDate}`
+          `http://localhost:8080/admin/search/date?fromDate=${fromDate}&toDate=${toDate}`
         )
         .then((result) => {
           if (result.status === 200) {
@@ -40,11 +43,10 @@ export default function DesignerProjectStatus() {
     e.preventDefault();
     fetchData();
   };
-
   return (
     <>
-      <div className="project-status">
-        <div className="filter">
+       <div className="project-status">
+     <div className="filter">
           <form onSubmit={handleSubmit} className="form-filter">
             <label>
               From Date:
@@ -65,38 +67,35 @@ export default function DesignerProjectStatus() {
             <button type="submit">Fetch Data</button>
           </form>
         </div>
-
+       
         <div className="project-status-box">
-        <div className="heading">
-            <span className="backlink-title">IMAGE</span>
-            <span className="backlink-title">IMAGE TITLE</span>
+        <div className="data-box-heading">
+            <div className="heading-style">TITLE</div>
+            <div className="heading-style">ENQUIRY</div>
+            <div className="heading-style">SOURCE</div>
+            <div className="heading-style">STATUS</div>
+            <div className="heading-style">REMARK</div>
+            <div className="heading-style">DATE</div>
            
-            {/* <div className="timetaken-title">
-          DETAILS
-          </div> */}
           </div>
+          {data.length === 0 ? (
+        <div  className="heading backlink-title">NO DATA FOUND</div>
+        )
+          :
           
-          <div className="img-bg">
-            {data.length === 0 ? (
-              <div className="heading-designer">NO DATA FOUND</div>
-            ) : (
-              data.map((img) => (
-                <>
-                  <div className="data-box-img">
-                    <div>
-                      <img
-                        className="img"
-                        src={`http://localhost:8080/designer/images/${img.PostImage}`}
-                        alt="user-img"
-                      />
-                    </div>
-                    <div className="title">{img.ImgTitle}</div>
-                    {/* <span className="time-taken">{projectStatus.TimeTaken}</span> */}
-                  </div>
-                </>
-              ))
-            )}
-          </div>
+          data.map((projectStatus) => (
+            <>
+              <div className="data-box">
+                <span className="time-taken">{projectStatus.ProjectTitle}</span>
+                <span className="time-taken">{projectStatus.Enquiry}</span>
+
+                <span className="time-taken">{projectStatus.Source}</span>
+                <span className="time-taken">{projectStatus.Status}</span>
+                <span className="time-taken">{projectStatus.Remark}</span>
+                <span className="time-taken">{projectStatus.Date}</span>
+              </div>
+            </>
+          ))}
         </div>
       </div>
     </>

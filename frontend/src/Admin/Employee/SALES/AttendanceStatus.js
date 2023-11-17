@@ -3,7 +3,7 @@ import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
 
-export default function AttendanceStatus(){
+export default function SalesAttendanceStatus(){
     const [data, setData] = useState([]);
 
   const EmplyId = localStorage.getItem("projEmId");

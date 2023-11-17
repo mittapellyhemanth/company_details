@@ -44,6 +44,9 @@ export default function GetEmply({ url, NavigateUrl, type }) {
     if (designation === "DESIGNER") {
       return navigate(NavigateUrl);
     }
+    if (designation === "SALES") {
+      return navigate(NavigateUrl);
+    }
   };
   const [name, setName] = useState("");
   console.log(name);
@@ -68,6 +71,14 @@ export default function GetEmply({ url, NavigateUrl, type }) {
       console.log(name);
       await axios
         .get(`http://localhost:8080/admin/oneEmpy/getDesigner/${name}`)
+        .then((result) => {
+          setData(result.data.data);
+        });
+    }
+    if (type === "SALES") {
+      console.log(name);
+      await axios
+        .get(`http://localhost:8080/admin/oneEmpy/getSales/${name}`)
         .then((result) => {
           setData(result.data.data);
         });
@@ -154,15 +165,4 @@ export default function GetEmply({ url, NavigateUrl, type }) {
   );
 }
 
-{
-  /* <Card style={{ width: "15rem", height: "7rem" }} key="card">
-             
-              <Card.Body key="body">
-                <Card.Title key={user._id}>{user.Name}</Card.Title>
 
-                <Button variant="primary" key={user.phoneNumber}>
-                  View
-                </Button>
-              </Card.Body>
-            </Card> */
-}

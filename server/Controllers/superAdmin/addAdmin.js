@@ -8,7 +8,7 @@ PostAdmin.post = async(req,res)=>{
   
     try {
         //here we  will send request,response,and usermodel and type,data
-      return  Post(req,res,addAdmin,'SUPER ADMIN',addedAdminId)   
+      return  Post(req,res,addAdmin,'ADMIN',addedAdminId)   
         
     } catch (error) {
         return error

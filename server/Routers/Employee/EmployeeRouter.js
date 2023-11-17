@@ -167,7 +167,7 @@ EmployeeRouter.get("/proj/status/:id", async (req, res) => {
 async function ProjectDetailsStatus(req,res,Model){
   try {
     // console.log(req.params.id, "id");
-    const data = await Model.find({ EmployeeId: req.params.id,ProjectName:req.params.projectName });
+    const data = await Model.find({ EmployeeId: req.params.id,ProjectTitle:req.params.projectName });
     console.log(data);
    return res.status(200).json({
       data: data,
@@ -177,7 +177,7 @@ async function ProjectDetailsStatus(req,res,Model){
     return error
   }
 }
-//.....SEO
+//.......................................SEO......................................................................
 EmployeeRouter.get("/proj/status/:id/:projectName", async (req, res) => {
   await ProjectDetailsStatus(req,res,SeoProjectSubmit)
 });
@@ -199,20 +199,20 @@ EmployeeRouter.get("/proj/view/:id", async (req, res) => {
 //......................................Writer project post get  ......................
 
 const WriterProjectSubmit = require("../../Schemas/Employee/ProjectSubmit/WriterProject");
-EmployeeRouter.post("/writer/project/submit/:id", async (req, res) => {
+EmployeeRouter.post("/writer/project/submit/:id/:projectName", async (req, res) => {
   try {
     console.log(req,"req");
     const emplyId = req.params.id.toUpperCase();
 
     
-    // console.log(formDataArray, "formDataArray");
 
     // Iterating through form data array and creating new project documents
     
-        const {  ContentTitle, Keyword, Type, Plagiarism, Ai, WordCount } = req.body;
+        const {  ContentTitle, ContentLink, Type, Plagiarism, Ai, WordCount } = req.body;
 
-        if (ContentTitle && Keyword && Type && Plagiarism && Ai && WordCount) {
+        if (ContentTitle && ContentLink && Type && Plagiarism && Ai && WordCount) {
           const project = new WriterProjectSubmit({
+            ProjectTitle:req.params.projectName,
             EmployeeId: emplyId,
             ...req.body
            
@@ -232,6 +232,45 @@ EmployeeRouter.post("/writer/project/submit/:id", async (req, res) => {
 EmployeeRouter.get("/writer/proj/status/:id", async (req, res) => {
   await ProjectStatus(req,res,WriterProjectSubmit)
 });
+
+
+
+//......................................Sales project post get  ......................
+
+const SalesProjectSubmit = require("../../Schemas/Employee/ProjectSubmit/SalesProject");
+EmployeeRouter.post("/sales/project/submit/:id/:projectName", async (req, res) => {
+  try {
+    console.log(req,"req");
+    const emplyId = req.params.id.toUpperCase();
+ // Iterating through form data array and creating new project documents
+        const {  Source, Enquiry, Remark, Status } = req.body;
+
+        if (Source && Enquiry && Remark && Status ) {
+          const project = new SalesProjectSubmit({
+            ProjectTitle:req.params.projectName,
+            EmployeeId: emplyId,
+            ...req.body
+           
+          });
+        
+          await project.save();
+          res.status(200).json(project);
+        }
+      
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+// getting sales project status
+EmployeeRouter.get("/sales/proj/status/:id/:projectName", async (req, res) => {
+  await ProjectDetailsStatus(req,res,SalesProjectSubmit)
+});
+
+
+
+
 
 
 

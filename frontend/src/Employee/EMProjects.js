@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+
 import Card from "react-bootstrap/Card";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export default function EMProjects() {
   const [data, setData] = useState([]);
@@ -45,6 +45,10 @@ export default function EMProjects() {
 
      return navigate("/v3/empy/designer/project/post");
     }
+    if(designation === "SALES"){
+
+      return navigate("/v3/empy/sales/project/post");
+     }
   };
 
 

@@ -38,8 +38,9 @@ export default function DesignerProjectSubmit() {
       formDataToSend.append("Date", date);
       // console.log(formDataToSend,"formmmmm");
       const EmplyId=localStorage.getItem('unique_id')
+      const projectName= localStorage.getItem('ProjectName')
       const res = await axios.post(
-        `${process.env.REACT_APP_PROXY_URL}/designer/proj/submit/${EmplyId}`,
+        `${process.env.REACT_APP_PROXY_URL}/designer/proj/submit/${EmplyId}/${projectName}`,
         formDataToSend
         );
 

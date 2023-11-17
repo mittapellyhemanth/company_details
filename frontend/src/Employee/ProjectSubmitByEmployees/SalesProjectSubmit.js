@@ -5,56 +5,44 @@ import axios from "axios";
 
 import ProjectSendForm from "../ProjectSendForm";
 
-export default function SeoProjectSubmit() {
+export default function SalesProjectSubmit() {
   const[sucess,setSucess] = useState('');
   const date = localStorage.getItem("date");
 
     const [formData, setFormData] = useState(
         // [...Array(4)].map(() => ({
         
-       {   BackLink: "",
-          Keyword: "",
-          Type: "",
-          Status: "",
+       {   Source: "",
+          Enquiry: "",
           Remark: "",
-          TimeTaken: "",
-        Date:date
+          Status: "",
+          Date:date
         }
         // }))
       );
   const inputs = [
     {
       type: "text",
-      placeholder: "BACKLINK",
-      name: "BackLink",
+      placeholder: "SOURCE",
+      name: "Source",
       required: false,
     },
     {
       type: "text",
-      placeholder: "KEYWORD",
-      name: "Keyword",
+      placeholder: "ENQUIRY",
+      name: "Enquiry",
       required: false,
     },
-    {
-      type: "select",
-
-      name: "Type",
-      required: false,
-      options: [
-        { value: "num1", name: "Type" },
-        { value: "num2", name: "Type" },
-        { value: "num3", name: "Type" },
-      ],
-    },
+    
     {
       type: "select",
 
       name: "Status",
       required: false,
       options: [
-        { value: "num1", name: "Status" },
-        { value: "num2", name: "Status" },
-        { value: "num3", name: "Status" },
+        { value: "Sold", name: "Status" },
+        { value: "UnSold", name: "Status" },
+        
       ],
     },
 
@@ -64,17 +52,12 @@ export default function SeoProjectSubmit() {
       name: "Remark",
       required: false,
     },
-    {
-      type: "text",
-      placeholder: "TIME TAKEN",
-      name: "TimeTaken",
-      required: false,
-    },
+   
   ];
   //
   const employID = localStorage.getItem('unique_id')
   const projectName= localStorage.getItem('ProjectName')
- const URL = `http://localhost:8080/employee/project/submit/${employID}/${projectName}`
+ const URL = `http://localhost:8080/employee/sales/project/submit/${employID}/${projectName}`
 
   const onSubmit = async (formData,url,TIMETAKEN) => {
     console.log(formData,url);

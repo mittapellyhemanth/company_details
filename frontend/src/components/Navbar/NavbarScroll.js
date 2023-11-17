@@ -2,16 +2,14 @@ import React, { useContext } from "react";
 import DetailsContext from "../../Context/CreateContext";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import "../../Styles/Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import { BsPersonCircle } from "react-icons/bs";
-import { IoIosLogOut } from "react-icons/io";
 
-import { AiOutlineLogin } from "react-icons/ai";
+
 import "../../Styles/Navbar.css";
-import axios from "axios";
+
 import Logout from "../Login_SignUp/Logout";
 
 export default function NavbarScroll() {
@@ -21,7 +19,7 @@ export default function NavbarScroll() {
   setDesignation(designation);
   const Name = localStorage.getItem("userName");
   setPersonName(Name);
-  const key = localStorage.getItem("token");
+ 
 
   // console.log(personName, "p");
 
@@ -44,7 +42,7 @@ export default function NavbarScroll() {
   }
 
   const links = [...homePageLinks, ...otherPageLinks]; // Combine both sets of links
-  const navigate = useNavigate();
+ 
 
   // logOut Handle
   const handleLogout = async () => {

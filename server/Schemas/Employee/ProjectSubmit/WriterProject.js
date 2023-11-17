@@ -4,7 +4,7 @@ const WriterProjectSubmit =new mongoose.Schema({
     EmployeeId:{type:String},
     ProjectTitle:{ type: String },
     ContentTitle: { type: String},
-    Keyword: { type: String},
+    ContentLink: { type: String},
     Type: { type: String},
     Plagiarism: { type: Number },
     Ai: { type: Number },

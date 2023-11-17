@@ -48,6 +48,14 @@ import AttendanceStatus from "../Admin/Employee/SEO/AttendanceStatus";
 import DesignerAttendanceStatus from "../Admin/Employee/DESIGNER/DesignerAttendanceStatus";
 import WriterAttendStatus from "../Admin/Employee/WRITER/WriterAttendStatus";
 import DesignerProjectStatus from "../Admin/Employee/DESIGNER/DesignerProjectStatus";
+import AddSales from "../Admin/Employee/SALES/AddSales";
+import GetSales from "../Admin/Employee/SALES/GetSales";
+import SalesAttendance from "../Admin/Employee/SALES/Attendance";
+import SalesProjectSubmit from "../Employee/ProjectSubmitByEmployees/SalesProjectSubmit";
+import SalesProjectStatus from "../Admin/Employee/SALES/SalesProjectStatus";
+import ViewFullProjStatus from "../Admin/Employee/SEO/ViewFullProjStatus";
+import WriterFullProjStatus from "../Admin/Employee/WRITER/WriterFullProjStatus";
+import SalesAttendanceStatus from "../Admin/Employee/SALES/AttendanceStatus";
 
 export default function Router() {
   return (
@@ -89,6 +97,7 @@ export default function Router() {
         <Route path="addempy" element={<AddSEO />} />
         <Route path="attendance/status" element={<SeoAttendance />} />
         <Route path="attendance/seo/status" element={<AttendanceStatus />} />
+        <Route path="view/project/status" element={<ViewFullProjStatus />} />
       </Route>
       {/*........................  WRITER Routers............................. */}
       <Route path="/v2/writer" element={<WriterDashboard />} />
@@ -98,7 +107,7 @@ export default function Router() {
         <Route path="wr/attend" element={<AttendanceWriter />} />
         <Route path="attend/status" element={<WriterAttendStatus />} />
         <Route path="project/status" element={<WriterProjectStatus/>} />
-       
+        <Route path="view/project/status" element={<WriterFullProjStatus />} />
         <Route path="wr/addempy" element={<AddWriter />} />
       </Route>
 
@@ -113,7 +122,16 @@ export default function Router() {
       </Route>
 
       {/*........................  SALES Routers............................. */}
-      <Route path="/v2/sales" element={<Sales />} />
+      <Route path="/v2/sales" element={<Sales />} >
+      <Route index element={<GetSales />} />{" "}
+        <Route index path="sa/empy" element={<GetSales />} />
+        <Route path="sa/addempy" element={<AddSales />} />
+         <Route path="sa/attend" element={<SalesAttendance />} />
+        <Route path="project/status" element={<SalesProjectStatus/>} />
+        <Route path="attendance/sales/status" element={<SalesAttendanceStatus />} />
+        {/* <Route path="attendance/designer/status" element={<DesignerAttendanceStatus />} />   */}
+      </Route>
+      
 
       {/*........................ EMPLOYEE  Routers............................. */}
       <Route path="/v3/empy/" element={<EmpysDashboard />}>
@@ -122,6 +140,7 @@ export default function Router() {
         <Route path="project/post" element={<SeoProjectSubmit/>} />
         <Route path="writer/project/post" element={<WriterProjectSubmit/>} />
         <Route  path="designer/project/post" element={<DesignerProjectSubmit />} />
+        <Route  path="sales/project/post" element={<SalesProjectSubmit />} />
         <Route path="leave" element={<Application />} />
         <Route path="details" element={<Details />} />
         <Route path="break" element={<BreakTime />} />

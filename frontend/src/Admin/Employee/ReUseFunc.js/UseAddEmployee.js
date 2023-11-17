@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
-// import ReUseForm from "../../Forms/ReUseForm";
-// import DetailsContext from "../../Context/CreateContext";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DetailsContext from "../../../Context/CreateContext";
 import ReUseForm from "../../../Forms/ReUseForm";
-import Form from "react-bootstrap/Form";
+
 import "./addEmpy.css";
+
 export default function UseAddEmployee({ url }) {
   console.log(url,'url');
 
@@ -62,7 +62,7 @@ export default function UseAddEmployee({ url }) {
 // console.log({...formData},{headers},url.Url);
     try {
       await axios.post(url.Url, { ...formData },{headers}).then((res) => {
-        console.log(res,'res');
+        console.log(url.Url,res,'res');
         if (res.data.error) {
           setError(res.data.error);
         } else {

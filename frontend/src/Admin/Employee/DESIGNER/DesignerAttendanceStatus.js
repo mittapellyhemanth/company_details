@@ -21,11 +21,11 @@ export default function DesignerAttendanceStatus(){
       <div className="project-status">
         <div className="dumy-heading">
 
-      <div className="dummy-attend-box">Date</div>
-                <div className="dummy-attend-box">LoginTime</div>
-                <div className="dummy-attend-box">LogoutTime</div>
-                <div className="dummy-attend-box">TotalBreak</div>
-                <div className="dummy-attend-box">TotalWorkTime</div>
+        <div className="dummy-attend-box">DATE</div>
+                <div className="dummy-attend-box">LOGIN TIME</div>
+                <div className="dummy-attend-box">LOGOUT TIME</div>
+                <div className="dummy-attend-box">TOTAL BREAK</div>
+                <div className="dummy-attend-box">WORK TIME</div>
         </div>
         
         <div className="project-status-box">

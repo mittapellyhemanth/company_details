@@ -2,10 +2,9 @@ import { useContext } from "react";
 import UserName from "../../../Functions/UserName";
 import NavbarScroll from "../../../components/Navbar/NavbarScroll";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { BsPersonFillAdd } from "react-icons/bs";
-import { MdAdminPanelSettings } from "react-icons/md";
+
 import DetailsContext from "../../../Context/CreateContext";
-// import DetailsContext from "../../../Context/CreateContext";
+
 
 
 export default function EmpDashboard(){
@@ -15,31 +14,31 @@ export default function EmpDashboard(){
   let sidebarData = [];
   if (designationType === "seo") {
      sidebarData = [
-        {label:'EMPLOYEE', to:'/v2/em/empy',icon:<MdAdminPanelSettings/>},
-        {label:'ADD EMPLOYEE', to:'/v2/em/addempy',icon:<BsPersonFillAdd/>},
-        {label:'ATTENDANCE', to:'/v2/em/attendance/status',icon:<BsPersonFillAdd/>}
+        {label:'EMPLOYEE', to:'/v2/em/empy'},
+        {label:'ADD EMPLOYEE', to:'/v2/em/addempy'},
+        {label:'ATTENDANCE', to:'/v2/em/attendance/status'}
       ];
  }
    if (designationType === "designer") {
     sidebarData = [
-        {label:'EMPLOYEE', to:'/v2/design/de/empy',icon:<MdAdminPanelSettings/>},
-        {label:'ADD EMPLOYEE', to:'/v2/design/de/addempy',icon:<BsPersonFillAdd/>},
-        {label:'ATTENDANCE', to:'/v2/design/de/attend',icon:<BsPersonFillAdd/>}
+        {label:'EMPLOYEE', to:'/v2/design/de/empy'},
+        {label:'ADD EMPLOYEE', to:'/v2/design/de/addempy'},
+        {label:'ATTENDANCE', to:'/v2/design/de/attend'}
       ];
   }
    if (designationType === "writer") {
     sidebarData = [
-      {label:'EMPLOYEE', to:'/v2/writer/wr/empy',icon:<MdAdminPanelSettings/>},
-      {label:'ADD EMPLOYEE', to:'/v2/writer/wr/addempy',icon:<BsPersonFillAdd/>},
-      {label:'ATTENDANCE', to:'/v2/writer/wr/attend',icon:<BsPersonFillAdd/>}
+      {label:'EMPLOYEE', to:'/v2/writer/wr/empy'},
+      {label:'ADD EMPLOYEE', to:'/v2/writer/wr/addempy'},
+      {label:'ATTENDANCE', to:'/v2/writer/wr/attend'}
     ];
   } 
   if (designationType === "sales") {
-    // sidebarData = [
-    //     {label:'EMPLOYEE', to:'/v2/em/empy',icon:<MdAdminPanelSettings/>},
-    //     {label:'ADD EMPLOYEE', to:'/v2/em/addempy',icon:<BsPersonFillAdd/>},
-    //     {label:'ATTENDANCE', to:'/v2/em/attend',icon:<BsPersonFillAdd/>}
-    //   ];
+    sidebarData = [
+        {label:'EMPLOYEE', to:'/v2/sales/sa/empy'},
+        {label:'ADD EMPLOYEE', to:'/v2/sales/sa/addempy'},
+        {label:'ATTENDANCE', to:'/v2/sales/sa/attend'}
+      ];
   }
   
    

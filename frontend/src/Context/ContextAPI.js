@@ -4,6 +4,7 @@ import DetailsContext from "./CreateContext";
 
 export default function ContextAPI({ children }) {
   const [flag,setFlag] = useState(false)
+  const [projectStatusData,setProjectStatusData] = useState({})
   const [result, setResult] = useState({})
   const [err,setError] = useState('')
   let [personLogin, setPersonLogin] = useState("");
@@ -15,10 +16,10 @@ let [personName,setPersonName] = useState("")
 
 const[getOneData,setGetOneData] = useState([])
 // const [input,setInput] = useState('')
-const[Prodesignation,setProDesignation]=useState('')  
 const[ProjectName,setProjectName] = useState('')
   const contextValue = {
-    Prodesignation,setProDesignation,ProjectName,setProjectName, flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
+    projectStatusData,setProjectStatusData,
+   ProjectName,setProjectName, flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
     result,
     setResult,
     personLogin,

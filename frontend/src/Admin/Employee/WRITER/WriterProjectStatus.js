@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
+import { useNavigate } from "react-router-dom";
 
 export default function WriterProjectStatus() {
-  
+  const {setProjectStatusData} = useContext(DetailsContext)
   const [data, setData] = useState([]);
  const projectEmplyId = localStorage.getItem("projEmId")
  console.log(projectEmplyId,"id");
@@ -41,7 +42,13 @@ export default function WriterProjectStatus() {
     e.preventDefault();
     fetchData();
   };
-
+  const navigate = useNavigate('')
+  const handleClick =(i)=>{
+    console.log(i,'INDEX');
+   
+    setProjectStatusData(data[i])
+navigate('/v2/writer/view/project/status')
+  }
   return (
     <>
       <div className="project-status">
@@ -68,31 +75,30 @@ export default function WriterProjectStatus() {
         </div>
        
         <div className="project-status-box">
-        <div className="heading">
-            <div className="backlink-title">CONTENT TITLE</div>
-            <div className="backlink-title">CONTENT LINK</div>
+        <div className="data-box-heading">
+            <div className="writer-heading-style-title">CONTENT TITLE</div>
+            <div className="writer-heading-style-link">CONTENT LINK</div>
+            
+            <div className="writer-heading-style-view">VIEW</div>
            
-            {/* <div className="timetaken-title">
-          DETAILS
-          </div> */}
           </div>
+          
           {data.length === 0 ? (
         <div  className="heading backlink-title">NO DATA FOUND</div>
         )
           :
-          
-          data.map((projectStatus) => (
+          data.map((projectStatus,i) => (
             <>
-              <div className="data-box">
+             <div className="data-box">
                 <span className="time-taken">{projectStatus.ContentTitle}</span>
-                <a
-                  className="backLink"
-                  href={projectStatus.ContentLink}
-                  target="_blank"
-                >
-                  {projectStatus.ContentLink}
-                </a>
+                <span className="time-taken"> <a  href={projectStatus.ContentLink}target="_blank">{projectStatus.ContentLink}</a></span>
+
+                <span className="time-taken view" onClick={()=>handleClick(i)}>View</span>
+              
+               
               </div>
+
+             
             </>
           ))}
         </div>

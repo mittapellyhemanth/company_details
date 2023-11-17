@@ -72,3 +72,46 @@ input::placeholder {
   font-family: Outfit;
  font-weight: 100;
 }
+.project-box{
+  width: 500px;
+  height: 450px;
+  margin: auto;
+  background-color: wheat;
+  display: block;
+  flex-wrap: wrap;
+  align-items: center;
+
+}
+.project-view{
+  width:500px;
+  height:500px;
+ 
+   margin: auto;
+   background-color: white;
+   margin-top: 50px;
+   display: flex;
+   flex-wrap: wrap;
+   
+}
+.project-view>h2{
+  width: 350px;
+ text-align: center;
+margin: auto;
+padding-bottom: 25px;
+}
+.content-box{
+  width: 300px;
+ height: fit-content;
+
+   display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+ 
+}
+.content-box>label{
+  margin-right: 10px;
+
+}
+.content-box >strong{
+  margin-right: 15px;
+}

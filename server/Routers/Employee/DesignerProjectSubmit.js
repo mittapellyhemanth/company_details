@@ -57,12 +57,12 @@ const upload = multer({ storage });
 
 
 
-router.post("/proj/submit/:id", upload.single("PostImage"),async (req,res)=>{
+router.post("/proj/submit/:id/:projectName", upload.single("PostImage"),async (req,res)=>{
   console.log("req",req.body,req.file);
   try {
     const post = new PostModel({
       EmployeeId:req.params.id,
-      
+      ProjectTitle:req.params.projectName,
       ...req.body,
       
       PostImage: req.file.filename,

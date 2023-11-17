@@ -20,4 +20,25 @@ getProjects.get = async (req, res) => {
   }
 };
 
+
+
+getProjects.getOne = async (req, res) => {
+  try {
+    console.log("Getting the properties",req.params);
+
+    await ProjectsDetails.findOne({addedAdminId:req.params.addedAdminId,projectName:req.params.projectName}).then((result) => {
+        res.status(200).json({
+          message: "Property details fetched successfully",
+          data: result,
+        });
+      });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: err,
+    });
+  }
+};
+
+
 module.exports = getProjects;

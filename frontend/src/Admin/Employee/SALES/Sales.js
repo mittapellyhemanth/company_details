@@ -1,7 +1,23 @@
+import { useContext, useEffect } from "react";
+
+
+import EmpDashboard from "../ReUseFunc.js/EmpDashboard";
+import DetailsContext from "../../../Context/CreateContext";
+// import DetailsContext from "../../../Context/CreateContext";
+
 
 export default function Sales(){
-    console.log('sales');
-return<>
-<h1>Page Not Found</h1>
-</>
+ 
+  const{ setDesignationType} = useContext(DetailsContext);
+    
+  useEffect(()=>{
+    setDesignationType('sales')
+  },[setDesignationType]);
+
+  
+    return (
+      <>
+        <EmpDashboard />
+      </>
+    );
 }

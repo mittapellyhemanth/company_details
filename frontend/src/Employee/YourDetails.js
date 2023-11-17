@@ -1,7 +1,7 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
-import { useContext, useEffect, useState } from "react";
-import DetailsContext from "../Context/CreateContext";
+import {  useEffect, useState } from "react";
+
 import './Yourdetails.css'
 import axios from "axios";
 
@@ -51,8 +51,8 @@ const getDetails = async(url,token)=>{
       getDetails(`http://localhost:8080/admin/getOneDesigner/${id}`,{headers})
     
     }
-    if(type === 'SEO'){
-      getDetails(`http://localhost:8080/admin/getOneSeo/${id}`,{headers})
+    if(type === 'SALES'){
+      getDetails(`http://localhost:8080/admin/getOneSales/${id}`,{headers})
     
     }
   },[setOneData]);

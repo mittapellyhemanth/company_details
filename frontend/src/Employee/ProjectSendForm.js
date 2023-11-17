@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Col from "react-bootstrap/Col";
-import axios from "axios";
+
 
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -77,7 +77,7 @@ action
                       readOnly
                       />
                     )}
-                    {(input.name !== "TimeTaken" && input.type === "text" ||input.type === "number")  && (
+                    {((input.name !== "TimeTaken") && ((input.type === "text") || (input.type === "number")))  && (
                       <Form.Control
                         type={input.type}
                         placeholder={input.placeholder}

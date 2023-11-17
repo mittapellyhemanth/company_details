@@ -31,8 +31,8 @@ export default function WriterProjectSubmit() {
    
     {
       type: "text",
-      placeholder: "KEYWORD",
-      name: "Keyword",
+      placeholder: "CONTENT LINK",
+      name: "ContentLink",
       required: false,
     },
     {
@@ -66,8 +66,9 @@ export default function WriterProjectSubmit() {
         required: false,
       },
   ];
-  const employID = localStorage.getItem('unique_id')
- const URL = `http://localhost:8080/employee/writer/project/submit/${employID}`
+  const employID = localStorage.getItem('unique_id');
+  const projectName= localStorage.getItem('ProjectName');
+ const URL = `http://localhost:8080/employee/writer/project/submit/${employID}/${projectName}`
 
   const onSubmit = async (formData,url) => {
     console.log(formData,url);

@@ -87,9 +87,12 @@ if ( req.body.projectName && req.body.clientName && req.body.employeeAlloted && 
 //..................get PROJECTS .................................................................................
 const getProjects = require("../../Controllers/Admin/getProject");
 AdminRouter.get("/getProject/:id", auth, getProjects.get);
+AdminRouter.get("/getProject/:addedAdminId/:projectName", getProjects.getOne);
 
 
-AdminRouter.get("/oneProject/:Name",async(req,res)=>{
+
+
+AdminRouter.get("/oneProject/:Name",async(req,res)=>{    // search
   const name = req.params.Name.toUpperCase()
   try {
     await AddProject.findOne({projectName:name}).then((result)=>{
@@ -103,7 +106,7 @@ AdminRouter.get("/oneProject/:Name",async(req,res)=>{
   }
 })
 
-//..................Add,Get Employee .................................................................................
+//..................Add,Get seo Employee .................................................................................
 const postEmployee = require("../../Controllers/Admin/SEO/AddSeo");
 AdminRouter.post("/addSeo/:id", auth, postEmployee.post);
 //....get Employee .....
@@ -163,7 +166,7 @@ AdminRouter.get("/oneEmpy/getDesigner/:Name",async(req,res)=>{
 //..................Add,Get Writer .................................................................................
 const addWriter = require("../../Controllers/Admin/Writer/addWriter");
 AdminRouter.post("/addWriter/:id", auth, addWriter.post);
-//GET designer
+
 
 AdminRouter.get("/getWriter/:id", auth, getWriter.get);
 
@@ -172,6 +175,9 @@ AdminRouter.get("/getOneWriter/:id", auth, getOneWriter.getOne);
 
 const getOneSeo = require("../../Controllers/Admin/SEO/GetSeo");
 AdminRouter.get("/getOneSeo/:id", auth, getOneSeo.getOne);
+
+const getOneSales = require("../../Controllers/Admin/Sales/GetSales");
+AdminRouter.get("/getOneSales/:id", auth, getOneSales.getOne);
 
 const WriterProjectDetails = require("../../Controllers/Admin/Writer/getWriter");
 AdminRouter.get("/writer/search/date",  WriterProjectDetails.getWriterProject);
@@ -192,6 +198,29 @@ AdminRouter.get("/oneEmpy/getWriter/:Name",async(req,res)=>{
     
   }
 });//getting only employee name
+
+
+//..................Add,Get SALES .................................................................................
+
+
+const postSales = require("../../Controllers/Admin/Sales/AddSales");
+AdminRouter.post("/addSales/:id", postSales.post);
+
+const getSales = require('../../Controllers/Admin/Sales/GetSales');
+AdminRouter.get("/getSales/:id", getSales.get);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

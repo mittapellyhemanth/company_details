@@ -3,12 +3,15 @@ import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
 import Filters from "../ReUseFunc.js/Filters";
+import { useNavigate } from "react-router-dom";
 
 export default function SeoEmployeeProject() {
   const [data, setData] = useState([]);
-
+const {setProjectStatusData} = useContext(DetailsContext)
   const projectEmplyId = localStorage.getItem("projEmId");
+  setProjectStatusData('')
   useEffect(() => {
+
     axios
       .get(`http://localhost:8080/employee/proj/status/${projectEmplyId}`)
       .then((res) => {
@@ -17,13 +20,7 @@ export default function SeoEmployeeProject() {
       });
   }, [projectEmplyId]);
 
-  // const handleClick = (id)=>{
-  //   console.log(id);
-  //   axios.get(`http://localhost:8080/employee/proj/view/${id}`).then((res) => {
-  //     console.log(res, "emply res");
-  //    ;
-  //   });
-  // }
+ 
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
 
@@ -48,6 +45,13 @@ export default function SeoEmployeeProject() {
     e.preventDefault();
     fetchData();
   };
+const navigate = useNavigate('')
+  const handleClick =(i)=>{
+    console.log(i,'INDEX');
+    // const Data = data[]
+    setProjectStatusData(data[i])
+navigate('/v2/em/view/project/status')
+  }
   return (
     <>
       <div className="project-status">
@@ -76,45 +80,36 @@ export default function SeoEmployeeProject() {
     
 
         <div className="project-status-box">
-          <div className="heading">
-            <div className="backlink-title">TITLE</div>
-            <div className="backlink-title">BACKLINK</div>
-            <div className="timetaken-title">TIME TAKEN</div>
-            {/* <div className="timetaken-title">
-          DETAILS
-          </div> */}
+        <div className="data-box-heading">
+            <div className="heading-style">TITLE</div>
+            <div className="heading-style">BACKLINK</div>
+            <div className="heading-style">TIME TAKEN</div>
+            <div className="heading-style">VIEW</div>
+            {/* <div className="heading-style">KEYWORD</div>
+            <div className="heading-style">TYPE</div>
+            <div className="heading-style">STATUS</div>
+            <div className="heading-style">REMARK</div> */}
+          
+            {/* <div className="heading-style">SUBMIT DATE</div> */}
           </div>
+          
           {data.length === 0 ? (
         <div  className="heading backlink-title">NO DATA FOUND</div>
         )
           :
-          data.map((projectStatus) => (
+          data.map((projectStatus,i) => (
             <>
-              <div className="data-box">
-                <div className="div-time">
-                  <span className="time-taken">
-                    {projectStatus.ProjectTitle}
-                  </span>
-                </div>
+             <div className="data-box">
+                <span className="time-taken">{projectStatus.ProjectTitle}</span>
+                <span className="time-taken"> <a  href={projectStatus.BackLink}target="_blank">{projectStatus.BackLink}</a></span>
 
-                <a
-                  className="backLink"
-                  href={projectStatus.BackLink}
-                  target="_blank"
-                >
-                  <span className="backLink-text">
-                    {projectStatus.BackLink}
-                  </span>
-                </a>
-                <div className="div-time">
-                  <span className="time-taken">{projectStatus.TimeTaken}</span>
-                </div>
-                {/* <div className="div-view">
-
-<span onClick={()=>{handleClick(projectStatus.
-_id)}}>View</span>
-</div> */}
+                <span className="time-taken">{projectStatus.TimeTaken}</span>
+                <span className="time-taken view" onClick={()=>handleClick(i)}>View</span>
+              
+               
               </div>
+
+             
             </>
           ))}
         </div>
