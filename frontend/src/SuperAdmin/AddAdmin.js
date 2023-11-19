@@ -90,7 +90,7 @@ const onSubmit = async (formData) => {
   return (
     <>
   <div className="form-addpro">
-  <div className="form-addpro-box">
+  {/* <div className="form-addpro-box"> */}
     <div>
 
       {err && <h6 className="error">{err}</h6>}
@@ -102,7 +102,7 @@ const onSubmit = async (formData) => {
     btnText="Submit"
     />
 </div>
-  </div>
+  {/* </div> */}
     </>
   );
 }

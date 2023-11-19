@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DetailsContext from "./CreateContext";
 
 
@@ -10,16 +10,21 @@ export default function ContextAPI({ children }) {
   let [personLogin, setPersonLogin] = useState("");
  
   const[designation,setDesignation]=useState('')  
-  const [designationType , setDesignationType ] = useState('')
+  let [personName,setPersonName] = useState("")
+  
+  const[getOneData,setGetOneData] = useState([])
+  // const [input,setInput] = useState('')  /////project view
   const [empyId , setEmpyId] = useState('')
-let [personName,setPersonName] = useState("")
+  const [designationType , setDesignationType ] = useState('')
+const[ProjectData,setProjectData] = useState([])
+const[projectView,setProjectView] = useState({})
+const[currentItems,setCurrentIteams] = useState([])
 
-const[getOneData,setGetOneData] = useState([])
-// const [input,setInput] = useState('')
-const[ProjectName,setProjectName] = useState('')
+
+
   const contextValue = {
-    projectStatusData,setProjectStatusData,
-   ProjectName,setProjectName, flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
+    currentItems,setCurrentIteams, projectStatusData,setProjectStatusData,projectView,setProjectView,
+   ProjectData,setProjectData, flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
     result,
     setResult,
     personLogin,

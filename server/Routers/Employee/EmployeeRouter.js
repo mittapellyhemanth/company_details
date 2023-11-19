@@ -166,7 +166,7 @@ EmployeeRouter.get("/proj/status/:id", async (req, res) => {
 //....................................................get project Admin checks status function   ProjectDetailsStatus()
 async function ProjectDetailsStatus(req,res,Model){
   try {
-    // console.log(req.params.id, "id");
+    console.log(req.params, "id");
     const data = await Model.find({ EmployeeId: req.params.id,ProjectTitle:req.params.projectName });
     console.log(data);
    return res.status(200).json({
@@ -181,9 +181,10 @@ async function ProjectDetailsStatus(req,res,Model){
 EmployeeRouter.get("/proj/status/:id/:projectName", async (req, res) => {
   await ProjectDetailsStatus(req,res,SeoProjectSubmit)
 });
+
 EmployeeRouter.get("/proj/view/:id", async (req, res) => {
   try {
-    // console.log(req.params.id, "id");
+    console.log(req.params.id, "id");
     await SeoProjectSubmit.findOne({_id:req.params.id}).then((result)=>{
        res.status(200).json({
         data: result,
@@ -243,9 +244,9 @@ EmployeeRouter.post("/sales/project/submit/:id/:projectName", async (req, res) =
     console.log(req,"req");
     const emplyId = req.params.id.toUpperCase();
  // Iterating through form data array and creating new project documents
-        const {  Source, Enquiry, Remark, Status } = req.body;
+        const {Location,Name,PhoneNum,Email,Source, Enquiry, Remark } = req.body;
 
-        if (Source && Enquiry && Remark && Status ) {
+        if (Location && Name && PhoneNum && Email && Enquiry && Remark   ) {
           const project = new SalesProjectSubmit({
             ProjectTitle:req.params.projectName,
             EmployeeId: emplyId,
@@ -264,8 +265,8 @@ EmployeeRouter.post("/sales/project/submit/:id/:projectName", async (req, res) =
   }
 });
 // getting sales project status
-EmployeeRouter.get("/sales/proj/status/:id/:projectName", async (req, res) => {
-  await ProjectDetailsStatus(req,res,SalesProjectSubmit)
+EmployeeRouter.get("/sales/proj/status/:id", async (req, res) => {
+  await ProjectStatus(req,res,SalesProjectSubmit)
 });
 
 

@@ -1,10 +1,12 @@
-import { useContext } from "react";
-import DetailsContext from "../../../Context/CreateContext";
+import CryptoJS from "crypto-js";
 
-export default function WriterFullProjStatus() {
-  const { projectStatusData } = useContext(DetailsContext);
-  console.log(projectStatusData);
-
+export default function WriterProjectStatusView() {
+  const encryptedProjectData = localStorage.getItem('writerOneProject');
+  const decryptedProjectDatay = CryptoJS.AES.decrypt(encryptedProjectData, "employeewriterProjects").toString(CryptoJS.enc.Utf8);
+  const projectStatusData = JSON.parse(decryptedProjectDatay);
+  const handleGoBack = () => {
+    window.history.back(); // Go back to the previous page
+  };
   return (
     <>
       <div className="project-status">
@@ -57,7 +59,7 @@ export default function WriterFullProjStatus() {
               
              
             </div>
-            
+            <button className="cancel-btn" onClick={handleGoBack}>CANCEL</button>
           </div>
         </div>
       </div>

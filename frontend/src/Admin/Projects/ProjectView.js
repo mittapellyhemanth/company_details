@@ -1,57 +1,47 @@
 import { useContext, useEffect, useState } from "react";
 import DetailsContext from "../../Context/CreateContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // /proj/status/:id/:projectName
 export default function ProjectView() {
     const [data,setData] = useState({})
-      const { ProjectName} = useContext(DetailsContext)
-      useEffect(()=>{
-          const addedAdminId = localStorage.getItem('unique_id')
-          axios.get(`http://localhost:8080/admin/getProject/${addedAdminId}/${ProjectName}`).then((res)=>{
-            setData(res.data.data);
-            console.log(res.data.data);
-          })
-     },[ProjectName])
+      const { ProjectData,designationType,projectView,setProjectView} = useContext(DetailsContext)
+      console.log(ProjectData,designationType);
+    //   useEffect(()=>{
+    //       const addedAdminId = localStorage.getItem('unique_id')
+    //       axios.get(`http://localhost:8080/admin/getProject/${addedAdminId}/${ProjectName}`).then((res)=>{
+    //         setData(res.data.data);
+    //         console.log(res.data.data);
+    //       })
+    //  },[ProjectName])
+    const navigate = useNavigate()
+    const handleClick =(i)=>{
+      console.log(i,'INDEX');
+     
+      setProjectView(data[i])
+  navigate('/v2/writer/view/project/status')
+    }
   return (
     <>
       <div className="project-status">
-        <div className="project-view">
-         
-          <h2>{data.projectName}</h2>
-          <div className="project-box">
-            <div className="content-box">
-                
-            <strong>CLIENT NAME :  </strong>
-            <div>{data.clientName}</div>
-            </div>
-          
-          <div className="content-box">
-            <strong>WEBSITE : </strong>
-            <div className="weblink"><a href={data.websiteAddress} >{data.websiteAddress}</a></div>
-          </div>
-          <div className="content-box">
-          <strong >EMPLOYEE ALLOTED : </strong>
-            <div>{data.employeeAlloted}</div>
-          </div>
-          <div className="content-box">
-          <strong>EMPLOYEE ID : </strong>
-            <div>{data.employID}</div>
-          </div>
-          <div className="content-box">
-          <strong>DESIGNATION : </strong>
-            <div>{data.empyDesignation}</div>
-          </div>
-          <div className="content-box">
-          <strong>START DATE : </strong>
-            <div>{data.startDate}</div>
-          </div>
-          <div className="content-box">
-          <strong>MONTHLY PRICE : </strong>
-            <div>{data.monthlyPrice} rs</div>
-          </div>
-          </div>
+       
+         {
+          ProjectData.map((projectStatus,i) => (
+            <>
+             <div className="data-box">
+                <span className="time-taken">{projectStatus.ContentTitle}</span>
+                <span className="time-taken"> <a  href={projectStatus.ContentLink}target="_blank">{projectStatus.ContentLink}</a></span>
+
+                <span className="time-taken view" onClick={()=>handleClick(i)}>View</span>
+              
+               
+              </div>
+
+             
+            </>
+          ))}
         </div>
-      </div>
+    
     </>
   );
 }

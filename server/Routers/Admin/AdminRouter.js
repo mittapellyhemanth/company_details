@@ -105,6 +105,64 @@ AdminRouter.get("/oneProject/:Name",async(req,res)=>{    // search
     
   }
 })
+//.....SEO PROJECTs STATUS 
+
+const seoProjectOne = require('../../Schemas/Employee/ProjectSubmit/SeoProject')
+AdminRouter.get("/SeoOneProject/:id/:projectName",async(req,res)=>{    // search
+ 
+  try {
+    await seoProjectOne.find({EmployeeId:req.params.id,ProjectTitle:req.params.projectName}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      // console.log(result);
+    })
+  } catch (error) {
+    
+  }
+})
+const WriterProjectOne = require('../../Schemas/Employee/ProjectSubmit/WriterProject')
+AdminRouter.get("/WriterOneProject/:id/:projectName",async(req,res)=>{    // search
+ 
+  try {
+    await WriterProjectOne.find({EmployeeId:req.params.id,ProjectTitle:req.params.projectName}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      // console.log(result);
+    })
+  } catch (error) {
+    
+  }
+}) 
+const DesignerProjectOne = require('../../Schemas/Employee/ProjectSubmit/DesignerProject')
+AdminRouter.get("/DesignerOneProject/:id/:projectName",async(req,res)=>{    // search
+  
+  try {
+    await DesignerProjectOne.find({EmployeeId:req.params.id,ProjectTitle:req.params.projectName}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      // console.log(result);
+    })
+  } catch (error) {
+    
+  }
+}) 
+const SalesProjectOne = require('../../Schemas/Employee/ProjectSubmit/SalesProject')
+AdminRouter.get("/SalesOneProject/:id/:projectName",async(req,res)=>{    // search
+
+  try {
+    await SalesProjectOne.find({EmployeeId:req.params.id,ProjectTitle:req.params.projectName}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      // console.log(result);
+    })
+  } catch (error) {
+    
+  }
+}) 
 
 //..................Add,Get seo Employee .................................................................................
 const postEmployee = require("../../Controllers/Admin/SEO/AddSeo");
@@ -209,15 +267,64 @@ AdminRouter.post("/addSales/:id", postSales.post);
 const getSales = require('../../Controllers/Admin/Sales/GetSales');
 AdminRouter.get("/getSales/:id", getSales.get);
 
+const Sales = require('../../Schemas/Admin/Employees/Sales');
+AdminRouter.get("/sales/oneEmpy/getSales/:Name", async(req,res)=>{
+  // console.log(req.params.Name,"params");
+  const name = req.params.Name.toUpperCase()
+  try {
+    await Sales.findOne({Name:name}).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      console.log(result);
+    })
+  } catch (error) {
+    
+  }
+});//getting only employee name;
+//....................................................................................project view 
+const ProjectOneView = async(req,res,model)=>{
+  try {
+    await model.findById(req.params._id).then((result)=>{
+      res.status(200).json({
+        data:result
+      })
+      console.log(result);
+    })
+  } catch (error) {
+    
+    res.status(500).json({
+      message: "Internal server error",
+      err: error
+    });
+  }
+}
+
+const GetoneSalesProjectView = require('../../Schemas/Employee/ProjectSubmit/SalesProject')
+AdminRouter.get("/salesProject/One/View/:_id",async(req,res)=>{
+  console.log(req.params._id);
+ await ProjectOneView(req,res,GetoneSalesProjectView);
+})
 
 
+const GetoneSeoProjectView = require('../../Schemas/Employee/ProjectSubmit/SeoProject')
+AdminRouter.get("/seoProject/One/View/:_id",async(req,res)=>{
+  console.log(req.params._id);
+ await ProjectOneView(req,res,GetoneSeoProjectView);
+})
+
+const GetoneWriterProjectView = require('../../Schemas/Employee/ProjectSubmit/WriterProject')
+AdminRouter.get("/writerProject/One/View/:_id",async(req,res)=>{
+  console.log(req.params._id);
+ await ProjectOneView(req,res,GetoneWriterProjectView);
+})
 
 
-
-
-
-
-
+const GetoneDesignerProjectView = require('../../Schemas/Employee/ProjectSubmit/DesignerProject')
+AdminRouter.get("/designerProject/One/View/:_id",async(req,res)=>{
+  console.log(req.params._id);
+ await ProjectOneView(req,res,GetoneDesignerProjectView);
+})
 
 
 

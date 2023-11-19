@@ -39,7 +39,7 @@
 .bg-img {
   width: 100%;
   height: 100vh;
-  background-image: url("../image/backimg.jpg");
+  background-image: url("../image/backimg.webp");
   display: flex;
   flex-wrap: wrap;
 /* flex-start: start; */

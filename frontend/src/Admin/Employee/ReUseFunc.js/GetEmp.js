@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function GetEmply({ url, NavigateUrl, type }) {
   const [data, setData] = useState([]);
+const [back,setBack] = useState(false)
 
   const { setError } = useContext(DetailsContext);
   setError("");
@@ -25,6 +26,7 @@ export default function GetEmply({ url, NavigateUrl, type }) {
           console.log(res.data.data, "got");
 
           setData(res.data.data);
+          
         }
       })
       .catch((err) => console.log(err));
@@ -51,12 +53,14 @@ export default function GetEmply({ url, NavigateUrl, type }) {
   const [name, setName] = useState("");
   console.log(name);
   const handleSearch = async () => {
+    console.log(type,"type");
     if (type === "SEO") {
       console.log(name);
       await axios
         .get(`http://localhost:8080/admin/oneEmpy/getSeo/${name}`)
         .then((result) => {
           setData(result.data.data);
+          setBack(true)
         });
     }
     if (type === "WRITER") {
@@ -65,6 +69,7 @@ export default function GetEmply({ url, NavigateUrl, type }) {
         .get(`http://localhost:8080/admin/oneEmpy/getWriter/${name}`)
         .then((result) => {
           setData(result.data.data);
+          setBack(true)
         });
     }
     if (type === "DESIGNER") {
@@ -73,17 +78,38 @@ export default function GetEmply({ url, NavigateUrl, type }) {
         .get(`http://localhost:8080/admin/oneEmpy/getDesigner/${name}`)
         .then((result) => {
           setData(result.data.data);
+          setBack(true)
         });
     }
     if (type === "SALES") {
       console.log(name);
       await axios
-        .get(`http://localhost:8080/admin/oneEmpy/getSales/${name}`)
+        .get(`http://localhost:8080/admin/sales/oneEmpy/getSales/${name}`)
         .then((result) => {
           setData(result.data.data);
+          setBack(true)
         });
     }
   };
+
+  const [currentPage, setCurrentPage] = useState(1);
+ const itemsPerPage = 12; // Number of items per page
+ const handlePagination = (pageNumber) => {
+   setCurrentPage(pageNumber);
+ };
+ 
+ const indexOfLastItem = currentPage * itemsPerPage;
+ const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+ let   currentItems = []
+ 
+ if(!back){
+  currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+}
+
+const handleGoBack = ()=>{
+  window.history.back();
+}
+
   return (
     <>
       {/* {flag ? links[0].userName : "woohooweb"} */}
@@ -106,8 +132,8 @@ export default function GetEmply({ url, NavigateUrl, type }) {
             </button>
           </div>
 
-          {data.length > 0 ? (
-            data.map((user) => {
+          {currentItems.length > 0 ? (
+            currentItems.map((user) => {
               return (
                 <>
                   <div className="super-container">
@@ -160,6 +186,32 @@ export default function GetEmply({ url, NavigateUrl, type }) {
             </div>
           )}
         </div>
+        {back ?  <button className="button-back" onClick={handleGoBack}>CANCEL</button> :(
+       
+        <div className="pagination">
+            <button className="prevbtn" onClick={() => handlePagination(currentPage - 1)} disabled={currentPage === 1}>
+              PREVIOUS
+            </button>
+            {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
+              <button
+              className="numbtn"
+                key={index}
+                onClick={() => handlePagination(index + 1)}
+                disabled={currentPage === index + 1}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button className="Nextbtn"
+              onClick={() => handlePagination(currentPage + 1)}
+              disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
+            >
+              NEXT
+            </button>
+            {/* {back &&  <button onClick={handleGoBack}>CANCEL</button>} */}
+          
+          </div> 
+        )}
       </div>
     </>
   );

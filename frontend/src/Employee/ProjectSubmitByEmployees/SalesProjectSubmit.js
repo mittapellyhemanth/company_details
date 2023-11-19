@@ -4,7 +4,7 @@ import React,{ useState} from "react";
 import axios from "axios";
 
 import ProjectSendForm from "../ProjectSendForm";
-
+import '../ProjectSendForm.css'
 export default function SalesProjectSubmit() {
   const[sucess,setSucess] = useState('');
   const date = localStorage.getItem("date");
@@ -12,15 +12,44 @@ export default function SalesProjectSubmit() {
     const [formData, setFormData] = useState(
         // [...Array(4)].map(() => ({
         
-       {   Source: "",
+       {
+        Location:"",
+        Name:"",
+        PhoneNum:"",
+        Email:"",
+        Source: "",
           Enquiry: "",
           Remark: "",
-          Status: "",
+          
           Date:date
         }
         // }))
       );
   const inputs = [
+    {
+      type: "text",
+      placeholder: "LOCATION",
+      name: "Location",
+      required: false,
+    },
+    {
+      type: "text",
+      placeholder: "NAME",
+      name: "Name",
+      required: false,
+    },
+    {
+      type: "number",
+      placeholder: "CONTACT",
+      name: "PhoneNum",
+      required: false,
+    },
+    {
+      type: "email",
+      placeholder: "EMAIL",
+      name: "Email",
+      required: false,
+    },
     {
       type: "text",
       placeholder: "SOURCE",
@@ -34,17 +63,7 @@ export default function SalesProjectSubmit() {
       required: false,
     },
     
-    {
-      type: "select",
-
-      name: "Status",
-      required: false,
-      options: [
-        { value: "Sold", name: "Status" },
-        { value: "UnSold", name: "Status" },
-        
-      ],
-    },
+    
 
     {
       type: "text",
@@ -66,7 +85,7 @@ export default function SalesProjectSubmit() {
     // Send POST request to the server
     await axios.post(url,dataToSend);
     setSucess('Posted Successfully');
-    
+    setFormData("")
 
     // console.log("Projects successfully added:", response.data);
    
@@ -81,7 +100,10 @@ export default function SalesProjectSubmit() {
   return (
     <>
      {sucess ? <div className="sucess">{sucess}</div>:"" }
+    
+
    <ProjectSendForm Method="POST" inputs={inputs} onSubmit={onSubmit} btnText='submit' urlData={URL} formData={formData} setFormData={setFormData} />
+     
     </>
   );
 }

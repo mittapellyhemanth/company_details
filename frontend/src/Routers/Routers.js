@@ -42,20 +42,32 @@ import ProjectView from "../Admin/Projects/ProjectView";
 import SeoEmployeeProject from "../Admin/Employee/SEO/SeoEmployeeProjects";
 import SeoProjectSubmit from "../Employee/ProjectSubmitByEmployees/SeoProjectSubmit";
 import WriterProjectSubmit from "../Employee/ProjectSubmitByEmployees/WriterProjectSubmit";
-import WriterProjectStatus from "../Admin/Employee/WRITER/WriterProjectStatus";
+
 import DesignerProjectSubmit from "../Employee/ProjectSubmitByEmployees/DesignerProjectSubmit";
 import AttendanceStatus from "../Admin/Employee/SEO/AttendanceStatus";
 import DesignerAttendanceStatus from "../Admin/Employee/DESIGNER/DesignerAttendanceStatus";
 import WriterAttendStatus from "../Admin/Employee/WRITER/WriterAttendStatus";
-import DesignerProjectStatus from "../Admin/Employee/DESIGNER/DesignerProjectStatus";
+
 import AddSales from "../Admin/Employee/SALES/AddSales";
 import GetSales from "../Admin/Employee/SALES/GetSales";
 import SalesAttendance from "../Admin/Employee/SALES/Attendance";
 import SalesProjectSubmit from "../Employee/ProjectSubmitByEmployees/SalesProjectSubmit";
-import SalesProjectStatus from "../Admin/Employee/SALES/SalesProjectStatus";
-import ViewFullProjStatus from "../Admin/Employee/SEO/ViewFullProjStatus";
-import WriterFullProjStatus from "../Admin/Employee/WRITER/WriterFullProjStatus";
+
+// import ViewFullProjStatus from "../Admin/Employee/SEO/ViewFullProjStatus";
+
 import SalesAttendanceStatus from "../Admin/Employee/SALES/AttendanceStatus";
+// import ViewSalesProjStatus from "../Admin/Employee/SALES/ViewFullProjStatus";
+import ProjectSeoStatus from "../Admin/Projects/ProjectViewEmpy/ProjectSeoStatus";
+import ProjectSalesStatus from "../Admin/Projects/ProjectViewEmpy/ProjectSalesStatus";
+import ProjectWriterStatus from "../Admin/Projects/ProjectViewEmpy/ProjectWriterStatus";
+import ProjectDesignerStatus from "../Admin/Projects/ProjectViewEmpy/ProjectDesignerStatus";
+import WriterProjectStatus from "../Admin/Employee/WRITER/WriterProjectStatus";
+import DesignerProjectStatus from "../Admin/Employee/DESIGNER/DesignerProjectStatus";
+import SalesProjectStatus from "../Admin/Employee/SALES/SalesProjectStatus";
+import WriterProjectStatusView from "../Admin/FullProjectStatusView/WriterProjectStatusView";
+import SeoProjectStatusView from "../Admin/FullProjectStatusView/SeoProjectStatusView";
+import SalesProjectStatusView from "../Admin/FullProjectStatusView/SalesProjectStatusView";
+
 
 export default function Router() {
   return (
@@ -83,8 +95,13 @@ export default function Router() {
         <Route index element={<Projects />} />
         <Route path="proj" element={<Projects />} />
 
-        <Route path="pro/view" element={<ProjectView />} />
+        <Route path="seo/pro/view" element={<ProjectSeoStatus />} />
        
+        <Route path="sales/pro/view" element={<ProjectSalesStatus />} />
+        
+        <Route path="writer/pro/view" element={<ProjectWriterStatus />} />
+        
+        <Route path="designer/pro/view" element={<ProjectDesignerStatus />} />
         <Route path="addProj" element={<AddProjects />} />
 
        
@@ -97,7 +114,7 @@ export default function Router() {
         <Route path="addempy" element={<AddSEO />} />
         <Route path="attendance/status" element={<SeoAttendance />} />
         <Route path="attendance/seo/status" element={<AttendanceStatus />} />
-        <Route path="view/project/status" element={<ViewFullProjStatus />} />
+        <Route path="view/project/status" element={<SeoProjectStatusView />} />
       </Route>
       {/*........................  WRITER Routers............................. */}
       <Route path="/v2/writer" element={<WriterDashboard />} />
@@ -107,7 +124,7 @@ export default function Router() {
         <Route path="wr/attend" element={<AttendanceWriter />} />
         <Route path="attend/status" element={<WriterAttendStatus />} />
         <Route path="project/status" element={<WriterProjectStatus/>} />
-        <Route path="view/project/status" element={<WriterFullProjStatus />} />
+        <Route path="view/project/status" element={<WriterProjectStatusView />} />
         <Route path="wr/addempy" element={<AddWriter />} />
       </Route>
 
@@ -129,7 +146,7 @@ export default function Router() {
          <Route path="sa/attend" element={<SalesAttendance />} />
         <Route path="project/status" element={<SalesProjectStatus/>} />
         <Route path="attendance/sales/status" element={<SalesAttendanceStatus />} />
-        {/* <Route path="attendance/designer/status" element={<DesignerAttendanceStatus />} />   */}
+        <Route path="view/Salesproject/status" element={<SalesProjectStatusView />} />  
       </Route>
       
 

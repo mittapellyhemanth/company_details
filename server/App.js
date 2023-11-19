@@ -23,11 +23,12 @@ const employeeRouter = require('./Routers/Employee/EmployeeRouter');
 const AdminRouter = require('./Routers/Admin/AdminRouter');
 const SuperAdmin = require('./Routers/SuperAdmin/SuperAdmin')
 const Imgpost = require('./Routers/Employee/DesignerProjectSubmit')
+const AdminProjectFilter = require('./Routers/Admin/AdminFilters')
 const port = process.env.PORT;
 const URL = process.env.DB_URL;
 
 
-
+app.use('/Project/filter',AdminProjectFilter);
 app.use("/designer",Imgpost);
 app.use("/user",userRouter); // Login Router
 app.use("/employee",employeeRouter); // Employee Router

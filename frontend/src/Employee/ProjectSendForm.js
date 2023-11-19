@@ -49,7 +49,7 @@ action
   return (
     <>
       <div className="form-addpro">
-        <div className="form-addpro-box">
+      
         
          
          {err ?  <div className="err">{err}</div>:"" }
@@ -61,15 +61,17 @@ action
             encType="multipart/form-data"
           >
             {/* {formData.map((formFields, index) => ( */}
-              <Row className="mb-3" >
+              {/* <Row className="mb-3" > */}
                 {inputs.map((input) => (
                   <Form.Group
                     as={Col}
                     controlId={`form${input.name}`}
                     key={input.name}
+                    className="formControl"
                   >
                     {( input.name === "TimeTaken")  && (
                       <Form.Control
+                      className="formPlaceHolder"
                       type={input.type}
                       name={`${input.name}`}
                       required={input.required}
@@ -77,8 +79,9 @@ action
                       readOnly
                       />
                     )}
-                    {((input.name !== "TimeTaken") && ((input.type === "text") || (input.type === "number")))  && (
+                    {((input.name !== "TimeTaken") && ((input.type === "text") || (input.type === "number") || (input.type === "email") ))  && (
                       <Form.Control
+                      className="formPlaceHolder"
                         type={input.type}
                         placeholder={input.placeholder}
                         name={`${input.name}`} // For example, "BackLink_0"
@@ -116,14 +119,14 @@ action
                     )}
                   </Form.Group>
                 ))}
-              </Row>
-            {/* ))} */}
+              {/* </Row> */}
             <button  type="submit" className="submit-btn">
               {btnText}
             </button>
+            {/* ))} */}
           </Form>
         </div>
-      </div>
+      
     </>
   );
 }

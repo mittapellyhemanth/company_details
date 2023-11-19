@@ -10,7 +10,7 @@ export default function GetSales() {
   let  Navlink = "/v2/sales/project/status"
   return (
     <>
-      <GetEmply url={URL} NavigateUrl={Navlink} type="WRITER"/>
+      <GetEmply url={URL} NavigateUrl={Navlink} type="SALES"/>
     </>
   );
 }

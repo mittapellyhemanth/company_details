@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
+import Attendance from "../Attendance";
 
 export default function WriterAttendStatus(){
     const [data, setData] = useState([]);
@@ -18,7 +19,8 @@ export default function WriterAttendStatus(){
 
   return (
     <>
-      <div className="project-status">
+    <Attendance data={data} />
+      {/* <div className="project-status">
         <div className="dumy-heading">
 
         <div className="dummy-attend-box">DATE</div>
@@ -42,7 +44,7 @@ export default function WriterAttendStatus(){
             </>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 

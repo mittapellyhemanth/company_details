@@ -3,7 +3,10 @@ import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
 import Filters from "../ReUseFunc.js/Filters";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
+import SeoStatus from "../../ProjectStatus/SeoStatus";
+
 
 export default function SeoEmployeeProject() {
   const [data, setData] = useState([]);
@@ -11,7 +14,7 @@ const {setProjectStatusData} = useContext(DetailsContext)
   const projectEmplyId = localStorage.getItem("projEmId");
   setProjectStatusData('')
   useEffect(() => {
-
+    // const projectName= localStorage.getItem('ProjectName')
     axios
       .get(`http://localhost:8080/employee/proj/status/${projectEmplyId}`)
       .then((res) => {
@@ -45,13 +48,9 @@ const {setProjectStatusData} = useContext(DetailsContext)
     e.preventDefault();
     fetchData();
   };
-const navigate = useNavigate('')
-  const handleClick =(i)=>{
-    console.log(i,'INDEX');
-    // const Data = data[]
-    setProjectStatusData(data[i])
-navigate('/v2/em/view/project/status')
-  }
+
+ 
+
   return (
     <>
       <div className="project-status">
@@ -76,43 +75,10 @@ navigate('/v2/em/view/project/status')
             <button type="submit">Fetch Data</button>
           </form>
         </div>
+<SeoStatus data={data} />
+       
 
-    
-
-        <div className="project-status-box">
-        <div className="data-box-heading">
-            <div className="heading-style">TITLE</div>
-            <div className="heading-style">BACKLINK</div>
-            <div className="heading-style">TIME TAKEN</div>
-            <div className="heading-style">VIEW</div>
-            {/* <div className="heading-style">KEYWORD</div>
-            <div className="heading-style">TYPE</div>
-            <div className="heading-style">STATUS</div>
-            <div className="heading-style">REMARK</div> */}
-          
-            {/* <div className="heading-style">SUBMIT DATE</div> */}
-          </div>
-          
-          {data.length === 0 ? (
-        <div  className="heading backlink-title">NO DATA FOUND</div>
-        )
-          :
-          data.map((projectStatus,i) => (
-            <>
-             <div className="data-box">
-                <span className="time-taken">{projectStatus.ProjectTitle}</span>
-                <span className="time-taken"> <a  href={projectStatus.BackLink}target="_blank">{projectStatus.BackLink}</a></span>
-
-                <span className="time-taken">{projectStatus.TimeTaken}</span>
-                <span className="time-taken view" onClick={()=>handleClick(i)}>View</span>
-              
-               
-              </div>
-
-             
-            </>
-          ))}
-        </div>
+     
       </div>
     </>
   );

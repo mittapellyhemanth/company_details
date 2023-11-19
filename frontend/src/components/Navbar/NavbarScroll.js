@@ -29,7 +29,7 @@ export default function NavbarScroll() {
   if (flag) {
     otherPageLinks = [{ to: "#", userName: Name }];
 
-    otherPageLinks.push({ to: "/", label: "Logout" });
+    otherPageLinks.push({ to: "/", label: "LOGOUT" });
 
     // otherPageLinks.push( { to: "/", label: "Login" })
   } else {

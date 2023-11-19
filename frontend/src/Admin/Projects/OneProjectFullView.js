@@ -1,38 +1,45 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import DetailsContext from "../../../Context/CreateContext";
 
-export default function ViewFullProjStatus() {
+export default function WriterFullProjStatus() {
   const { projectStatusData } = useContext(DetailsContext);
   console.log(projectStatusData);
-
+  let data = {}
+useEffect(()=>{
+ data = projectStatusData
+},[projectStatusData])
   return (
     <>
       <div className="project-status">
         <div className="project-view">
-          <h2>{projectStatusData.ProjectTitle}</h2>
-          <div className="project-details">
+          <h2>{data.ProjectTitle}</h2>
+          {/* <div className="project-details">
             <div className="project-content-box">
               <div className="project-matter">
                 <label><strong>SUBMIT DATE : </strong></label>
                 <div className="proj-date">{projectStatusData.Date}</div>
               </div>
+              <div className="project-matter">
+                <label><strong>CONTENT TITLE : </strong></label>
+                <div className="proj-date">{projectStatusData.ContentTitle}</div>
+              </div>
               <div className="project-keyword">
-                <label><strong>BACKLINK :</strong> </label>
+                <label><strong>CONTENT LINK :</strong> </label>
                 <div className="project-link proj-link">
                   <a
-                    href={projectStatusData.BackLink}
+                    href={projectStatusData.ContentLink}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {projectStatusData.BackLink}
+                    {projectStatusData.ContentLink}
                   </a>
                 </div>
               </div>
               
               <div className="project-keyword">
                
-                <label><strong>KEYWORD :</strong> </label>
-                <div className=" proj-keyword">{projectStatusData.Keyword}</div>
+                <label><strong>WORD COUNT :</strong> </label>
+                <div className=" proj-keyword">{projectStatusData.WordCount}</div>
               </div>
               <div className="project-matter">
                 
@@ -42,24 +49,19 @@ export default function ViewFullProjStatus() {
               <div className="project-matter">
                 
                 
-                <label><strong>STATUS :</strong> </label>
-                <div className="proj-status">{projectStatusData.Status}</div>
+                <label><strong>AI :</strong> </label>
+                <div className="proj-status">{projectStatusData.Ai}%</div>
               </div>
               <div className="project-keyword">
                
-                <label><strong>REMARK :</strong> </label>
-                <div className="proj-keyword">{projectStatusData.Remark}</div>
+                <label><strong>PLAGIARISM :</strong> </label>
+                <div className="proj-keyword">{projectStatusData.Plagiarism}%</div>
               </div>
-              <div className="project-matter">
-                
-                 
-                <label><strong>TIME TAKEN :</strong> </label>
-                <div className="proj-timetaken">{projectStatusData.TimeTaken}</div>
-              </div>
+              
              
             </div>
             
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
+import DesignerStatus from "../../ProjectStatus/DesignerStatus";
 
 export default function DesignerProjectStatus() {
   const [data, setData] = useState([]);
@@ -66,38 +67,7 @@ export default function DesignerProjectStatus() {
           </form>
         </div>
 
-        <div className="project-status-box">
-        <div className="heading">
-            <span className="backlink-title">IMAGE</span>
-            <span className="backlink-title">IMAGE TITLE</span>
-           
-            {/* <div className="timetaken-title">
-          DETAILS
-          </div> */}
-          </div>
-          
-          <div className="img-bg">
-            {data.length === 0 ? (
-              <div className="heading-designer">NO DATA FOUND</div>
-            ) : (
-              data.map((img) => (
-                <>
-                  <div className="data-box-img">
-                    <div>
-                      <img
-                        className="img"
-                        src={`http://localhost:8080/designer/images/${img.PostImage}`}
-                        alt="user-img"
-                      />
-                    </div>
-                    <div className="title">{img.ImgTitle}</div>
-                    {/* <span className="time-taken">{projectStatus.TimeTaken}</span> */}
-                  </div>
-                </>
-              ))
-            )}
-          </div>
-        </div>
+     <DesignerStatus data={data} />
       </div>
     </>
   );

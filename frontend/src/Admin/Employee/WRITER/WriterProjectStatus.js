@@ -3,6 +3,9 @@ import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
 import { useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
+import WriterStatus from "../../ProjectStatus/WriterStatus";
+
 
 export default function WriterProjectStatus() {
   const {setProjectStatusData} = useContext(DetailsContext)
@@ -38,17 +41,16 @@ export default function WriterProjectStatus() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchData();
-  };
-  const navigate = useNavigate('')
-  const handleClick =(i)=>{
-    console.log(i,'INDEX');
-   
-    setProjectStatusData(data[i])
-navigate('/v2/writer/view/project/status')
-  }
+
+
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  fetchData();
+};
+
+
+
   return (
     <>
       <div className="project-status">
@@ -73,35 +75,9 @@ navigate('/v2/writer/view/project/status')
             <button type="submit">Fetch Data</button>
           </form>
         </div>
-       
-        <div className="project-status-box">
-        <div className="data-box-heading">
-            <div className="writer-heading-style-title">CONTENT TITLE</div>
-            <div className="writer-heading-style-link">CONTENT LINK</div>
-            
-            <div className="writer-heading-style-view">VIEW</div>
-           
-          </div>
-          
-          {data.length === 0 ? (
-        <div  className="heading backlink-title">NO DATA FOUND</div>
-        )
-          :
-          data.map((projectStatus,i) => (
-            <>
-             <div className="data-box">
-                <span className="time-taken">{projectStatus.ContentTitle}</span>
-                <span className="time-taken"> <a  href={projectStatus.ContentLink}target="_blank">{projectStatus.ContentLink}</a></span>
-
-                <span className="time-taken view" onClick={()=>handleClick(i)}>View</span>
-              
-               
-              </div>
-
-             
-            </>
-          ))}
-        </div>
+        <WriterStatus data={data} />
+      
+      
       </div>
     </>
   );

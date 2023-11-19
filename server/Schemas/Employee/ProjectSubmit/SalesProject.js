@@ -5,6 +5,23 @@ const mongoose = require("mongoose");
 const SalesProjectSubmit =  mongoose.Schema({
   EmployeeId:{type:String},
   ProjectTitle:{ type: String },
+  
+  Location:{
+    type: String,
+    required: true,
+  },
+  Name:{
+    type: String,
+    required: true,
+  },
+  PhoneNum:{
+    type: Number,
+    required: true,
+  },
+  Email:{
+    type: String,
+    required: true,
+  },
   Source:{
     type: String,
     required: true,
@@ -13,15 +30,12 @@ const SalesProjectSubmit =  mongoose.Schema({
     type: String,
     required: true,
   },
-  Remark :{
+  Remark:{
     type : String,
     required: true,
     },
   
-    Status:{
-    type: String,
-    required: true,
-  },
+   
   Date:{type:String},
 
 },
