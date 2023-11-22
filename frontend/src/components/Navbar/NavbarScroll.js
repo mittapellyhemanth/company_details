@@ -34,9 +34,9 @@ export default function NavbarScroll() {
     // otherPageLinks.push( { to: "/", label: "Login" })
   } else {
     homePageLinks = [
-      { to: "/employee", label: "Employee" },
-      { to: "/Admin", label: "Admin" },
-      { to: "/", label: "superAdmin" },
+      { to: "/employee", label: "EMPLOYEE" },
+      { to: "/Admin", label: "ADMIN" },
+      { to: "/", label: "SUPER ADMIN" },
       // Add more links as needed
     ];
   }

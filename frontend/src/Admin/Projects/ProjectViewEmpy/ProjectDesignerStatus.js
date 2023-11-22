@@ -1,21 +1,48 @@
-import React, { useContext, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import DetailsContext from "../../../Context/CreateContext";
+import React, { useEffect, useState } from "react";
+
 import CryptoJS from 'crypto-js';
 
 import DesignerStatus from "../../ProjectStatus/DesignerStatus";
+import DesignerFilter from "../../../Filters/DesignerFilter";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function ProjectDesignerStatus(){
-  const{setProjectStatusData} = useContext(DetailsContext)
+  
 
-  const encryptedProjectData = localStorage.getItem('DesignerProject');
-  const decryptedProjectDatay = CryptoJS.AES.decrypt(encryptedProjectData, "DesignersecretKey").toString(CryptoJS.enc.Utf8);
-  const ProjectData = JSON.parse(decryptedProjectDatay);
-  // console.log(typeof(storedArray),storedArray,"ProjectData");
+  const [ProjectData,setProjectData] = useState([])
+  const EmplyId =localStorage.getItem('projEmId')
+  const decryptedProjectEmId = CryptoJS.AES.decrypt(EmplyId, "projectEmplyIdsecretKey").toString(CryptoJS.enc.Utf8);
+  const projectEmplyId = JSON.parse(decryptedProjectEmId);
+
+ const projeName =  localStorage.getItem('projName')
+ const decryptedProjectName = CryptoJS.AES.decrypt(projeName, "projectNamesecretKey").toString(CryptoJS.enc.Utf8);
+ const projectName = JSON.parse(decryptedProjectName);
+
+ useEffect(()=>{
+
+   axios
+   .get(`http://localhost:8080/admin/DesignerOneProject/${projectEmplyId}/${projectName}`)
+   .then((res) => {
+     // console.log(res,projectName, "seo res");
+     setProjectData(res.data.data)
+    console.log(res.data.data,"new seo form");
+   });
+ },[projectEmplyId,projectName])
+ 
+  const navigate = useNavigate('')
+  const onSearchGet=(searchData)=>{
+    const result = searchData
+    const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeeDesignerSearch").toString()
+    localStorage.setItem("DesignerSearch",encryptData)
+   navigate('/v2/das/designer/search/results')
+  
+  }
 return<>
  <div className="project-status">
-
+ <div className="filters">
+         <DesignerFilter searchGet = {onSearchGet} comesFrom='projDesigner' />
+        </div>
 <DesignerStatus data={ProjectData}/>
  </div>
 </>

@@ -6,7 +6,7 @@ export default function ContextAPI({ children }) {
   const [flag,setFlag] = useState(false)
   const [projectStatusData,setProjectStatusData] = useState({})
   const [result, setResult] = useState({})
-  const [err,setError] = useState('')
+  const [error,setError] = useState('')
   let [personLogin, setPersonLogin] = useState("");
  
   const[designation,setDesignation]=useState('')  
@@ -24,7 +24,7 @@ const[currentItems,setCurrentIteams] = useState([])
 
   const contextValue = {
     currentItems,setCurrentIteams, projectStatusData,setProjectStatusData,projectView,setProjectView,
-   ProjectData,setProjectData, flag,setFlag,err,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
+   ProjectData,setProjectData, flag,setFlag,error,setError,designationType , setDesignationType,empyId , setEmpyId,designation,setDesignation,getOneData,setGetOneData,
     result,
     setResult,
     personLogin,

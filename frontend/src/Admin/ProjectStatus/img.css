@@ -1,20 +1,60 @@
-.data-box-image{
-    margin-top: 5px;
-    width: 200px;
-    height: 50px;
-    border: 1px solid white;
-    background-color: white;
-   
-}
-.data-box-image>div{
-    color: black;
-}
-.data-box-image:hover{
-    cursor: pointer;
-}
-.popup{
-    width: fit-content;
-    height: fit-content;
-   
+.img-box{
+    width: 100%;
+    height: auto;
     margin: auto;
 }
+.col-container{
+    width: 350px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 25px;
+}
+.card-img{
+    width: 350px;
+    height: 400px;
+  overflow: hidden;
+}
+.img-size{
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    padding-top: 5px;
+}
+.tabel-view-img{
+    padding: 10px;
+    background-color: rgb(240, 182, 74);
+    border: 2px solid orange;
+    
+}
+.pagination{
+margin-bottom: 20px;
+}
+
+/* // one view */
+
+.col-container-view{
+    width: 100%;
+    height: fit-content;
+   margin-top: 85px;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+}
+.card-oneView{
+    width:450px;
+    height: fit-content;
+    padding-bottom: 25px;
+   
+}
+
+/* .img-size{
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    padding-top: 5px;
+} */

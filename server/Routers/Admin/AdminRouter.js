@@ -89,21 +89,43 @@ const getProjects = require("../../Controllers/Admin/getProject");
 AdminRouter.get("/getProject/:id", auth, getProjects.get);
 AdminRouter.get("/getProject/:addedAdminId/:projectName", getProjects.getOne);
 
-
-
-
-AdminRouter.get("/oneProject/:Name",async(req,res)=>{    // search
-  const name = req.params.Name.toUpperCase()
+const getProject = async(req,res,Model)=>{
+  const name = req.params.projectName.toUpperCase()
   try {
-    await AddProject.findOne({projectName:name}).then((result)=>{
+    let result;
+    if(req.params.id){
+
+       result =  await Model.findOne({projectName:name,employID:req.params.id})
+    }
+    else{
+      result =  await Model.findOne({projectName:name})
+    }
+    if(result){
       res.status(200).json({
         data:result
       })
       // console.log(result);
-    })
+    }
+    else{
+     
+      res.status(400).json({
+        err:"Enter Correct Name"
+      })
+    }
   } catch (error) {
-    
+    console.log('eeeee');
+    res.status(500).json({
+      err:"Internal Server Error"
+    })
   }
+}
+
+
+AdminRouter.get("/oneProject/:id/:projectName",async(req,res)=>{    // search
+  await getProject(req,res,AddProject)
+})
+AdminRouter.get("/oneProject/:projectName",async(req,res)=>{    // search
+  await getProject(req,res,AddProject)
 })
 //.....SEO PROJECTs STATUS 
 
@@ -174,16 +196,27 @@ AdminRouter.get("/getSeo/:id", auth, getEmployee.get);//getting with id
 // const getOneEmployee = require('../../Controllers/Admin/SEO/GetSeo')
 const getEmployeeSeo = require('../../Schemas/Admin/Employees/SEO')
 AdminRouter.get("/oneEmpy/getSeo/:Name",async(req,res)=>{
-  const name = req.params.Name.toUpperCase()
   try {
-    await getEmployeeSeo.findOne({Name:name}).then((result)=>{
+    const name = req.params.Name.toUpperCase()
+    // console.log(name);
+ const result =    await getEmployeeSeo.findOne({Name:name})
+    if(result){
       res.status(200).json({
         data:result
       })
-      console.log(result);
-    })
+      // console.log(result);
+    }
+    else{
+     
+      res.status(400).json({
+        err:"Enter Correct Name"
+      })
+    }
   } catch (error) {
-    
+    console.log('eeeee');
+    res.status(500).json({
+      err:"Internal Server Error"
+    })
   }
 });//getting only employee name
 const seoProjectDetails = require("../../Controllers/Admin/SEO/GetSeo");
@@ -209,15 +242,25 @@ const getEmployeeDesigner = require('../../Schemas/Admin/Employees/Designer')
 AdminRouter.get("/oneEmpy/getDesigner/:Name",async(req,res)=>{
   const name = req.params.Name.toUpperCase()
   try {
-    await getEmployeeDesigner.findOne({Name:name}).then((result)=>{
-      res.status(200).json({
-        data:result
+   const result = await getEmployeeDesigner.findOne({Name:name})
+      if(result){
+        res.status(200).json({
+          data:result
+        })
+        // console.log(result);
+      }
+      else{
+       
+        res.status(400).json({
+          err:"Enter Correct Name"
+        })
+      }
+    } catch (error) {
+      console.log('eeeee');
+      res.status(500).json({
+        err:"Internal Server Error"
       })
-      console.log(result);
-    })
-  } catch (error) {
-    
-  }
+    }
 });//getting only employee name
 
 
@@ -246,15 +289,25 @@ const getEmployeeWriter = require('../../Schemas/Admin/Employees/Writer')
 AdminRouter.get("/oneEmpy/getWriter/:Name",async(req,res)=>{
   const name = req.params.Name.toUpperCase()
   try {
-    await getEmployeeWriter.findOne({Name:name}).then((result)=>{
-      res.status(200).json({
-        data:result
-      })
-      console.log(result);
+   const result =  await getEmployeeWriter.findOne({Name:name})
+   if(result){
+    res.status(200).json({
+      data:result
     })
-  } catch (error) {
-    
+    // console.log(result);
   }
+  else{
+   
+    res.status(400).json({
+      err:"Enter Correct Name"
+    })
+  }
+} catch (error) {
+  console.log('eeeee');
+  res.status(500).json({
+    err:"Internal Server Error"
+  })
+}
 });//getting only employee name
 
 
@@ -272,15 +325,25 @@ AdminRouter.get("/sales/oneEmpy/getSales/:Name", async(req,res)=>{
   // console.log(req.params.Name,"params");
   const name = req.params.Name.toUpperCase()
   try {
-    await Sales.findOne({Name:name}).then((result)=>{
-      res.status(200).json({
-        data:result
+   const result = await Sales.findOne({Name:name})
+      if(result){
+        res.status(200).json({
+          data:result
+        })
+        // console.log(result);
+      }
+      else{
+       
+        res.status(400).json({
+          err:"Enter Correct Name"
+        })
+      }
+    } catch (error) {
+      console.log('eeeee');
+      res.status(500).json({
+        err:"Internal Server Error"
       })
-      console.log(result);
-    })
-  } catch (error) {
-    
-  }
+    }
 });//getting only employee name;
 //....................................................................................project view 
 const ProjectOneView = async(req,res,model)=>{

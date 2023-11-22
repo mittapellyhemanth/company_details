@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 
-export default function SalesStatus({data}){
-    //...........pagination
+export default function SalesStatus({data,comesFrom}){
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Number of items per page
-  const handlePagination = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+    //...........pagination
+    // useEffect(()=>{
 
- 
+    // },[data])
+    const itemsPerPage = 10; // Number of items per page
+    const handlePagination = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    };
+    
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    
+    let currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+//  console.log(currentItems,"curr");
   const navigate = useNavigate('')
   const handleClick = async(_id)=>{
     console.log(_id,'INDEX');
@@ -29,8 +33,12 @@ export default function SalesStatus({data}){
  localStorage.setItem("SalesOneProject", encryptSales);
  // setProjectStatusData(res.data.data)
 });
-  
-navigate('/v2/sales/view/Salesproject/status')
+  if(comesFrom){
+    navigate('/v2/das/Sales/one/view')
+  }else{
+
+    navigate('/v2/sales/view/project/status')
+  }
   }
  
     return<>

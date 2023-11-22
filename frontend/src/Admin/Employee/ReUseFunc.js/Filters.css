@@ -43,3 +43,7 @@ border: 1px solid black;
    
     text-align: center;
 }
+.error{
+   width: 100%;
+   height: fit-content;
+}

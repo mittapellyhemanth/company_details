@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function EMProjects() {
   const [data, setData] = useState([]);
-
+  const [back,setBack] = useState(false)
+  const [error,setError] = useState('')
   useEffect(() => {
     // const key = localStorage.getItem("token");
     // const headers = {
@@ -15,7 +16,7 @@ export default function EMProjects() {
     let id = localStorage.getItem("unique_id");
 
     // console.log(employeeId,"empyId");
-    console.log(id);
+    
     axios
       .get(`http://localhost:8080/employee/details/${id}`)
       .then((res) => {
@@ -30,8 +31,9 @@ export default function EMProjects() {
   }, []);
   const navigate = useNavigate();
 
-  const handleClick = (ProjectName) => {
+  const handleClick = (ProjectName,clientName) => {
     const designation = localStorage.getItem("designation");
+    localStorage.setItem("Client",clientName)
     localStorage.setItem("ProjectName", ProjectName);
     if (designation === "SEO") {
       return navigate("/v3/empy/project/post");
@@ -48,16 +50,22 @@ export default function EMProjects() {
   };
 
   const [name, setName] = useState("");
-  console.log(name);
+
+
   const handleSearch = async () => {
+    const id = localStorage.getItem("unique_id");
     await axios
-      .get(`http://localhost:8080/admin/oneProject/${name}`)
+      .get(`http://localhost:8080/admin/oneProject/${id}/${name}`)
       .then((result) => {
-        // console.log(result);
-        setData(result.data.data);
+        if (result.status === 200) {
+          setError("");
+
+          setData(result.data.data);
+          setBack(true);
+        }
       })
-      .catch((Err) => {
-        setData("");
+      .catch((err) => {
+        setError(err.response.data.err);
       });
   };
   //pagination 
@@ -70,7 +78,16 @@ export default function EMProjects() {
   
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+let currentItems = []
+// console.log(typeof(data)===object);
+ if(!back){
+   
+   currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+ }
+
+  
+
+  
  
 
 
@@ -78,6 +95,7 @@ export default function EMProjects() {
     <>
       <div className="bg-img">
         <div className="card-top">
+              {error && <span className="error"> {error}</span>}
           <div className="search">
             <input
               placeholder="ENTER  PROJECT  NAME"
@@ -109,7 +127,7 @@ export default function EMProjects() {
                     <Card.Body key="body">
                       <Card.Title
                         onClick={() => {
-                          handleClick(user.projectName);
+                          handleClick(user.projectName,user.clientName);
                         }}
                         key={user.projectName}
                       >
@@ -122,27 +140,29 @@ export default function EMProjects() {
                 </>
               );
             })
-          ) : (
-            <Card
-              style={{ width: "18rem", textAlign: "center" }}
-              key="card"
-              className="person-card"
-            >
-              {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-              <Card.Body key="body">
-                <Card.Title
-                  onClick={() => {
-                    handleClick(data.projectName);
-                  }}
-                  key={data.projectName}
-                >
-                  {data.projectName}
-                </Card.Title>
-
-                {/* <button className='person-card-view'   key={user.phoneNumber}>View</button> */}
-              </Card.Body>
-            </Card>
-          )}
+            ) 
+            :
+             (
+              <Card
+                style={{ width: "18rem", textAlign: "center" }}
+                key="card"
+                className="person-card"
+              >
+                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+                <Card.Body key="body">
+                  <Card.Title
+                    onClick={() => {
+                      handleClick(data.projectName,data.clientName);
+                    }}
+                    key={data.projectName}
+                  >
+                    {data.projectName}
+                  </Card.Title>
+  
+                  {/* <button className='person-card-view'   key={user.phoneNumber}>View</button> */}
+                </Card.Body>
+              </Card>
+            )}
         </div>
         <div className="pagination">
             <button className="prevbtn" onClick={() => handlePagination(currentPage - 1)} disabled={currentPage === 1}>

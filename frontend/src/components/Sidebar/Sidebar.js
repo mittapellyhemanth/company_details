@@ -25,7 +25,7 @@ export default function Sidebar({ children }) {
                         <Link
                           key={idx}
                           to={child.to}
-                          className="  link-text"
+                          className="link-text"
                           onClick={() => handleClick}
                         >
                           {child.label}

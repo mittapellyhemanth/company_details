@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
 const SeoProjectSubmit =new mongoose.Schema({
+  Name:{type:String},
     EmployeeId:{type:String},
     ProjectTitle:{ type: String },
+    clientName: { type: String, required: true },
     BackLink: { type: String},
     Keyword: { type: String },
     Type: { type: String },

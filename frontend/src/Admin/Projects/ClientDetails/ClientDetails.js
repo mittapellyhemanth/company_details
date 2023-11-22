@@ -3,16 +3,12 @@ import React, { useState, useEffect, useContext } from "react";
 import CryptoJS from "crypto-js";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
-import DetailsContext from "../../Context/CreateContext";
 
-export default function Projects(click) {
+
+export default function ClientDetails() {
   const [data, setData] = useState([]);
   const [back, setBack] = useState(false);
-  const { setProjectData, setDesignationType } = useContext(DetailsContext);
-  useEffect(() => {
-    setProjectData("");
-  }, [setProjectData]);
-
+  const[err,setError] = useState('')
   useEffect(() => {
     const key = localStorage.getItem("token");
     const headers = {
@@ -22,65 +18,14 @@ export default function Projects(click) {
     axios
       .get(`http://localhost:8080/admin/getProject/${AdminId}`, { headers })
       .then((res) => {
-        // console.log(res)
+       
         if (res.status === 200) {
+           
           setData(res.data.data);
         }
       })
-      .catch((err) => console.log(err));
+    //   .catch((err) => console.log(err));
   }, []);
-
-  const navigate = useNavigate();
-
-  const handleClick = async (projectName, designation, projectEmplyId) => {
-    const projEmId = CryptoJS.AES.encrypt(
-      JSON.stringify(projectEmplyId),
-      "projectEmplyIdsecretKey"
-    ).toString();
-    const projName = CryptoJS.AES.encrypt(
-      JSON.stringify(projectName),
-      "projectNamesecretKey"
-    ).toString();
-    localStorage.setItem("projEmId", projEmId);
-    localStorage.setItem("projName", projName);
-    setDesignationType(designation);
-
-    if (designation === "SALES") {
-    
-      navigate("/v2/das/sales/pro/view");
-    }
-
-    if (designation === "SEO") {
-      navigate("/v2/das/seo/pro/view");
-    }
-    if (designation === "WRITER") {
-     
-
-      navigate("/v2/das/writer/pro/view");
-    }
-    if (designation === "DESIGNER") {
-    
-
-      navigate("/v2/das/designer/pro/view");
-    }
-  };
-
-  const [name, setName] = useState("");
-  // console.log(name);
-  const handleSearch = async () => {
-    await axios
-      .get(`http://localhost:8080/admin/oneProject/${name}`)
-      .then((result) => {
-        // console.log(result);
-        setData(result.data.data);
-        setBack(true);
-      })
-      .catch((Err) => {
-        setData("");
-      });
-  };
-
-  // /getProject/:addedAdminId/:projectName
 
   //...........pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -101,10 +46,42 @@ export default function Projects(click) {
     window.history.back();
   };
 
+  const navigate = useNavigate("");
+  const handleClick = async (id) => {
+    const clientId = CryptoJS.AES.encrypt(
+      JSON.stringify(id),
+      "clientsecretKey"
+    ).toString();
+
+    localStorage.setItem("clientId", clientId);
+
+    navigate("/v2/das/client/one/view");
+  };
+
+  const [name, setName] = useState("");
+ ;
+  const handleSearch = async () => {
+  const result =   await axios
+      .get(`http://localhost:8080/client/search/${name}`)
+    
+     
+        if(result.status === 200){
+
+            setData(result.data.data);
+            setBack(true);
+         
+        }
+        else{
+            setError("result.data.err"); 
+        }
+
+  };
+
   return (
     <>
       <div className="bg-img">
         <div className="card-top">
+            {err&&<h3>{err}</h3>}
           <div className="search">
             <input
               placeholder="ENTER  PROJECT  NAME"
@@ -136,15 +113,11 @@ export default function Projects(click) {
                     <Card.Body key="body">
                       <Card.Title
                         onClick={() => {
-                          handleClick(
-                            user.projectName,
-                            user.empyDesignation,
-                            user.employID
-                          );
+                          handleClick(user._id);
                         }}
-                        key={user.projectName}
+                        key={user.clientName}
                       >
-                        {user.projectName}
+                        {user.clientName}
                       </Card.Title>
 
                       {/* <button className='person-card-view'   key={user.phoneNumber}>View</button> */}
@@ -163,15 +136,11 @@ export default function Projects(click) {
               <Card.Body key="body">
                 <Card.Title
                   onClick={() => {
-                    handleClick(
-                      data.projectName,
-                      data.empyDesignation,
-                      data.employID
-                    );
+                    handleClick(data._id);
                   }}
-                  key={data.projectName}
+                  key={data.clientName}
                 >
-                  {data.projectName}
+                  {data.clientName}
                 </Card.Title>
 
                 {/* <button className='person-card-view'   key={user.phoneNumber}>View</button> */}

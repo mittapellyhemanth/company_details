@@ -16,8 +16,9 @@ export default function ProjectsDashboard() {
   UserName()
 
   const sidebarData = [
-    {label:'PROJECTS', to:'/v2/das/proj',icon:<MdAdminPanelSettings/>},
-    {label:'ADD PROJECTS', to:'/v2/das/addProj',icon:<BsPersonFillAdd/>}
+    {label:'PROJECTS', to:'/v2/das/proj'},
+    {label:'ADD PROJECTS', to:'/v2/das/addProj'},
+    {label:'CLIENT DETAILS', to:'/v2/das/client/details'}
   ];
 
   return (

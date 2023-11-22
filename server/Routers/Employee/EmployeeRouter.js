@@ -100,7 +100,7 @@ EmployeeRouter.post("/leave", auth, async (req, res) => {
 EmployeeRouter.get("/details/:id", async (req, res) => {
   // console.log(req);
   try {
-    const data = await getProjects.find({ employID: req.params.id });
+    const data = await getProjects.find({ employID: req.params.id }).sort({ createdAt: -1 });;
     res.status(200).json(data);
     console.log(data, "data");
   } catch (error) {
@@ -115,7 +115,7 @@ EmployeeRouter.get("/details/:id", async (req, res) => {
 
 const SeoProjectSubmit = require("../../Schemas/Employee/ProjectSubmit/SeoProject");
 
-EmployeeRouter.post("/project/submit/:id/:projectName", async (req, res) => {
+EmployeeRouter.post("/project/submit/:id/:projectName/:Name/:clientName", async (req, res) => {
   console.log(req.body,req.params);
   try {
     const emplyId = req.params.id.toUpperCase();
@@ -128,6 +128,8 @@ EmployeeRouter.post("/project/submit/:id/:projectName", async (req, res) => {
 
         if (BackLink && Keyword && Type && Status && Remark && TimeTaken) {
           const project = new SeoProjectSubmit({
+            clientName:req.params.clientName,
+            Name:req.params.Name,
             EmployeeId: emplyId,
             ProjectTitle:req.params.projectName,
             ...req.body
@@ -150,7 +152,7 @@ EmployeeRouter.post("/project/submit/:id/:projectName", async (req, res) => {
 async function ProjectStatus(req,res,Model){
   try {
     // console.log(req.params.id, "id");
-    const data = await Model.find({ EmployeeId: req.params.id });
+    const data = await Model.find({ EmployeeId: req.params.id }).sort({ createdAt: -1 });
     console.log(data);
    return res.status(200).json({
       data: data,
@@ -167,7 +169,7 @@ EmployeeRouter.get("/proj/status/:id", async (req, res) => {
 async function ProjectDetailsStatus(req,res,Model){
   try {
     console.log(req.params, "id");
-    const data = await Model.find({ EmployeeId: req.params.id,ProjectTitle:req.params.projectName });
+    const data = await Model.find({ EmployeeId: req.params.id,ProjectTitle:req.params.projectName }).sort({ createdAt: -1 });
     console.log(data);
    return res.status(200).json({
       data: data,
@@ -185,7 +187,7 @@ EmployeeRouter.get("/proj/status/:id/:projectName", async (req, res) => {
 EmployeeRouter.get("/proj/view/:id", async (req, res) => {
   try {
     console.log(req.params.id, "id");
-    await SeoProjectSubmit.findOne({_id:req.params.id}).then((result)=>{
+    await SeoProjectSubmit.findOne({_id:req.params.id}).sort({ createdAt: -1 }).then((result)=>{
        res.status(200).json({
         data: result,
         message: "got the status",
@@ -200,9 +202,9 @@ EmployeeRouter.get("/proj/view/:id", async (req, res) => {
 //......................................Writer project post get  ......................
 
 const WriterProjectSubmit = require("../../Schemas/Employee/ProjectSubmit/WriterProject");
-EmployeeRouter.post("/writer/project/submit/:id/:projectName", async (req, res) => {
+EmployeeRouter.post("/writer/project/submit/:id/:projectName/:Name/:clientName", async (req, res) => {
   try {
-    console.log(req,"req");
+    console.log(req,"req",req.params.Name);
     const emplyId = req.params.id.toUpperCase();
 
     
@@ -213,6 +215,8 @@ EmployeeRouter.post("/writer/project/submit/:id/:projectName", async (req, res) 
 
         if (ContentTitle && ContentLink && Type && Plagiarism && Ai && WordCount) {
           const project = new WriterProjectSubmit({
+            clientName:req.params.clientName,
+            Name:req.params.Name,
             ProjectTitle:req.params.projectName,
             EmployeeId: emplyId,
             ...req.body
@@ -239,7 +243,7 @@ EmployeeRouter.get("/writer/proj/status/:id", async (req, res) => {
 //......................................Sales project post get  ......................
 
 const SalesProjectSubmit = require("../../Schemas/Employee/ProjectSubmit/SalesProject");
-EmployeeRouter.post("/sales/project/submit/:id/:projectName", async (req, res) => {
+EmployeeRouter.post("/sales/project/submit/:id/:projectName/:Name/:clientName", async (req, res) => {
   try {
     console.log(req,"req");
     const emplyId = req.params.id.toUpperCase();
@@ -248,8 +252,10 @@ EmployeeRouter.post("/sales/project/submit/:id/:projectName", async (req, res) =
 
         if (Location && Name && PhoneNum && Email && Enquiry && Remark   ) {
           const project = new SalesProjectSubmit({
+            Name:req.params.Name,
             ProjectTitle:req.params.projectName,
             EmployeeId: emplyId,
+            clientName:req.params.clientName,
             ...req.body
            
           });
@@ -299,7 +305,7 @@ EmployeeRouter.get("/previousbreakTime/:id/:date",async(req,res)=>{
    console.log(req.body);
     
      
-     await breakTime.find({EmployeeId:req.params.id,Date:req.params.date} ).then((result)=>{
+     await breakTime.find({EmployeeId:req.params.id,Date:req.params.date} ).sort({ createdAt: -1 }).then((result)=>{
 
        res.status(200).json(result);
      })

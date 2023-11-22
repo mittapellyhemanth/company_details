@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 
-export default function WriterStatus({data}){
+export default function WriterStatus({data,comesFrom}){
+
     const [currentPage, setCurrentPage] = useState(1);
  const itemsPerPage = 10; // Number of items per page
  const handlePagination = (pageNumber) => {
@@ -26,7 +27,12 @@ export default function WriterStatus({data}){
     localStorage.setItem("writerOneProject",encryptData)
    
   })
-navigate('/v2/writer/view/project/status')
+  if(comesFrom){
+    navigate('/v2/das/writer/one/view')
+  }else{
+
+    navigate('/v2/writer/view/project/status')
+  }
   }
     return<>
       <div className="project-status-box">

@@ -2,8 +2,10 @@
 const mongoose = require("mongoose");
 
 // ProjectName:{type:String},
-const designerProjectSubmit =  mongoose.Schema({
+const designerProjectSubmit =new  mongoose.Schema({
+  Name:{type:String},
   EmployeeId:{type:String},
+  clientName: { type: String, required: true },
   ProjectTitle:{ type: String },
   ImgTitle:{
     type: String,

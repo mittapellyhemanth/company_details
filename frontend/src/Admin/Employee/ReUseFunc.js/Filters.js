@@ -14,12 +14,7 @@ const Filters = () => {
           setData(result.data.data);
         }
       })
-      // if (!response.ok) {
-      //   throw new Error('Network response was not ok.');
-      // }
-    //  console.log(response,"resss");
-    //   const jsonData = await response.json();
- 
+     
     } catch (error) {
       console.error('Error fetching data:', error);
     }

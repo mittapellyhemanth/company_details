@@ -1,13 +1,46 @@
 
 import CryptoJS from "crypto-js";
 import WriterStatus from "../../ProjectStatus/WriterStatus";
+import WriterFilter from "../../../Filters/WriterFilter";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function ProjectWriterStatus(){
-  const encryptedProjectData = localStorage.getItem('writerProject');
-  const decryptedProjectDatay = CryptoJS.AES.decrypt(encryptedProjectData, "WritersecretKey").toString(CryptoJS.enc.Utf8);
-  const ProjectData = JSON.parse(decryptedProjectDatay);
+  const [ProjectData,setProjectData] = useState([])
+  const EmplyId =localStorage.getItem('projEmId')
+  const decryptedProjectEmId = CryptoJS.AES.decrypt(EmplyId, "projectEmplyIdsecretKey").toString(CryptoJS.enc.Utf8);
+  const projectEmplyId = JSON.parse(decryptedProjectEmId);
+
+ const projeName =  localStorage.getItem('projName')
+ const decryptedProjectName = CryptoJS.AES.decrypt(projeName, "projectNamesecretKey").toString(CryptoJS.enc.Utf8);
+ const projectName = JSON.parse(decryptedProjectName);
+
+ useEffect(()=>{
+
+   axios
+   .get(`http://localhost:8080/admin/WriterOneProject/${projectEmplyId}/${projectName}`)
+   .then((res) => {
+     // console.log(res,projectName, "seo res");
+     setProjectData(res.data.data)
+    console.log(res.data.data,"new seo form");
+   });
+ },[projectEmplyId,projectName])
+
+  const navigate = useNavigate('')
+ 
+  const onSearchGet=(searchData)=>{
+    const result = searchData
+    const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeewriterSearch").toString()
+    localStorage.setItem("writerSearch",encryptData)
+   navigate('/v2/das/writer/search/results')
+  
+  }
     return<>
      <div className="project-status">
-      
+     <div className="filters">
+         <WriterFilter searchGet = {onSearchGet} comesFrom='ProjectWriter' />
+        </div>
       <WriterStatus data={ProjectData}/>
      </div>
     </>

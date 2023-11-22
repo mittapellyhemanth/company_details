@@ -1,8 +1,9 @@
 .project-status {
   width: 100vw;
-
+height:auto;
   background-image: url("../image/backimg.webp");
-  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .project-status-box {
   margin-top: 60px;

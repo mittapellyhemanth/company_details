@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function GetEmply({ url, NavigateUrl, type }) {
   const [data, setData] = useState([]);
-const [back,setBack] = useState(false)
-
-  const { setError } = useContext(DetailsContext);
-  setError("");
+  const [back, setBack] = useState(false);
+  const [error, setError] = useState("");
+  // const {err, setError } = useContext(DetailsContext);
+  // setError("");
   useEffect(() => {
     const key = localStorage.getItem("token");
     const headers = {
@@ -26,7 +26,6 @@ const [back,setBack] = useState(false)
           console.log(res.data.data, "got");
 
           setData(res.data.data);
-          
         }
       })
       .catch((err) => console.log(err));
@@ -51,16 +50,27 @@ const [back,setBack] = useState(false)
     }
   };
   const [name, setName] = useState("");
-  console.log(name);
+
+
+
+
   const handleSearch = async () => {
-    console.log(type,"type");
+    if (!name) {
+      return setError("Enter Name");
+    }
     if (type === "SEO") {
-      console.log(name);
       await axios
         .get(`http://localhost:8080/admin/oneEmpy/getSeo/${name}`)
         .then((result) => {
-          setData(result.data.data);
-          setBack(true)
+          if (result.status === 200) {
+            setError("");
+
+            setData(result.data.data);
+            setBack(true);
+          }
+        })
+        .catch((err) => {
+          setError(err.response.data.err);
         });
     }
     if (type === "WRITER") {
@@ -68,8 +78,15 @@ const [back,setBack] = useState(false)
       await axios
         .get(`http://localhost:8080/admin/oneEmpy/getWriter/${name}`)
         .then((result) => {
-          setData(result.data.data);
-          setBack(true)
+          if (result.status === 200) {
+            setError("");
+
+            setData(result.data.data);
+            setBack(true);
+          }
+        })
+        .catch((err) => {
+          setError(err.response.data.err);
         });
     }
     if (type === "DESIGNER") {
@@ -77,8 +94,15 @@ const [back,setBack] = useState(false)
       await axios
         .get(`http://localhost:8080/admin/oneEmpy/getDesigner/${name}`)
         .then((result) => {
-          setData(result.data.data);
-          setBack(true)
+          if (result.status === 200) {
+            setError("");
+
+            setData(result.data.data);
+            setBack(true);
+          }
+        })
+        .catch((err) => {
+          setError(err.response.data.err);
         });
     }
     if (type === "SALES") {
@@ -86,29 +110,36 @@ const [back,setBack] = useState(false)
       await axios
         .get(`http://localhost:8080/admin/sales/oneEmpy/getSales/${name}`)
         .then((result) => {
-          setData(result.data.data);
-          setBack(true)
+          if (result.status === 200) {
+            setError("");
+
+            setData(result.data.data);
+            setBack(true);
+          }
+        })
+        .catch((err) => {
+          setError(err.response.data.err);
         });
     }
   };
 
   const [currentPage, setCurrentPage] = useState(1);
- const itemsPerPage = 12; // Number of items per page
- const handlePagination = (pageNumber) => {
-   setCurrentPage(pageNumber);
- };
- 
- const indexOfLastItem = currentPage * itemsPerPage;
- const indexOfFirstItem = indexOfLastItem - itemsPerPage;
- let   currentItems = []
- 
- if(!back){
-  currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-}
+  const itemsPerPage = 12; // Number of items per page
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-const handleGoBack = ()=>{
-  window.history.back();
-}
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  let currentItems = [];
+
+  if (!back) {
+    currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  }
+
+  const handleGoBack = () => {
+    window.history.back();
+  };
 
   return (
     <>
@@ -116,6 +147,7 @@ const handleGoBack = ()=>{
 
       <div className="bg-img">
         <div className="card-top">
+          {error && <span className="error"> {error}</span>}
           <div className="search">
             <input
               placeholder="ENTER  EMPLOYEE  NAME"
@@ -186,35 +218,42 @@ const handleGoBack = ()=>{
             </div>
           )}
         </div>
-        {back ?  <button className="button-back" onClick={handleGoBack}>CANCEL</button> :(
-       
-        <div className="pagination">
-            <button className="prevbtn" onClick={() => handlePagination(currentPage - 1)} disabled={currentPage === 1}>
+        {back ? (
+          <button className="button-back" onClick={handleGoBack}>
+            CANCEL
+          </button>
+        ) : (
+          <div className="pagination">
+            <button
+              className="prevbtn"
+              onClick={() => handlePagination(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
               PREVIOUS
             </button>
-            {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
-              <button
-              className="numbtn"
-                key={index}
-                onClick={() => handlePagination(index + 1)}
-                disabled={currentPage === index + 1}
-              >
-                {index + 1}
-              </button>
-            ))}
-            <button className="Nextbtn"
+            {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map(
+              (_, index) => (
+                <button
+                  className="numbtn"
+                  key={index}
+                  onClick={() => handlePagination(index + 1)}
+                  disabled={currentPage === index + 1}
+                >
+                  {index + 1}
+                </button>
+              )
+            )}
+            <button
+              className="Nextbtn"
               onClick={() => handlePagination(currentPage + 1)}
               disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
             >
               NEXT
             </button>
             {/* {back &&  <button onClick={handleGoBack}>CANCEL</button>} */}
-          
-          </div> 
+          </div>
         )}
       </div>
     </>
   );
 }
-
-

@@ -63,17 +63,15 @@ background-color:white;
 
 
 .link-text:hover {
- 
- 
-  
-  padding:10px 0px ;
+ padding:10px 0px ;
  background-color: #19191b;
  color: white;
- 
- 
-}
+ }
 
-
+/* .link-text:active{
+  background-color: #19191b;
+  color: white;
+}  */
 
 .personName{
 

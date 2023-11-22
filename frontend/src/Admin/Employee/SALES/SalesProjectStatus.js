@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DetailsContext from "../../../Context/CreateContext";
 import SalesStatus from "../../ProjectStatus/SalesStatus";
-
+import SalesFilter from "../../../Filters/SalesFilter";
+import CryptoJS from "crypto-js";
 export default function SalesProjectStatus() {
   const [data, setData] = useState([]);
   
@@ -28,37 +29,19 @@ const ProjectName = localStorage.getItem("ProjectName");
     }
   };
 
-  const handleDateFilter = async () => {
-    try {
-      const result = await axios.get(`http://localhost:8080/admin/search/date?fromDate=${fromDate}&toDate=${toDate}`);
-      setData(result.data.data);
-    } catch (error) {
-      console.error("Error fetching filtered data:", error);
-    }
-  };
+  const navigate = useNavigate('')
+  const onSearchGet=(searchData)=>{
+    const result = searchData
+    const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeeSalesSearch").toString()
+    localStorage.setItem("SalesSearch",encryptData)
+   navigate('/v2/sales/search/results')
+  
+  } 
   
   return (
     <div className="project-status">
-      <div className="filter">
-        <form onSubmit={handleDateFilter} className="form-filter">
-          <label>
-            From Date:
-            <input
-              type="date"
-              value={fromDate}
-              onChange={(e) => setFromDate(e.target.value)}
-            />
-          </label>
-          <label>
-            To Date:
-            <input
-              type="date"
-              value={toDate}
-              onChange={(e) => setToDate(e.target.value)}
-            />
-          </label>
-          <button type="submit">Fetch Data</button>
-        </form>
+      <div className="filters">
+      <SalesFilter searchGet = {onSearchGet} />
       </div>
 <SalesStatus data={data} />
     

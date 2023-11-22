@@ -3,7 +3,9 @@ import DetailsContext from "../../../Context/CreateContext";
 import axios from "axios";
 import "../../../Styles/ProjectStatus.css";
 import DesignerStatus from "../../ProjectStatus/DesignerStatus";
-
+import { useNavigate } from "react-router-dom";
+import DesignerFilter from "../../../Filters/DesignerFilter";
+import CryptoJS from "crypto-js";
 export default function DesignerProjectStatus() {
   const [data, setData] = useState([]);
 
@@ -17,54 +19,20 @@ export default function DesignerProjectStatus() {
       });
   }, [projectEmplyId]);
 
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-
-  const fetchData = async () => {
-    try {
-      await axios
-        .get(
-          `http://localhost:8080/admin/designer/search/date?fromDate=${fromDate}&toDate=${toDate}`
-        )
-        .then((result) => {
-          if (result.status === 200) {
-            // console.log(result);
-            setData(result.data.data);
-          }
-        });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchData();
-  };
-
+ 
+  const navigate = useNavigate('')
+  const onSearchGet=(searchData)=>{
+    const result = searchData
+    const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeeDesignerSearch").toString()
+    localStorage.setItem("DesignerSearch",encryptData)
+   navigate('/v2/design/search/results')
+  
+  }
   return (
     <>
       <div className="project-status">
-        <div className="filter">
-          <form onSubmit={handleSubmit} className="form-filter">
-            <label>
-              From Date:
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
-            </label>
-            <label>
-              To Date:
-              <input
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
-            </label>
-            <button type="submit">Fetch Data</button>
-          </form>
+        <div className="filters">
+         <DesignerFilter  searchGet = {onSearchGet} />
         </div>
 
      <DesignerStatus data={data} />

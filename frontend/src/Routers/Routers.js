@@ -67,6 +67,19 @@ import SalesProjectStatus from "../Admin/Employee/SALES/SalesProjectStatus";
 import WriterProjectStatusView from "../Admin/FullProjectStatusView/WriterProjectStatusView";
 import SeoProjectStatusView from "../Admin/FullProjectStatusView/SeoProjectStatusView";
 import SalesProjectStatusView from "../Admin/FullProjectStatusView/SalesProjectStatusView";
+import WriterFilter from "../Filters/WriterFilter";
+import WriterSearchView from "../Admin/Employee/WRITER/WriterSearchView";
+import SeoSearchView from "../Admin/Employee/SEO/SeoSearchView";
+import DesignerSearchView from "../Admin/Employee/DESIGNER/DesignerSearchView";
+import SalesSearchView from "../Admin/Employee/SALES/SalesSearchView";
+import DesignerProjectStatusView from "../Admin/FullProjectStatusView/DesignerProjectStatusView";
+import ProSEOSearchView from "../Admin/Projects/ProjectEmpySerachView.js/ProjSEOSearchView";
+import ProjWriterSearchView from "../Admin/Projects/ProjectEmpySerachView.js/ProjWriterSearchView";
+import ProjSalesSearchView from "../Admin/Projects/ProjectEmpySerachView.js/ProjSalesSearchView";
+import ProjDesignerSearchView from "../Admin/Projects/ProjectEmpySerachView.js/ProjDesignerSearchView";
+import ClientDetails from "../Admin/Projects/ClientDetails/ClientDetails";
+import ClientOneView from "../Admin/Projects/ClientDetails/ClientOneView";
+
 
 
 export default function Router() {
@@ -77,6 +90,8 @@ export default function Router() {
       <Route path="/Logout" element={<Logout />} />
       <Route path="/Admin" element={<AdminLogin />} />
       <Route path="/Employee" element={<EmployeeLogin />} />
+        
+        
       {/* ...............................Super Admin Routers ......................*/}
       <Route path="/v1/" element={<SuperAdminHome />}>
         <Route index element={<Admins />} /> {/* by default we get this route*/}
@@ -96,14 +111,34 @@ export default function Router() {
         <Route path="proj" element={<Projects />} />
 
         <Route path="seo/pro/view" element={<ProjectSeoStatus />} />
-       
+        <Route path="seo/one/view" element={<SeoProjectStatusView />} />
+        <Route path="seo/search/results" element={  <ProSEOSearchView />}/>
+        <Route path="seo-your-search-route" element={  <ProSEOSearchView />}/>
+
         <Route path="sales/pro/view" element={<ProjectSalesStatus />} />
-        
+        <Route path="Sales/one/view" element={<SalesProjectStatusView />} />
+        <Route path="Sales/search/results" element={  <ProjSalesSearchView />}/>
+        <Route path="Sales-your-search-route" element={  <ProjSalesSearchView />}/>
+
+
+
         <Route path="writer/pro/view" element={<ProjectWriterStatus />} />
+        <Route path="writer/one/view" element={<WriterProjectStatusView />} />
+        <Route path="writer/search/results" element={  <ProjWriterSearchView />}/>
+        <Route path="writer-your-search-route" element={  <ProjWriterSearchView />}/>
+
+
         
         <Route path="designer/pro/view" element={<ProjectDesignerStatus />} />
+        <Route path="designer/one/view" element={<DesignerProjectStatusView />} />
+        <Route path="designer/search/results" element={  <ProjDesignerSearchView />}/>
+        <Route path="designer-your-search-route" element={  <ProjDesignerSearchView />}/>
+
+
         <Route path="addProj" element={<AddProjects />} />
 
+        <Route path="client/details" element={<ClientDetails />} />
+        <Route path="client/one/view" element={<ClientOneView />} />
        
       </Route>
       {/*........................  SEO Routers............................. */}
@@ -115,6 +150,8 @@ export default function Router() {
         <Route path="attendance/status" element={<SeoAttendance />} />
         <Route path="attendance/seo/status" element={<AttendanceStatus />} />
         <Route path="view/project/status" element={<SeoProjectStatusView />} />
+        <Route path="your-search-route" element={  <SeoSearchView />}/>
+      <Route path="search/results" element={  <SeoSearchView />}/>
       </Route>
       {/*........................  WRITER Routers............................. */}
       <Route path="/v2/writer" element={<WriterDashboard />} />
@@ -126,6 +163,8 @@ export default function Router() {
         <Route path="project/status" element={<WriterProjectStatus/>} />
         <Route path="view/project/status" element={<WriterProjectStatusView />} />
         <Route path="wr/addempy" element={<AddWriter />} />
+      <Route path="your-search-route" element={  <WriterSearchView />}/>
+      <Route path="search/results" element={  <WriterSearchView />}/>
       </Route>
 
       {/*........................  DESIGNER Routers............................. */}
@@ -133,20 +172,25 @@ export default function Router() {
         <Route index element={<GetDesigner />} />{" "}
         <Route index path="de/empy" element={<GetDesigner />} />
         <Route path="project/status" element={<DesignerProjectStatus/>} />
+        <Route path="view/project/status" element={<DesignerProjectStatusView/>} />
         <Route path="de/addempy" element={<AddDesigner />} />
         <Route path="de/attend" element={<AttendanceDesigner />} />
         <Route path="attendance/designer/status" element={<DesignerAttendanceStatus />} />
+        <Route path="your-search-route" element={  <DesignerSearchView />}/>
+      <Route path="search/results" element={  <DesignerSearchView />}/>
       </Route>
 
       {/*........................  SALES Routers............................. */}
-      <Route path="/v2/sales" element={<Sales />} >
+      <Route path="/v2/sales/" element={<Sales />} >
       <Route index element={<GetSales />} />{" "}
         <Route index path="sa/empy" element={<GetSales />} />
         <Route path="sa/addempy" element={<AddSales />} />
          <Route path="sa/attend" element={<SalesAttendance />} />
         <Route path="project/status" element={<SalesProjectStatus/>} />
         <Route path="attendance/sales/status" element={<SalesAttendanceStatus />} />
-        <Route path="view/Salesproject/status" element={<SalesProjectStatusView />} />  
+        <Route path="view/project/status" element={<SalesProjectStatusView />} />  
+        <Route path="your-search-route" element={<SalesSearchView />}/>
+      <Route path="search/results" element={<SalesSearchView />}/>
       </Route>
       
 

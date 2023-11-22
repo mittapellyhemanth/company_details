@@ -2,8 +2,10 @@
 const mongoose = require("mongoose");
 
 // ProjectName:{type:String},
-const SalesProjectSubmit =  mongoose.Schema({
+const SalesProjectSubmit =new  mongoose.Schema({
+  Name:{type:String},
   EmployeeId:{type:String},
+  clientName: { type: String },
   ProjectTitle:{ type: String },
   
   Location:{

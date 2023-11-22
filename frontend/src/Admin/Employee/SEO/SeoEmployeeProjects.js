@@ -6,6 +6,7 @@ import Filters from "../ReUseFunc.js/Filters";
 import { json, useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import SeoStatus from "../../ProjectStatus/SeoStatus";
+import SeoFilter from "../../../Filters/SeoFilter";
 
 
 export default function SeoEmployeeProject() {
@@ -24,57 +25,24 @@ const {setProjectStatusData} = useContext(DetailsContext)
   }, [projectEmplyId]);
 
  
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-
-  const fetchData = async () => {
-    try {
-      await axios
-        .get(
-          `http://localhost:8080/admin/search/date?fromDate=${fromDate}&toDate=${toDate}`
-        )
-        .then((result) => {
-          if (result.status === 200) {
-            // console.log(result);
-            setData(result.data.data);
-          }
-        });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchData();
-  };
+  
 
  
-
+  const navigate = useNavigate('')
+  const onSearchGet=(searchData)=>{
+    const result = searchData
+    const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeeSeoSearch").toString()
+    localStorage.setItem("seoSearch",encryptData)
+   navigate('/v2/em/search/results')
+  
+  }
   return (
     <>
       <div className="project-status">
-        <div className="filter">
-          <form onSubmit={handleSubmit} className="form-filter">
-            <label>
-              From Date:
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
-            </label>
-            <label>
-              To Date:
-              <input
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
-            </label>
-            <button type="submit">Fetch Data</button>
-          </form>
-        </div>
+        
+      <div className="filters">
+         <SeoFilter searchGet = {onSearchGet} />
+        </div>  
 <SeoStatus data={data} />
        
 

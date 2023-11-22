@@ -1,30 +1,29 @@
-import React,{ useState} from "react";
-
+import React, { useState } from "react";
 
 import axios from "axios";
 
 import ProjectSendForm from "../ProjectSendForm";
-import '../ProjectSendForm.css'
+import "../ProjectSendForm.css";
 export default function SalesProjectSubmit() {
-  const[sucess,setSucess] = useState('');
+  const [sucess, setSucess] = useState("");
   const date = localStorage.getItem("date");
 
-    const [formData, setFormData] = useState(
-        // [...Array(4)].map(() => ({
-        
-       {
-        Location:"",
-        Name:"",
-        PhoneNum:"",
-        Email:"",
-        Source: "",
-          Enquiry: "",
-          Remark: "",
-          
-          Date:date
-        }
-        // }))
-      );
+  const [formData, setFormData] = useState(
+    // [...Array(4)].map(() => ({
+
+    {
+      Location: "",
+      Name: "",
+      PhoneNum: "",
+      Email: "",
+      Source: "",
+      Enquiry: "",
+      Remark: "",
+
+      Date: date,
+    }
+    // }))
+  );
   const inputs = [
     {
       type: "text",
@@ -62,8 +61,6 @@ export default function SalesProjectSubmit() {
       name: "Enquiry",
       required: false,
     },
-    
-    
 
     {
       type: "text",
@@ -71,39 +68,42 @@ export default function SalesProjectSubmit() {
       name: "Remark",
       required: false,
     },
-   
   ];
   //
-  const employID = localStorage.getItem('unique_id')
-  const projectName= localStorage.getItem('ProjectName')
- const URL = `http://localhost:8080/employee/sales/project/submit/${employID}/${projectName}`
+  const employID = localStorage.getItem("unique_id");
+  const projectName = localStorage.getItem("ProjectName");
+  const Name = localStorage.getItem("userName");
+  const client = localStorage.getItem('Client')
+  const URL = `http://localhost:8080/employee/sales/project/submit/${employID}/${projectName}/${Name}/${client}`;
 
-  const onSubmit = async (formData,url,TIMETAKEN) => {
-    console.log(formData,url);
+  const onSubmit = async (formData, url, TIMETAKEN) => {
+    console.log(formData, url);
     const dataToSend = { ...formData, TimeTaken: TIMETAKEN };
-  try {
-    // Send POST request to the server
-    await axios.post(url,dataToSend);
-    setSucess('Posted Successfully');
-    setFormData("")
+    try {
+      // Send POST request to the server
+      await axios.post(url, dataToSend);
+      setSucess("Posted Successfully");
+      setFormData("");
 
-    // console.log("Projects successfully added:", response.data);
-   
-  } catch (error) {
-    console.error("Error adding projects:", error);
-    
-  }
-
+      // console.log("Projects successfully added:", response.data);
+    } catch (error) {
+      console.error("Error adding projects:", error);
+    }
   };
 
-  
   return (
     <>
-     {sucess ? <div className="sucess">{sucess}</div>:"" }
-    
+      {sucess ? <div className="sucess">{sucess}</div> : ""}
 
-   <ProjectSendForm Method="POST" inputs={inputs} onSubmit={onSubmit} btnText='submit' urlData={URL} formData={formData} setFormData={setFormData} />
-     
+      <ProjectSendForm
+        Method="POST"
+        inputs={inputs}
+        onSubmit={onSubmit}
+        btnText="submit"
+        urlData={URL}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </>
   );
 }

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 
-export default function SeoStatus({ data }) {
+export default function SeoStatus({ data,comesFrom }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
   const handlePagination = (pageNumber) => {
@@ -30,7 +30,13 @@ export default function SeoStatus({ data }) {
         localStorage.setItem("SeoOneProject", encryptSeo);
         // setProjectStatusData(res.data.data)
       });
-    navigate("/v2/em/view/project/status");
+      if(comesFrom){
+        navigate("/v2/das/seo/one/view");
+      }
+      else{
+
+        navigate("/v2/em/view/project/status");
+      }
   };
   return (
     <>

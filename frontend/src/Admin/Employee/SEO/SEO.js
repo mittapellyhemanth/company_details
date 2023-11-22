@@ -8,7 +8,7 @@ import DetailsContext from "../../../Context/CreateContext";
 
 export default function SEO(){
  
-  const{ setDesignationType} = useContext(DetailsContext);
+  const{err, setDesignationType} = useContext(DetailsContext);
     
   useEffect(()=>{
     setDesignationType('seo')

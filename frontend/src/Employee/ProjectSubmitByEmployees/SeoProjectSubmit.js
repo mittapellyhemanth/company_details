@@ -1,27 +1,27 @@
-import React,{ useState} from "react";
-
+import React, { useState } from "react";
 
 import axios from "axios";
 
 import ProjectSendForm from "../ProjectSendForm";
 
 export default function SeoProjectSubmit() {
-  const[sucess,setSucess] = useState('');
+  const [sucess, setSucess] = useState("");
   const date = localStorage.getItem("date");
 
-    const [formData, setFormData] = useState(
-        // [...Array(4)].map(() => ({
-        
-       {   BackLink: "",
-          Keyword: "",
-          Type: "",
-          Status: "",
-          Remark: "",
-          TimeTaken: "",
-        Date:date
-        }
-        // }))
-      );
+  const [formData, setFormData] = useState(
+    // [...Array(4)].map(() => ({
+
+    {
+      BackLink: "",
+      Keyword: "",
+      Type: "",
+      Status: "",
+      Remark: "",
+      TimeTaken: "",
+      Date: date,
+    }
+    // }))
+  );
   const inputs = [
     {
       type: "text",
@@ -35,26 +35,42 @@ export default function SeoProjectSubmit() {
       name: "Keyword",
       required: false,
     },
+
     {
       type: "select",
-
       name: "Type",
+      title:"TYPE",
       required: false,
       options: [
-        { value: "num1", name: "Type" },
-        { value: "num2", name: "Type" },
-        { value: "num3", name: "Type" },
+        { value: "ARTICLE SUBMISSION", name: "Type" },
+        { value: "BLOG SUBMISSION", name: "Type" },
+        { value: "IMAGE SUBMISSION", name: "Type" },
+        { value: "PDF SUBMISSION", name: "Type" },
+        { value: "PPT SUBMISSION", name: "Type" },
+        { value: "INFOGRAPHIC SUBMISSION", name: "Type" },
+        { value: "QUESTIONS & ANSWER SUBMISSION", name: "Type" },
+        { value: "QUORA SUBMISSION", name: "Type" },
+        { value: "PODCAST SUBMISSION", name: "Type" },
+        { value: "VIDEO SUBMISSION", name: "Type" },
+        { value: "CLASSIFIED ADS", name: "Type" },
+        { value: "SOCIAL BOOKMARKEING", name: "Type" },
+        { value: "GMB POSTING", name: "Type" },
+        { value: "GUEST POSTING", name: "Type" },
+        { value: "PROFILE CREATION", name: "Type" },
+        { value: "BLOG COMMENTING", name: "Type" },
+        { value: "PRESS RELEASE", name: "Type" },
+        { value: "BUSINESS LISTING", name: "Type" },
       ],
     },
     {
       type: "select",
-
-      name: "Status",
+       name: "Status",
+       title:"STATUS",
       required: false,
       options: [
-        { value: "num1", name: "Status" },
-        { value: "num2", name: "Status" },
-        { value: "num3", name: "Status" },
+        { value: "ACTIVE", name: "Status" },
+        { value: "PENDING", name: "Status" },
+        { value: "LOST", name: "Status" },
       ],
     },
 
@@ -64,41 +80,46 @@ export default function SeoProjectSubmit() {
       name: "Remark",
       required: false,
     },
-    {
-      type: "text",
-      placeholder: "TIME TAKEN",
-      name: "TimeTaken",
-      required: false,
-    },
+    // {
+    //   type: "text",
+    //   placeholder: "TIME TAKEN",
+    //   name: "TimeTaken",
+    //   required: false,
+    // },
   ];
   //
-  const employID = localStorage.getItem('unique_id')
-  const projectName= localStorage.getItem('ProjectName')
- const URL = `http://localhost:8080/employee/project/submit/${employID}/${projectName}`
+  const employID = localStorage.getItem("unique_id");
+  const projectName = localStorage.getItem("ProjectName");
+  const Name = localStorage.getItem("userName");
+  const client = localStorage.getItem('Client')
+  const URL = `http://localhost:8080/employee/project/submit/${employID}/${projectName}/${Name}/${client}`;
 
-  const onSubmit = async (formData,url,TIMETAKEN) => {
-    console.log(formData,url);
+  const onSubmit = async (formData, url, TIMETAKEN) => {
+    console.log(formData, url);
     const dataToSend = { ...formData, TimeTaken: TIMETAKEN };
-  try {
-    // Send POST request to the server
-    await axios.post(url,dataToSend);
-    setSucess('Posted Successfully');
-    
+    try {
+      // Send POST request to the server
+      await axios.post(url, dataToSend);
+      setSucess("Posted Successfully");
 
-    // console.log("Projects successfully added:", response.data);
-   
-  } catch (error) {
-    console.error("Error adding projects:", error);
-    
-  }
-
+      // console.log("Projects successfully added:", response.data);
+    } catch (error) {
+      console.error("Error adding projects:", error);
+    }
   };
 
-  
   return (
     <>
-     {sucess ? <div className="sucess">{sucess}</div>:"" }
-   <ProjectSendForm Method="POST" inputs={inputs} onSubmit={onSubmit} btnText='submit' urlData={URL} formData={formData} setFormData={setFormData} />
+      {sucess ? <div className="sucess">{sucess}</div> : ""}
+      <ProjectSendForm
+        Method="POST"
+        inputs={inputs}
+        onSubmit={onSubmit}
+        btnText="submit"
+        urlData={URL}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </>
   );
 }
