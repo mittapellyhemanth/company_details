@@ -124,6 +124,36 @@ router.get("/proj/view/:id", async (req, res) => {
   }
 });
 
+
+//select one designer and delete
+
+router.delete('/delete/one/:id',async (req,res)=>{
+  try {
+    const id = req.params.id
+   const result = await PostModel.findByIdAndDelete({_id:id})
+   if(result){
+    res.status(200).json({
+      mess:"deleted sucessfully"
+    })
+   }else{
+    res.status(400).json({
+      err:"unable to delete"
+    })
+   }
+} catch (error) {
+  // console.log(error);
+    res.status(500).json({
+      mess:"internal server Error"
+    })
+  }
+})
+
+
+
+
+
+
+
 // router to download and display images
 router.get("/images/:filename", (req, res) => {
   const filename = req.params.filename.toString();

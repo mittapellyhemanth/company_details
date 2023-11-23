@@ -35,11 +35,11 @@ useEffect(()=>{
       //  localStorage.setItem("personLogin", "SuperAdmin");
         localStorage.setItem("Id", res.data.user._id);
         localStorage.setItem("designation", res.data.user.designation);
-        // console.log(res.data.user._id,'idddddddddd');
+     
       
         return res;    // returning response 
       } catch (error) {
-        // console.error(error);
+    
         return error; 
       }
 };
@@ -47,19 +47,18 @@ useEffect(()=>{
   const navigation = async (formData , url, serverURL) => {
     try {
       let res = await LoginCheck(formData , serverURL)
-      console.log(res,'res',formData);
+  
       if (res.status === 200) {
-        // console.log(res);
+        
         navigate(url);
       }
       if (res.status === 400) {
-        console.log(res,"400");
-        console.log(res.message);
+       
         setError(res.message);
       }
       
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -83,7 +82,7 @@ hours = hours ? hours : 12;
 let date = year+"-"+month+"-"+day
 let LoginTime = hours + ":" + minutes + ":" + seconds + " " + ampm
     if (personLogin === "SuperAdmin") {
-      // console.log(formData,'form');
+    
       
       let url = "/v1"
       let serverURL = "http://localhost:8080/superAdmin/login"

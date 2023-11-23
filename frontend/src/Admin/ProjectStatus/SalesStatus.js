@@ -19,10 +19,10 @@ export default function SalesStatus({data,comesFrom}){
     
     let currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-//  console.log(currentItems,"curr");
+
   const navigate = useNavigate('')
   const handleClick = async(_id)=>{
-    console.log(_id,'INDEX');
+  
  await axios.get(`http://localhost:8080/admin/salesProject/One/View/${_id}`).then((res)=>{
     
  const result = res.data.data;

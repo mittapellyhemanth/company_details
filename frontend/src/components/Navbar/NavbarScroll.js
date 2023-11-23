@@ -21,7 +21,6 @@ export default function NavbarScroll() {
   setPersonName(Name);
  
 
-  // console.log(personName, "p");
 
   let otherPageLinks = [];
   let homePageLinks = [];
@@ -48,17 +47,7 @@ export default function NavbarScroll() {
   const handleLogout = async () => {
     setFlag(false);
     await Logout()
-//     localStorage.removeItem("unique_id");
-//     localStorage.removeItem("LogTime");
-//  localStorage.removeItem("date");
-//    localStorage.removeItem("breakTaken")
-try {
-  localStorage.clear();
-  console.log('Local storage cleared successfully.');
-} catch (error) {
-  console.error('Error clearing local storage:', error);
-}
-  };
+ };
   return (
     <>
       <div className="sticky">

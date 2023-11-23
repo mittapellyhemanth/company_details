@@ -79,6 +79,7 @@ import ProjSalesSearchView from "../Admin/Projects/ProjectEmpySerachView.js/Proj
 import ProjDesignerSearchView from "../Admin/Projects/ProjectEmpySerachView.js/ProjDesignerSearchView";
 import ClientDetails from "../Admin/Projects/ClientDetails/ClientDetails";
 import ClientOneView from "../Admin/Projects/ClientDetails/ClientOneView";
+import SeoLeaveTracker from "../Admin/Employee/SEO/SeoLeaveTracker";
 
 
 
@@ -147,7 +148,10 @@ export default function Router() {
         <Route index path="empy" element={<Employee />} />
         <Route path="project/status" element={<SeoEmployeeProject/>} />
         <Route path="addempy" element={<AddSEO />} />
-        <Route path="attendance/status" element={<SeoAttendance />} />
+        <Route path="attendance/status" element={<SeoAttendance />} /> 
+        <Route path="leave/track" element={<SeoLeaveTracker />} /> 
+
+
         <Route path="attendance/seo/status" element={<AttendanceStatus />} />
         <Route path="view/project/status" element={<SeoProjectStatusView />} />
         <Route path="your-search-route" element={  <SeoSearchView />}/>

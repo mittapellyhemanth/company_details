@@ -18,7 +18,7 @@ export default function SeoStatus({ data,comesFrom }) {
 
   const navigate = useNavigate("");
   const handleClick = async (_id) => {
-    // console.log(i,'INDEX');
+    
     await axios
       .get(`http://localhost:8080/admin/seoProject/One/View/${_id}`)
       .then((res) => {

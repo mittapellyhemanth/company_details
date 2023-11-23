@@ -1,75 +1,52 @@
-import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import "../../Styles/Sidebar.css";
-// {label:'Add Admin', to:'/addAdmin',icon: <BsPersonFillAdd />}
+
 export default function Sidebar({ children }) {
-  // console.log(children);
-  const [isActive, setIsactive] = useState(false);
-  const handleClick = () => {
-    setIsactive(true);
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState('');
+
+  useEffect(() => {
+    // Check if there's any previously active link in localStorage
+    const savedActiveLink = localStorage.getItem('activeLink');
+    if (savedActiveLink) {
+      setActiveLink(savedActiveLink);
+    }
+  }, []); // Run this effect only once on component mount
+
+  const handleSetActiveLink = (label) => {
+    setActiveLink(label);
+    // Save the active link to localStorage
+    localStorage.setItem('activeLink', label);
   };
+
   return (
-    <>
-      <div className="side-container">
-        <div className="  sider">
-          <div className=" ">
-            <div>
-              <div>
-                <ul
-                  className="nav  flex-column  align-items-sm-start"
-                  id="menu"
-                >
-                  <div className="nav-div">
-                    <li className="nav-item">
-                      {children.map((child, idx) => (
-                        <Link
-                          key={idx}
-                          to={child.to}
-                          className="link-text"
-                          onClick={() => handleClick}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </li>
-                  </div>
-                </ul>
+    <div className="side-container">
+      <div className="sider">
+        <div>
+          <div>
+            <ul className="nav flex-column align-items-sm-start" id="menu">
+              <div className="nav-div">
+                {children.map((child, idx) => (
+                  <li key={idx} className="nav-item">
+                    <Link
+                      to={child.to}
+                      className={`link-text ${activeLink === child.label ? 'active' : ''}`}
+                      onClick={() => handleSetActiveLink(child.label)}
+                    >
+                      {child.label}
+                    </Link>
+                  </li>
+                ))}
               </div>
-            </div>
+            </ul>
           </div>
         </div>
-
-        <div className="side-content">
-          <Outlet />
-        </div>
       </div>
-    </>
+
+      <div className="side-content">
+        <Outlet />
+      </div>
+    </div>
   );
 }
-
-// <Link
-// to="admins"
-// style={{ color: "#2289FF" }}
-// className="nav-link align-middle px-0"
-// >
-// <i className="fs-4 bi-house">
-//   <MdAdminPanelSettings />
-// </i>
-// <span className="ms-1 d-none d-sm-inline mx-2">
-//   Admins
-// </span>
-// </Link>
-// </li>
-// <li className="nav-item">
-// <Link
-// to="addAdmin"
-// style={{ color: "#AAAAAA" }}
-// className="nav-link align-middle px-0"
-// >
-// <i className="fs-4 bi-house">
-//   <BsPersonFillAdd />
-// </i>
-// <span className="ms-1 d-none d-sm-inline mx-2">
-//   Add Admin
-// </span>
-// </Link>

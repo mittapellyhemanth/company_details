@@ -16,28 +16,32 @@ export default function EmpDashboard(){
      sidebarData = [
         {label:'EMPLOYEE', to:'/v2/em/empy'},
         {label:'ADD EMPLOYEE', to:'/v2/em/addempy'},
-        {label:'ATTENDANCE', to:'/v2/em/attendance/status'}
+        {label:'ATTENDANCE', to:'/v2/em/attendance/status'},
+        {label:'LEAVE TRACKER', to:'/v2/em/leave/track'}
       ];
  }
    if (designationType === "designer") {
     sidebarData = [
         {label:'EMPLOYEE', to:'/v2/design/de/empy'},
         {label:'ADD EMPLOYEE', to:'/v2/design/de/addempy'},
-        {label:'ATTENDANCE', to:'/v2/design/de/attend'}
+        {label:'ATTENDANCE', to:'/v2/design/de/attend'},
+        {label:'LEAVE TRACKER', to:'/v2/em/leave/track'}
       ];
   }
    if (designationType === "writer") {
     sidebarData = [
       {label:'EMPLOYEE', to:'/v2/writer/wr/empy'},
       {label:'ADD EMPLOYEE', to:'/v2/writer/wr/addempy'},
-      {label:'ATTENDANCE', to:'/v2/writer/wr/attend'}
+      {label:'ATTENDANCE', to:'/v2/writer/wr/attend'},
+      {label:'LEAVE TRACKER', to:'/v2/em/leave/track'}
     ];
   } 
   if (designationType === "sales") {
     sidebarData = [
         {label:'EMPLOYEE', to:'/v2/sales/sa/empy'},
         {label:'ADD EMPLOYEE', to:'/v2/sales/sa/addempy'},
-        {label:'ATTENDANCE', to:'/v2/sales/sa/attend'}
+        {label:'ATTENDANCE', to:'/v2/sales/sa/attend'},
+        {label:'LEAVE TRACKER', to:'/v2/em/leave/track'}
       ];
   }
   
