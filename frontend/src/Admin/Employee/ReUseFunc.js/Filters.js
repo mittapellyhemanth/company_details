@@ -1,22 +1,25 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import './Filters.css'
+import axios from "axios";
+import React, { useState } from "react";
+import "./Filters.css";
 const Filters = () => {
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
     try {
-        await axios.get(`http://localhost:8080/admin/search/date?fromDate=${fromDate}&toDate=${toDate}`).then((result)=>{
-        if(result.status === 200){
-          // console.log(result);
-          setData(result.data.data);
-        }
-      })
-     
+      await axios
+        .get(
+          `http://localhost:8080/admin/search/date?fromDate=${fromDate}&toDate=${toDate}`
+        )
+        .then((result) => {
+          if (result.status === 200) {
+            // console.log(result);
+            setData(result.data.data);
+          }
+        });
     } catch (error) {
-      console.error('Error fetching data:', error);
+      // console.error('Error fetching data:', error);
     }
   };
 
@@ -26,9 +29,8 @@ const Filters = () => {
   };
 
   return (
-    <div className='filter'>
-      
-      <form onSubmit={handleSubmit} className='form-filter'>
+    <div className="filter">
+      <form onSubmit={handleSubmit} className="form-filter">
         <label>
           From Date:
           <input
@@ -47,7 +49,6 @@ const Filters = () => {
         </label>
         <button type="submit">Fetch Data</button>
       </form>
-      
     </div>
   );
 };

@@ -8,8 +8,6 @@ import ReUseForm from "../../../Forms/ReUseForm";
 import "./addEmpy.css";
 
 export default function UseAddEmployee({ url }) {
-  console.log(url,'url');
-
   const { err, setError } = useContext(DetailsContext);
   const inputs = [
     {
@@ -18,7 +16,12 @@ export default function UseAddEmployee({ url }) {
       name: "Name",
       required: true,
     },
-    { type: "date", placeholder: "START DATE", name: "StartDate", required: true },
+    {
+      type: "date",
+      placeholder: "START DATE",
+      name: "StartDate",
+      required: true,
+    },
     {
       type: "number",
       placeholder: "PHONE NUMBER ",
@@ -52,17 +55,15 @@ export default function UseAddEmployee({ url }) {
   //   const { name, value } = e.target;
   //   setFormData({ ...formData, [name]: value });
   // };
- 
-  const onSubmit = async ({...formData}) => {
-    console.log(formData);
+
+  const onSubmit = async ({ ...formData }) => {
     const key = localStorage.getItem("token");
     const headers = {
-      Authorization: key
+      Authorization: key,
     };
-// console.log({...formData},{headers},url.Url);
+    // console.log({...formData},{headers},url.Url);
     try {
-      await axios.post(url.Url, { ...formData },{headers}).then((res) => {
-        console.log(url.Url,res,'res');
+      await axios.post(url.Url, { ...formData }, { headers }).then((res) => {
         if (res.data.error) {
           setError(res.data.error);
         } else {
@@ -78,19 +79,16 @@ export default function UseAddEmployee({ url }) {
   return (
     <>
       <div className="form-addpro">
-  <div className="form-addpro-box">
-    <div>
-
-      {err && <h6 className="error">{err}</h6>}
-  </div>
-  <ReUseForm
-    Method="POST"
-    inputs={inputs}
-    onSubmit={onSubmit}
-    btnText="Submit"
-    />
-</div>
-  </div>
+        <div className="form-addpro-box">
+          <div>{err && <h6 className="error">{err}</h6>}</div>
+          <ReUseForm
+            Method="POST"
+            inputs={inputs}
+            onSubmit={onSubmit}
+            btnText="Submit"
+          />
+        </div>
+      </div>
     </>
   );
 }

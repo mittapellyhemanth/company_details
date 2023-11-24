@@ -2,14 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import GetLeaves from "../ReUseFunc.js/GetLeaves";
 
-export default function SeoLeaveTracker() {
+export default function DesignerLeaveTracker() {
   const [data, setData] = useState([]);
   localStorage.removeItem("getLeave");
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await axios.get(
-          "http://localhost:8080/leave/seo/getleaves"
+          "http://localhost:8080/leave/designer/getleaves"
         );
         setData(result.data.data);
         // console.log(result.data.data);
@@ -20,6 +20,8 @@ export default function SeoLeaveTracker() {
 
     fetchData();
   }, []);
+
+  // console.log(data, "data");
 
   return (
     <div className="project-status">

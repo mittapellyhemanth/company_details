@@ -14,7 +14,7 @@ export default function Application() {
   // console.log(url,'url');
 
   const { err, setError } = useContext(DetailsContext);
-  const [leaveSubmit, setLeaveSubmit] = useState(4);
+
   let inputs = [];
 
  
@@ -22,27 +22,27 @@ export default function Application() {
     {
       type: "text",
       placeholder: "REASON FOR ABSENT",
-      name: "Name",
-      required: false,
+      name: "ReasonForAbsent",
+      required: true,
     },
 
     {
       type: "date",
       placeholder: "CHOOSE DATE",
-      name: "phoneNumber",
-      required: false,
+      name: "ChooseDate",
+      required: true,
     },
     {
       type: "number",
       placeholder: "NO OF DAYS",
       name: "NoOfDays",
-      required: false,
+      required: true,
     },
     {
       type: "number",
       placeholder: "TOTAL NO. OF DAYS",
-      name: "TotalNoOfDays",
-      required: false,
+      name: "TotalNumOfDays",
+      required: true,
     }
   );
   const navigate = useNavigate();
@@ -57,19 +57,43 @@ export default function Application() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const key = localStorage.getItem("token");
+    const emplyId = localStorage.getItem("unique_id")
+    const type = localStorage.getItem("designation")
+    const Name = localStorage.getItem("userName")
     const headers = {
       Authorization: key,
     };
     console.log({...formData},{headers});
+
+    const PostData = async(URL,formData)=>{
+     await axios.post(URL, { ...formData }).then((res) => {
+          if (res.data.error) {
+            setError(res.data.error);
+          } else {
+            setError("Posted sucessfully");
+              }
+         });
+      }
+
     try {
-      await axios.post("http://localhost:8080/employee/leave", { headers }, { ...formData }).then((res) => {
-        if (res.data.error) {
-          setError(res.data.error);
-        } else {
-          return navigate("");
-        }
-        // console.log(res);
-      });
+      if(type === 'SEO'){
+        const URL =`http://localhost:8080/leave/seo/${emplyId}/${Name}`
+        PostData(URL,formData)
+      }
+      if(type === 'SALES'){
+        const URL =`http://localhost:8080/leave/sales/${emplyId}/${Name}`
+        PostData(URL,formData)
+      }
+      if(type === 'DESIGNER'){
+        const URL =`http://localhost:8080/leave/designer/${emplyId}/${Name}`
+        PostData(URL,formData)
+      
+      }
+      if(type === 'WRITER'){
+        const URL =`http://localhost:8080/leave/writer/${emplyId}/${Name}`
+        PostData(URL,formData)
+      
+      }
     } catch (error) {
       // console.log(error,'error');
     }
@@ -78,13 +102,13 @@ export default function Application() {
   return (
     <>
       <div className="form-addpro">
-        {/* <div className="orm-addpro-box"> */}
+      
           <div>{err && <h6 className="error">{err}</h6>}</div>
 
           <Form  method="POST" onSubmit={onSubmit} encType="multipart/form-data">
             
               
-          {/* {[...Array(4)].map((_, index) => ( */}
+          
  <Row className="mb-3">
  {inputs.map((input) => (
 
@@ -101,7 +125,7 @@ export default function Application() {
 
  ))}
 </Row>
-          {/* ))} */}
+          
            
           
 
@@ -110,7 +134,7 @@ export default function Application() {
             </button>
           </Form>
         </div>
-      {/* </div> */}
+   
     </>
   );
 }

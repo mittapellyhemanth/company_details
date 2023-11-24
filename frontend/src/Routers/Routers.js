@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Deatils from "../components/CompanyDetails/Details";
+
 import AdminLogin from "../Admin/AdminLogin";
 import EmployeeLogin from "../Employee/EmployeeLogin";
 import SuperAdminHome from "../SuperAdmin/SuperHome";
@@ -37,8 +37,7 @@ import AttendanceWriter from "../Admin/Employee/WRITER/AttendanceWriter";
 import EmpysDashboard from "../Employee/Dashboard/EmpysDashboard";
 import AdminView from "../SuperAdmin/AdminView";
 import EditAdmin from "../SuperAdmin/EditAdmin";
-import ProjSend from "../Employee/ProjSend";
-import ProjectView from "../Admin/Projects/ProjectView";
+
 import SeoEmployeeProject from "../Admin/Employee/SEO/SeoEmployeeProjects";
 import SeoProjectSubmit from "../Employee/ProjectSubmitByEmployees/SeoProjectSubmit";
 import WriterProjectSubmit from "../Employee/ProjectSubmitByEmployees/WriterProjectSubmit";
@@ -67,7 +66,7 @@ import SalesProjectStatus from "../Admin/Employee/SALES/SalesProjectStatus";
 import WriterProjectStatusView from "../Admin/FullProjectStatusView/WriterProjectStatusView";
 import SeoProjectStatusView from "../Admin/FullProjectStatusView/SeoProjectStatusView";
 import SalesProjectStatusView from "../Admin/FullProjectStatusView/SalesProjectStatusView";
-import WriterFilter from "../Filters/WriterFilter";
+
 import WriterSearchView from "../Admin/Employee/WRITER/WriterSearchView";
 import SeoSearchView from "../Admin/Employee/SEO/SeoSearchView";
 import DesignerSearchView from "../Admin/Employee/DESIGNER/DesignerSearchView";
@@ -80,6 +79,13 @@ import ProjDesignerSearchView from "../Admin/Projects/ProjectEmpySerachView.js/P
 import ClientDetails from "../Admin/Projects/ClientDetails/ClientDetails";
 import ClientOneView from "../Admin/Projects/ClientDetails/ClientOneView";
 import SeoLeaveTracker from "../Admin/Employee/SEO/SeoLeaveTracker";
+import SeoViewLeave from "../Admin/Employee/SEO/SeoViewLeave";
+import SalesLeaveTracker from "../Admin/Employee/SALES/SalesLeaveTracker";
+import SalesViewLeave from "../Admin/Employee/SALES/SalesViewLeave";
+import DesignerLeaveTracker from "../Admin/Employee/DESIGNER/DesignerLeaveTracker";
+import DesignerViewLeave from "../Admin/Employee/DESIGNER/DesignerViewLeave";
+import WriterLeaveTracker from "../Admin/Employee/WRITER/WriterLeaveTracker";
+import WriterViewLeave from "../Admin/Employee/WRITER/WriterViewLeave";
 
 
 
@@ -150,7 +156,7 @@ export default function Router() {
         <Route path="addempy" element={<AddSEO />} />
         <Route path="attendance/status" element={<SeoAttendance />} /> 
         <Route path="leave/track" element={<SeoLeaveTracker />} /> 
-
+        <Route path="view/leave" element={<SeoViewLeave />} /> 
 
         <Route path="attendance/seo/status" element={<AttendanceStatus />} />
         <Route path="view/project/status" element={<SeoProjectStatusView />} />
@@ -166,6 +172,10 @@ export default function Router() {
         <Route path="attend/status" element={<WriterAttendStatus />} />
         <Route path="project/status" element={<WriterProjectStatus/>} />
         <Route path="view/project/status" element={<WriterProjectStatusView />} />
+        <Route path="leave/track" element={<WriterLeaveTracker />} /> 
+        <Route path="view/leave" element={<WriterViewLeave />} /> 
+
+
         <Route path="wr/addempy" element={<AddWriter />} />
       <Route path="your-search-route" element={  <WriterSearchView />}/>
       <Route path="search/results" element={  <WriterSearchView />}/>
@@ -179,7 +189,11 @@ export default function Router() {
         <Route path="view/project/status" element={<DesignerProjectStatusView/>} />
         <Route path="de/addempy" element={<AddDesigner />} />
         <Route path="de/attend" element={<AttendanceDesigner />} />
-        <Route path="attendance/designer/status" element={<DesignerAttendanceStatus />} />
+ <Route path="attendance/designer/status" element={<DesignerAttendanceStatus />} />
+
+ <Route path="leave/track" element={<DesignerLeaveTracker />} /> 
+        <Route path="view/leave" element={<DesignerViewLeave />} /> 
+
         <Route path="your-search-route" element={  <DesignerSearchView />}/>
       <Route path="search/results" element={  <DesignerSearchView />}/>
       </Route>
@@ -192,6 +206,10 @@ export default function Router() {
          <Route path="sa/attend" element={<SalesAttendance />} />
         <Route path="project/status" element={<SalesProjectStatus/>} />
         <Route path="attendance/sales/status" element={<SalesAttendanceStatus />} />
+        <Route path="leave/track" element={<SalesLeaveTracker />} /> 
+        <Route path="view/leave" element={<SalesViewLeave />} /> 
+
+
         <Route path="view/project/status" element={<SalesProjectStatusView />} />  
         <Route path="your-search-route" element={<SalesSearchView />}/>
       <Route path="search/results" element={<SalesSearchView />}/>

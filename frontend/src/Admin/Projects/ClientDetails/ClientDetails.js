@@ -4,11 +4,10 @@ import CryptoJS from "crypto-js";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 
-
 export default function ClientDetails() {
   const [data, setData] = useState([]);
   const [back, setBack] = useState(false);
-  const[err,setError] = useState('')
+  const [err, setError] = useState("");
   useEffect(() => {
     const key = localStorage.getItem("token");
     const headers = {
@@ -18,12 +17,10 @@ export default function ClientDetails() {
     axios
       .get(`http://localhost:8080/admin/getProject/${AdminId}`, { headers })
       .then((res) => {
-       
         if (res.status === 200) {
-           
           setData(res.data.data);
         }
-      })
+      });
     //   .catch((err) => console.log(err));
   }, []);
 
@@ -59,29 +56,24 @@ export default function ClientDetails() {
   };
 
   const [name, setName] = useState("");
- ;
   const handleSearch = async () => {
-  const result =   await axios
-      .get(`http://localhost:8080/client/search/${name}`)
-    
-     
-        if(result.status === 200){
+    const result = await axios.get(
+      `http://localhost:8080/client/search/${name}`
+    );
 
-            setData(result.data.data);
-            setBack(true);
-         
-        }
-        else{
-            setError("result.data.err"); 
-        }
-
+    if (result.status === 200) {
+      setData(result.data.data);
+      setBack(true);
+    } else {
+      setError("result.data.err");
+    }
   };
 
   return (
     <>
       <div className="bg-img">
         <div className="card-top">
-            {err&&<h3>{err}</h3>}
+          {err && <h3>{err}</h3>}
           <div className="search">
             <input
               placeholder="ENTER  PROJECT  NAME"

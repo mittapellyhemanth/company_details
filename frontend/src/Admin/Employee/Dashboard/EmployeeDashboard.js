@@ -11,7 +11,7 @@ import UserName from "../../../Functions/UserName";
 
 export default function EmployeeDashboard() {
   UserName();
-console.log('employee');
+
   return (
     <>
       <div className="Nav">

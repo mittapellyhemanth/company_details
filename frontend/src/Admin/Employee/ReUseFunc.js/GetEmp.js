@@ -21,14 +21,14 @@ export default function GetEmply({ url, NavigateUrl, type }) {
     axios
       .get(url, { headers })
       .then((res) => {
-        // console.log(res)
+        console.log(url)
         if (res.status === 200) {
           console.log(res.data.data, "got");
 
           setData(res.data.data);
         }
       })
-      .catch((err) => console.log(err));
+      // .catch((err) => console.log(err));
   }, [url]);
 
   const navigate = useNavigate();
@@ -37,89 +37,54 @@ export default function GetEmply({ url, NavigateUrl, type }) {
 
     // console.log(designation);
     if (designation === "SEO") {
-      return navigate(NavigateUrl);
+       navigate(NavigateUrl);
     }
     if (designation === "WRITER") {
-      return navigate(NavigateUrl);
+       navigate(NavigateUrl);
     }
     if (designation === "DESIGNER") {
-      return navigate(NavigateUrl);
+       navigate(NavigateUrl);
     }
     if (designation === "SALES") {
-      return navigate(NavigateUrl);
+       navigate(NavigateUrl);
     }
   };
   const [name, setName] = useState("");
 
+  const SEARCH = async (URL) => {
+   await axios.get(URL)
+      .then((result) => {
+        if (result.status === 200) {
+          setError("");
 
+          setData(result.data.data);
+          setBack(true);
+        }
+      })
+      .catch((err) => {
+        setError(err.response.data.err);
+      });
+  };
 
-
-  const handleSearch = async () => {
+  const handleSearch = async (type) => {
     if (!name) {
       return setError("Enter Name");
     }
     if (type === "SEO") {
-      await axios
-        .get(`http://localhost:8080/admin/oneEmpy/getSeo/${name}`)
-        .then((result) => {
-          if (result.status === 200) {
-            setError("");
-
-            setData(result.data.data);
-            setBack(true);
-          }
-        })
-        .catch((err) => {
-          setError(err.response.data.err);
-        });
+      const URL = `http://localhost:8080/admin/oneEmpy/getSeo/${name}`;
+      SEARCH(URL);
     }
     if (type === "WRITER") {
-      console.log(name);
-      await axios
-        .get(`http://localhost:8080/admin/oneEmpy/getWriter/${name}`)
-        .then((result) => {
-          if (result.status === 200) {
-            setError("");
-
-            setData(result.data.data);
-            setBack(true);
-          }
-        })
-        .catch((err) => {
-          setError(err.response.data.err);
-        });
+      const URL = `http://localhost:8080/admin/oneEmpy/getWriter/${name}`;
+      return  SEARCH(URL);
     }
     if (type === "DESIGNER") {
-      console.log(name);
-      await axios
-        .get(`http://localhost:8080/admin/oneEmpy/getDesigner/${name}`)
-        .then((result) => {
-          if (result.status === 200) {
-            setError("");
-
-            setData(result.data.data);
-            setBack(true);
-          }
-        })
-        .catch((err) => {
-          setError(err.response.data.err);
-        });
+      const URL = `http://localhost:8080/admin/oneEmpy/getDesigner/${name}`;
+      return SEARCH(URL);
     }
     if (type === "SALES") {
-      console.log(name);
-      await axios
-        .get(`http://localhost:8080/admin/sales/oneEmpy/getSales/${name}`)
-        .then((result) => {
-          if (result.status === 200) {
-            setError("");
-
-            setData(result.data.data);
-            setBack(true);
-          }
-        })
-        .catch((err) => {
-          setError(err.response.data.err);
-        });
+      const URL = `http://localhost:8080/admin/sales/oneEmpy/getSales/${name}`;
+      return SEARCH(URL);
     }
   };
 

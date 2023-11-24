@@ -21,9 +21,9 @@ export default function ProjectWriterStatus(){
    axios
    .get(`http://localhost:8080/admin/WriterOneProject/${projectEmplyId}/${projectName}`)
    .then((res) => {
-     // console.log(res,projectName, "seo res");
+     
      setProjectData(res.data.data)
-    console.log(res.data.data,"new seo form");
+   
    });
  },[projectEmplyId,projectName])
 

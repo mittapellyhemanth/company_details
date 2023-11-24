@@ -14,7 +14,6 @@ export default function DesignerProjectStatusView() {
     "employeeDesignerProjects"
   ).toString(CryptoJS.enc.Utf8);
   const projectStatusData = JSON.parse(decryptedProjectDatay);
-  console.log(projectStatusData);
 
   const handleGoBack = () => {
     window.history.back(); // Go back to the previous page
@@ -22,12 +21,10 @@ export default function DesignerProjectStatusView() {
   return (
     <>
       <div className="project-status">
-     
-
         <Row className="g-3 img-box">
           <div className="col-container-view">
             <Card className="card-oneView">
-          <h2>{projectStatusData.ProjectTitle}</h2>
+              <h2>{projectStatusData.ProjectTitle}</h2>
               <Card.Img
                 variant="top"
                 className="one-img-size"
@@ -35,34 +32,47 @@ export default function DesignerProjectStatusView() {
                 alt="user-img"
               />
               <Card.Body>
-              <div className="project-matter">
-                <label><strong>EMPLOYEE NAME : </strong></label>
-                <div className="proj-date">{projectStatusData.Name}</div>
-              </div>
-              <div className="project-matter">
-                
-                <label><strong>IMAGE TITLE : </strong></label>
-                <div className="proj-date">{projectStatusData.ImgTitle}</div>
-              </div>
                 <div className="project-matter">
-                <label><strong>SUBMIT DATE : </strong></label>
-                <div className="proj-date">{projectStatusData.Date}</div>
-              </div>
-              <div className="project-matter">
-                
-                <label><strong>TYPE :</strong> </label>
-                <div className="proj-type">{projectStatusData.Type}</div>
-              </div>
-              <div className="project-keyword">
-               
-               <label><strong>DESCRIPTION :</strong> </label>
-               <div className=" proj-keyword">{projectStatusData.description}</div>
-             </div>
-           
-              <div className="project-matter">
-                <label><strong>CLIENT NAME : </strong></label>
-                <div className="proj-date">{projectStatusData.clientName}</div>
-              </div>
+                  <label>
+                    <strong>EMPLOYEE NAME : </strong>
+                  </label>
+                  <div className="proj-date">{projectStatusData.Name}</div>
+                </div>
+                <div className="project-matter">
+                  <label>
+                    <strong>IMAGE TITLE : </strong>
+                  </label>
+                  <div className="proj-date">{projectStatusData.ImgTitle}</div>
+                </div>
+                <div className="project-matter">
+                  <label>
+                    <strong>SUBMIT DATE : </strong>
+                  </label>
+                  <div className="proj-date">{projectStatusData.Date}</div>
+                </div>
+                <div className="project-matter">
+                  <label>
+                    <strong>TYPE :</strong>{" "}
+                  </label>
+                  <div className="proj-type">{projectStatusData.Type}</div>
+                </div>
+                <div className="project-keyword">
+                  <label>
+                    <strong>DESCRIPTION :</strong>{" "}
+                  </label>
+                  <div className=" proj-keyword">
+                    {projectStatusData.description}
+                  </div>
+                </div>
+
+                <div className="project-matter">
+                  <label>
+                    <strong>CLIENT NAME : </strong>
+                  </label>
+                  <div className="proj-date">
+                    {projectStatusData.clientName}
+                  </div>
+                </div>
               </Card.Body>
               <button className="cancel-btn" onClick={handleGoBack}>
                 CANCEL
@@ -71,7 +81,6 @@ export default function DesignerProjectStatusView() {
           </div>
         </Row>
       </div>
-     
     </>
   );
 }

@@ -24,9 +24,9 @@ export default function ProjectDesignerStatus(){
    axios
    .get(`http://localhost:8080/admin/DesignerOneProject/${projectEmplyId}/${projectName}`)
    .then((res) => {
-     // console.log(res,projectName, "seo res");
+    
      setProjectData(res.data.data)
-    console.log(res.data.data,"new seo form");
+  
    });
  },[projectEmplyId,projectName])
  

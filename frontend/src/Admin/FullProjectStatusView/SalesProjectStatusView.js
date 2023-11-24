@@ -1,17 +1,18 @@
 import CryptoJS from "crypto-js";
 import { useNavigate } from "react-router-dom";
 
-
 export default function SalesProjectStatusView() {
-
-  const encryptedProjectData = localStorage.getItem('SalesOneProject');
-  const decryptedProjectDatay = CryptoJS.AES.decrypt(encryptedProjectData, "employeeSalesProjects").toString(CryptoJS.enc.Utf8);
+  const encryptedProjectData = localStorage.getItem("SalesOneProject");
+  const decryptedProjectDatay = CryptoJS.AES.decrypt(
+    encryptedProjectData,
+    "employeeSalesProjects"
+  ).toString(CryptoJS.enc.Utf8);
   const projectStatusData = JSON.parse(decryptedProjectDatay);
   console.log(projectStatusData);
-  const navigate = useNavigate("")
+  const navigate = useNavigate("");
 
- const handleGoBack = () => {
-  window.history.back();  // Go back to the previous page
+  const handleGoBack = () => {
+    window.history.back(); // Go back to the previous page
   };
   return (
     <>
@@ -66,9 +67,7 @@ export default function SalesProjectStatusView() {
                 <label>
                   <strong>ENQUIRY :</strong>{" "}
                 </label>
-                <div className="proj-keyword">
-                  {projectStatusData.Enquiry}
-                </div>
+                <div className="proj-keyword">{projectStatusData.Enquiry}</div>
               </div>
               <div className="project-keyword">
                 <label>
@@ -77,7 +76,9 @@ export default function SalesProjectStatusView() {
                 <div className="proj-keyword">{projectStatusData.Remark}</div>
               </div>
             </div>
-             <button className="cancel-btn" onClick={handleGoBack}>CANCEL</button>
+            <button className="cancel-btn" onClick={handleGoBack}>
+              CANCEL
+            </button>
           </div>
         </div>
       </div>

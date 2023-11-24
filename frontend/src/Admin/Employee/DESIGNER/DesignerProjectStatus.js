@@ -14,28 +14,29 @@ export default function DesignerProjectStatus() {
     axios
       .get(`http://localhost:8080/designer/getPosts/${projectEmplyId}`)
       .then((res) => {
-        console.log(res.data.result, "emply res");
+        // console.log(res.data.result, "emply res");
         setData(res.data.result);
       });
   }, [projectEmplyId]);
 
- 
-  const navigate = useNavigate('')
-  const onSearchGet=(searchData)=>{
-    const result = searchData
-    const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeeDesignerSearch").toString()
-    localStorage.setItem("DesignerSearch",encryptData)
-   navigate('/v2/design/search/results')
-  
-  }
+  const navigate = useNavigate("");
+  const onSearchGet = (searchData) => {
+    const result = searchData;
+    const encryptData = CryptoJS.AES.encrypt(
+      JSON.stringify(result),
+      "employeeDesignerSearch"
+    ).toString();
+    localStorage.setItem("DesignerSearch", encryptData);
+    navigate("/v2/design/search/results");
+  };
   return (
     <>
       <div className="project-status">
         <div className="filters">
-         <DesignerFilter  searchGet = {onSearchGet} />
+          <DesignerFilter searchGet={onSearchGet} />
         </div>
 
-     <DesignerStatus data={data} />
+        <DesignerStatus data={data} />
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import DetailsContext from "../../../Context/CreateContext";
 
 export default function WriterFullProjStatus() {
   const { projectStatusData } = useContext(DetailsContext);
-  console.log(projectStatusData);
+  
   let data = {}
 useEffect(()=>{
  data = projectStatusData

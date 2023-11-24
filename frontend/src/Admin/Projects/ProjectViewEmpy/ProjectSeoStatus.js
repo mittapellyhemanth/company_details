@@ -23,9 +23,9 @@ export default function ProjectSeoStatus(){
    axios
    .get(`http://localhost:8080/admin/SeoOneProject/${projectEmplyId}/${projectName}`)
    .then((res) => {
-     // console.log(res,projectName, "seo res");
+
      setProjectData(res.data.data)
-    console.log(res.data.data,"new seo form");
+   
    });
  },[projectEmplyId,projectName])
  
@@ -33,7 +33,7 @@ export default function ProjectSeoStatus(){
   const navigate = useNavigate('')
   const onSearchGet=async(searchData)=>{
     const result = searchData
-   console.log(searchData,"searchGet");
+   
     const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeeSeoSearch").toString()
     localStorage.setItem("seoSearch",encryptData)
    navigate('/v2/das/seo/search/results')

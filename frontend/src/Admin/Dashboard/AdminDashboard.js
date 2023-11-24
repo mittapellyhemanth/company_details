@@ -10,7 +10,7 @@ import UserName from "../../Functions/UserName";
 
 export default function AdminDashboard() {
   UserName()
-  console.log('admin');
+  
   return (
     <>
       <div className="Nav">

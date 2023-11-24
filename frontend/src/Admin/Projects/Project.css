@@ -162,6 +162,12 @@ th, td {
  word-wrap: break-word;
   background-color: rgb(237, 198, 127) !important;
 }
+.Approved{
+  background-color:rgb(124, 227, 124) !important;
+}
+.Rejected{
+  background-color:rgb(240, 90, 90)!important;
+}
 .tabel-view:hover{
   color: white;
   background-color:black !important;

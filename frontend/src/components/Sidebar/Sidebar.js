@@ -5,7 +5,7 @@ import "../../Styles/Sidebar.css";
 export default function Sidebar({ children }) {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
-
+ localStorage.removeItem("activeLink")
   useEffect(() => {
     // Check if there's any previously active link in localStorage
     const savedActiveLink = localStorage.getItem('activeLink');

@@ -7,46 +7,41 @@ import axios from "axios";
 import DetailsContext from "../../../Context/CreateContext";
 
 export default function ProSEOSearchView() {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const [projectStatusData, setProjectStatusData] = useState([]);
 
-
-  
-
   useEffect(() => {
-      
-  const encryptedProjectData = localStorage.getItem("seoSearch");
-  const decryptedProjectDatay = CryptoJS.AES.decrypt(
-    encryptedProjectData,
-    "employeeSeoSearch"
-  ).toString(CryptoJS.enc.Utf8);
-  const formData = JSON.parse(decryptedProjectDatay);
+    const encryptedProjectData = localStorage.getItem("seoSearch");
+    const decryptedProjectDatay = CryptoJS.AES.decrypt(
+      encryptedProjectData,
+      "employeeSeoSearch"
+    ).toString(CryptoJS.enc.Utf8);
+    const formData = JSON.parse(decryptedProjectDatay);
 
-    
-        const fetchFilteredData = async () => {
-          try {
-            const response = await axios.get(
-              `http://localhost:8080/filter/seo/search`,
-              { params: formData }
-            );
-    
-            if (response.status === 200) {
-              if (response.data.error) {
-                setError(response.data.error);
-              } else {
-                setProjectStatusData(response.data.data);
-              }
-            }
-          } catch (error) {
-            console.error('Error fetching data:', error);
-            setError('Failed to fetch data');
+    const fetchFilteredData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/filter/seo/search`,
+          { params: formData }
+        );
+
+        if (response.status === 200) {
+          if (response.data.error) {
+            setError(response.data.error);
+          } else {
+            setProjectStatusData(response.data.data);
           }
-        };
-    
-        fetchFilteredData();
-      }, []); 
-      
+        }
+      } catch (error) {
+     
+        setError("Failed to fetch data");
+      }
+    };
+
+    fetchFilteredData();
+  }, []);
+
   const navigate = useNavigate("");
   const handleGoBack = () => {
     return navigate("/v2/das/seo/pro/view");
@@ -58,8 +53,11 @@ export default function ProSEOSearchView() {
         <button className="cancel-btn" onClick={handleGoBack}>
           BACK
         </button>
-        {error ? <p className="error">{error}</p> : <SeoStatus data={projectStatusData} comesFrom="Seo" />  }
-        
+        {error ? (
+          <p className="error">{error}</p>
+        ) : (
+          <SeoStatus data={projectStatusData} comesFrom="Seo" />
+        )}
       </div>
     </>
   );

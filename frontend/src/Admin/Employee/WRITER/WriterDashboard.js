@@ -4,7 +4,7 @@ import EmpDashboard from "../ReUseFunc.js/EmpDashboard";
 import DetailsContext from "../../../Context/CreateContext";
 
 export default function WriterDashboard() {
-  const {  setDesignationType } = useContext(DetailsContext);
+  const { setDesignationType } = useContext(DetailsContext);
 
   useEffect(() => {
     setDesignationType("writer");

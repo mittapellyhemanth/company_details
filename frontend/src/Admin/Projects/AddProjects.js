@@ -71,7 +71,7 @@ export default function AddProjects() {
 const navigate = useNavigate()
 
   const onSubmit = async( formData ) => {
-    console.log(formData);
+   
     const key = localStorage.getItem("token");
     const headers = {
       Authorization: key
@@ -81,12 +81,12 @@ const navigate = useNavigate()
       await axios
         .post(`http://localhost:8080/admin/addProject/${adminId}`, formData,{headers})
         .then((res) => {
-          console.log(res);
+          
           if (res.data.error) {
            return setError(res.data.error);
           }
           navigate('/v2/das/proj')
-          // console.log(res);
+          
         });
     } catch (error) {
       return setError('check details');

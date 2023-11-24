@@ -25,10 +25,13 @@ const SuperAdmin = require('./Routers/SuperAdmin/SuperAdmin')
 const Imgpost = require('./Routers/Employee/DesignerProjectSubmit')
 const AdminProjectFilter = require('./Routers/Admin/AdminFilters')
 const getClient = require('./Routers/Admin/ClientDetails')
+const leaveTracker = require('./Routers/Employee/LeavesRouter')
 
 const port = process.env.PORT;
 const URL = process.env.DB_URL;
 
+
+app.use('/leave',leaveTracker);
 app.use('/client',getClient);
 app.use('/filter',AdminProjectFilter);
 app.use("/designer",Imgpost);

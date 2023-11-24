@@ -7,44 +7,47 @@ import SalesFilter from "../../../Filters/SalesFilter";
 import CryptoJS from "crypto-js";
 export default function SalesProjectStatus() {
   const [data, setData] = useState([]);
-  
+
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-const{setProjectStatusData} = useContext(DetailsContext)
-setProjectStatusData('')
+  const { setProjectStatusData } = useContext(DetailsContext);
+  setProjectStatusData("");
 
-const projectEmplyId = localStorage.getItem("projEmId");
-const ProjectName = localStorage.getItem("ProjectName");
+  const projectEmplyId = localStorage.getItem("projEmId");
+  const ProjectName = localStorage.getItem("ProjectName");
 
   useEffect(() => {
     fetchData(projectEmplyId);
   }, [projectEmplyId]);
-  
+
   const fetchData = async (employeeId) => {
     try {
-      const res = await axios.get(`http://localhost:8080/employee/sales/proj/status/${employeeId}`);
+      const res = await axios.get(
+        `http://localhost:8080/employee/sales/proj/status/${employeeId}`
+      );
       setData(res.data.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
     }
   };
 
-  const navigate = useNavigate('')
-  const onSearchGet=(searchData)=>{
-    const result = searchData
-    const encryptData = CryptoJS.AES.encrypt(JSON.stringify(result),"employeeSalesSearch").toString()
-    localStorage.setItem("SalesSearch",encryptData)
-   navigate('/v2/sales/search/results')
-  
-  } 
-  
+  const navigate = useNavigate("");
+  const onSearchGet = (searchData) => {
+    const result = searchData;
+    const encryptData = CryptoJS.AES.encrypt(
+      JSON.stringify(result),
+      "employeeSalesSearch"
+    ).toString();
+    localStorage.setItem("SalesSearch", encryptData);
+    navigate("/v2/sales/search/results");
+  };
+
   return (
     <div className="project-status">
       <div className="filters">
-      <SalesFilter searchGet = {onSearchGet} />
+        <SalesFilter searchGet={onSearchGet} />
       </div>
-<SalesStatus data={data} />
-    
+      <SalesStatus data={data} />
     </div>
   );
 }
